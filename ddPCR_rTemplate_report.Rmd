@@ -381,12 +381,7 @@ oft.ntv <- (ntv/fu.cell.concentration)/dx.baseline
 
 
 #
-oft.call <- "NEG"
-if (relative.oft > oft.ptv) {
-	oft.call <- "POS"
-} else if (relative.oft > oft.ntv) {
-	oft.call <- "LOQ"
-}
+
 
 
 fu.marker.formatted <- sprintf("%#.3f", fu.marker.info[1, "concentration"])
@@ -402,6 +397,15 @@ oft.ptv.formatted <- formatC(oft.ptv, format = "e", digits = 2)
 
 if (params$type == 1) {
 
+			
+			if (absolute.oft > absolute.ptv) {
+				oft.call <- "POS"
+			} else if (absolute.oft > absolute.ntv) {
+				oft.call <- "PNQ"
+			} else {
+				oft.call <- "NEG"
+			}
+
 
 			oft.output.values <- c(fu.marker.formatted, 
 			                      fu.gus.concentration.formatted, 
@@ -409,7 +413,8 @@ if (params$type == 1) {
 			                      absolute.ntv.formatted, 
 			                      absolute.ptv.formatted, 
 			                      background.level.formatted, 
-			                      total.cell.no
+			                      total.cell.no,
+			                      oft.call
 			                      )
 
 			names(oft.output.values) <- c("FU OFT (copies/uL)", 
@@ -418,14 +423,20 @@ if (params$type == 1) {
 			                              "Absolute NTV", 
 			                              "Absolute PTV", 
 			                              "HL60 Baseline", 
-			                              "Total Cell Numbers"
-			                            
-			                            
+			                              "Total Cell Numbers",
+			                              "Call"
 			                             )
 
 	
 } else {
-	
+
+			oft.call <- "NEG"
+			if (relative.oft > oft.ptv) {
+				oft.call <- "POS"
+			} else if (relative.oft > oft.ntv) {
+				oft.call <- "PNQ"
+			}
+				
 
 
 			oft.output.values <- c(fu.marker.formatted, 
