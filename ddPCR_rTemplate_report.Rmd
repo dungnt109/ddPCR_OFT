@@ -18,6 +18,7 @@ params:
   hl60.gus.dilutionX: 200
   hl60.gus.concentration: ""
   show_outliers: TRUE
+  type: 1
   verifier: ""
 title: "ddPCR OFT results"
 fontsize: 10pt
@@ -399,32 +400,61 @@ relative.oft.formatted <- formatC(relative.oft, format = "e", digits = 2)
 oft.ntv.formatted <- formatC(oft.ntv, format = "e", digits = 2)
 oft.ptv.formatted <- formatC(oft.ptv, format = "e", digits = 2)
 
+if (params$type == 1) {
 
-oft.output.values <- c(fu.marker.formatted, 
-                      fu.gus.concentration.formatted, 
-                      absolute.oft.formatted, 
-                      absolute.ntv.formatted, 
-                      absolute.ptv.formatted, 
-                      dx.baseline.formatted, 
-                      background.level.formatted, 
-                      relative.oft.formatted, 
-                      total.cell.no,  
-                      oft.ntv.formatted, 
-                      oft.ptv.formatted, 
-                      oft.call)
 
-names(oft.output.values) <- c("FU OFT (copies/uL)", 
-                              "FU GUS (copies/uL)", 
-                              "Absolute OFT level", 
-                              "Absolute NTV", 
-                              "Absolute PTV", 
-                              "Tumour load", 
-                              "HL60 Baseline", 
-                              "OFT level", 
-                              "Total Cell Numbers", 
-                              "NTV", 
-                              "PTV", 
-                              "Call")
+			oft.output.values <- c(fu.marker.formatted, 
+			                      fu.gus.concentration.formatted, 
+			                      absolute.oft.formatted, 
+			                      absolute.ntv.formatted, 
+			                      absolute.ptv.formatted, 
+			                      background.level.formatted, 
+			                      total.cell.no
+			                      )
+
+			names(oft.output.values) <- c("FU OFT (copies/uL)", 
+			                              "FU GUS (copies/uL)", 
+			                              "Absolute OFT level", 
+			                              "Absolute NTV", 
+			                              "Absolute PTV", 
+			                              "HL60 Baseline", 
+			                              "Total Cell Numbers"
+			                            
+			                            
+			                             )
+
+	
+} else {
+	
+
+
+			oft.output.values <- c(fu.marker.formatted, 
+			                      fu.gus.concentration.formatted, 
+			                      absolute.oft.formatted, 
+			                      absolute.ntv.formatted, 
+			                      absolute.ptv.formatted, 
+			                      dx.baseline.formatted, 
+			                      background.level.formatted, 
+			                      relative.oft.formatted, 
+			                      total.cell.no,  
+			                      oft.ntv.formatted, 
+			                      oft.ptv.formatted, 
+			                      oft.call)
+
+			names(oft.output.values) <- c("FU OFT (copies/uL)", 
+			                              "FU GUS (copies/uL)", 
+			                              "Absolute OFT level", 
+			                              "Absolute NTV", 
+			                              "Absolute PTV", 
+			                              "Tumour load", 
+			                              "HL60 Baseline", 
+			                              "OFT level", 
+			                              "Total Cell Numbers", 
+			                              "NTV", 
+			                              "PTV", 
+			                              "Call")
+
+ }
 
 oft.output.values <- as.matrix(oft.output.values)
 
