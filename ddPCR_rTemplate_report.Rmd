@@ -303,7 +303,7 @@ kable(qc.table, caption = "Quality control summary")
 
 
 
-# GUS calculation
+# OFT calculation
 
 ```{r mrd_calculation, echo=FALSE}
 # cell contration at fullow up
