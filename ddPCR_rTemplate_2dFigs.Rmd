@@ -135,13 +135,16 @@ get_merged_info <- function(multiwell.results, sample.names=NA) {
 }
 ```
 
-## Albumin, diagnostic sample
+
+`r if(length(params$dx.gus) > 0){"## Albumin, diagnostic sample"}`
 
 ```{r 2dFigures_dx_alb, fig.height=12, fig.width=12, fig.align="center", echo=FALSE}
-for (i in 1:length(params$dx.gus)) {
-	plot2d(params$dx.gus[[i]], gus.channel)
-	#info <- get_info(params$dx.gus[i])
-	#kable(info, caption = paste("Summary of", params$dx.gus[[i]]$name))
+if (length(params$dx.gus) > 0) {
+	for (i in 1:length(params$dx.gus)) {
+		plot2d(params$dx.gus[[i]], gus.channel)
+		#info <- get_info(params$dx.gus[i])
+		#kable(info, caption = paste("Summary of", params$dx.gus[[i]]$name))
+	}
 }
 ```
 

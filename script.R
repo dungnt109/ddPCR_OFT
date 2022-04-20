@@ -100,7 +100,13 @@ folder <- dirname(sample_sheet_file)
 
 cat("Do you want to perform absolute or relative OFT?\n1. Absolute\n2. Relative\n")
 
-type <- as.numeric(trimws(readLines("stdin",n=1)))
+runType <- as.numeric(trimws(readLines("stdin",n=1)))
+
+if (runType == 1) {
+	runType = "absolute"
+} else {
+	runType = "relative"
+}
 
 cat("\nVerified by?\n")
 verifier <- trimws(readLines("stdin",n=1))
@@ -599,7 +605,7 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 		#dx.baseline <- as.numeric(dx.baseline)
 
 
-		if (type == 2) {
+		if (runType == "relative") {
 		
 				cat(paste("Processing ", fu.sid, "_", mid, ". Please key in the tumour load at Dx or hit enter to use the value calculated from the current test.\n", sep=""));
 				dx.baseline <- trimws(readLines("stdin",n=1))
@@ -690,7 +696,7 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			hl60.gus.dilutionX=hl60.gus.dilutionX, 
 			hl60.gus.concentration=hl60.gus.concentration, 
 			verifier=verifier, 
-			type=type,
+			runType=runType,
 			date=Sys.time()), 
 			output_file = paste(folder, separator, fu.sid, "_", mid, "_", runmode, "_report.pdf", sep="")
 		)

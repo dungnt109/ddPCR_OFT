@@ -18,7 +18,7 @@ params:
   hl60.gus.dilutionX: 200
   hl60.gus.concentration: ""
   show_outliers: TRUE
-  type: 1
+  runType: ""
   verifier: ""
 title: "ddPCR OFT results"
 fontsize: 10pt
@@ -319,6 +319,8 @@ fu.marker.info <- get_merged_info(c(params$fu.marker))
 # absolute oft
 absolute.oft <- fu.marker.info[1, "concentration"] / fu.cell.concentration
 
+
+
 # diagnostic baseline
 dx.baseline <- params$dx.baseline
 if (is.na(dx.baseline)) {
@@ -333,14 +335,15 @@ if (is.na(dx.baseline)) {
 
 
 
+
+
 #writeLines(paste("Using HL60 GUS concentration", params$hl60.gus.concentration))
 
 writeLines(paste("Using HL60 dilution factor", params$hl60.gus.dilutionX))
 
 
 
-# relatiive oft
-relative.oft <- absolute.oft/dx.baseline
+
 
 
 # oft in mnc
@@ -367,16 +370,11 @@ total.cell.no <- ceiling(fu.cell.concentration * 20 * fu.marker.info[1, "replica
 ptv <- (1 + qpois(0.9999, total.cell.no * background.level)) / (20 * fu.marker.info[1, "replicates"])
 ntv <- (1 + qpois(0.95, total.cell.no * background.level)) / (20 * fu.marker.info[1, "replicates"])
 
-cat(file= file("log.txt", open = "a"), "\n", "ptv:", ptv)
-cat(file= file("log.txt", open = "a"), "\n", "ntv:", ntv)
+
 
 
 absolute.ptv <- ptv/fu.cell.concentration
 absolute.ntv <- ntv/fu.cell.concentration
-
-# oft thresholds
-oft.ptv <- (ptv/fu.cell.concentration)/dx.baseline
-oft.ntv <- (ntv/fu.cell.concentration)/dx.baseline
 
 
 
@@ -389,13 +387,10 @@ fu.gus.concentration.formatted <- sprintf("%#.3f", fu.gus.concentration)
 absolute.oft.formatted <- formatC(absolute.oft, format = "e", digits = 2)
 absolute.ptv.formatted <- formatC(absolute.ptv, format = "e", digits = 2)
 absolute.ntv.formatted <- formatC(absolute.ntv, format = "e", digits = 2)
-dx.baseline.formatted <- sprintf("%#.3f", dx.baseline)
 background.level.formatted <- formatC(background.level, format = "e", digits = 2)
-relative.oft.formatted <- formatC(relative.oft, format = "e", digits = 2)
-oft.ntv.formatted <- formatC(oft.ntv, format = "e", digits = 2)
-oft.ptv.formatted <- formatC(oft.ptv, format = "e", digits = 2)
 
-if (params$type == 1) {
+
+if (params$runType == "absolute") {
 
 			
 			if (absolute.oft > absolute.ptv) {
@@ -429,6 +424,19 @@ if (params$type == 1) {
 
 	
 } else {
+
+			# relatiive oft
+			relative.oft <- absolute.oft/dx.baseline
+
+			# oft thresholds
+
+			oft.ptv <- (ptv/fu.cell.concentration)/dx.baseline
+			oft.ntv <- (ntv/fu.cell.concentration)/dx.baseline
+
+			dx.baseline.formatted <- sprintf("%#.3f", dx.baseline)
+			relative.oft.formatted <- formatC(relative.oft, format = "e", digits = 2)
+			oft.ntv.formatted <- formatC(oft.ntv, format = "e", digits = 2)
+			oft.ptv.formatted <- formatC(oft.ptv, format = "e", digits = 2)
 
 			oft.call <- "NEG"
 			if (relative.oft > oft.ptv) {
