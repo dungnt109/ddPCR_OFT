@@ -393,12 +393,12 @@ background.level.formatted <- formatC(background.level, format = "e", digits = 2
 if (params$runType == "absolute") {
 
 			
-			if (absolute.oft > absolute.ptv) {
+			if (absolute.oft >= absolute.ptv) {
 				oft.call <- "POS"
-			} else if (absolute.oft > absolute.ntv) {
-				oft.call <- "PNQ"
+			} else if (absolute.oft < absolute.ntv) {
+				oft.call <- "NEG" 
 			} else {
-				oft.call <- "NEG"
+				oft.call <- "PNQ"
 			}
 
 
@@ -438,10 +438,13 @@ if (params$runType == "absolute") {
 			oft.ntv.formatted <- formatC(oft.ntv, format = "e", digits = 2)
 			oft.ptv.formatted <- formatC(oft.ptv, format = "e", digits = 2)
 
-			oft.call <- "NEG"
-			if (relative.oft > oft.ptv) {
+			
+			if (relative.oft >= oft.ptv) {
 				oft.call <- "POS"
-			} else if (relative.oft > oft.ntv) {
+			} else if (relative.oft < oft.ntv) {
+				oft.call <- "NEG"
+				
+			} else {
 				oft.call <- "PNQ"
 			}
 				
@@ -472,6 +475,7 @@ if (params$runType == "absolute") {
 			                              "NTV", 
 			                              "PTV", 
 			                              "Call")
+			}
 
  }
 
