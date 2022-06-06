@@ -163,7 +163,7 @@ kable(marker.merged.info, caption = "Per sample summary of marker results")
 # GUS Results
 
 ```{r fig1, fig.height=7, fig.width=12, fig.align="center", echo=FALSE}
-plot1d(c(params$dx.gus, params$hl60.gus, params$h2o.gus, params$fu.gus), 2, main="Intensities and annotation of albumin wells")
+plot1d(c(params$dx.gus, params$hl60.gus, params$h2o.gus, params$fu.gus), 2, main="Intensities and annotation of GUS wells")
 alb.info <- get_info(c(params$dx.gus, params$hl60.gus, params$h2o.gus, params$fu.gus))
 alb.merged.info <- get_merged_info(c(params$dx.gus, params$hl60.gus, params$h2o.gus, params$fu.gus))
 kable(alb.info, caption = "Per well summary of GUS results")
