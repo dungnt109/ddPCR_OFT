@@ -108,10 +108,13 @@ if (runType == 1) {
 	runType = "relative"
 }
 
-cat("\nVerified by?\n")
+cat("\nVerified by? Hit enter to use 'Allen Yeoh Eng Juh'\n")
 verifier <- trimws(readLines("stdin",n=1))
 
-
+if (verifier == "") {
+	verifier <- "Allen Yeoh Eng Juh"
+	cat("Verified by Allen Yeoh Eng Juh\n\n")
+}
 
 
 cat(paste("Analyzing sample sheet", sample_sheet_file, "\n", sep=""))

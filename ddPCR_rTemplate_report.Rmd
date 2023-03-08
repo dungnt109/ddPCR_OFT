@@ -384,10 +384,10 @@ absolute.ntv <- ntv/fu.cell.concentration
 
 fu.marker.formatted <- sprintf("%#.3f", fu.marker.info[1, "concentration"])
 fu.gus.concentration.formatted <- sprintf("%#.3f", fu.gus.concentration)
-absolute.oft.formatted <- formatC(absolute.oft, format = "e", digits = 2)
-absolute.ptv.formatted <- formatC(absolute.ptv, format = "e", digits = 2)
-absolute.ntv.formatted <- formatC(absolute.ntv, format = "e", digits = 2)
-background.level.formatted <- formatC(background.level, format = "e", digits = 2)
+absolute.oft.formatted <- formatC(absolute.oft, format = "E", digits = 2)
+absolute.ptv.formatted <- formatC(absolute.ptv, format = "E", digits = 2)
+absolute.ntv.formatted <- formatC(absolute.ntv, format = "E", digits = 2)
+background.level.formatted <- formatC(background.level, format = "E", digits = 2)
 
 
 if (params$runType == "absolute") {
@@ -434,9 +434,9 @@ if (params$runType == "absolute") {
 			oft.ntv <- (ntv/fu.cell.concentration)/dx.baseline
 
 			dx.baseline.formatted <- sprintf("%#.3f", dx.baseline)
-			relative.oft.formatted <- formatC(relative.oft, format = "e", digits = 2)
-			oft.ntv.formatted <- formatC(oft.ntv, format = "e", digits = 2)
-			oft.ptv.formatted <- formatC(oft.ptv, format = "e", digits = 2)
+			relative.oft.formatted <- formatC(relative.oft, format = "E", digits = 2)
+			oft.ntv.formatted <- formatC(oft.ntv, format = "E", digits = 2)
+			oft.ptv.formatted <- formatC(oft.ptv, format = "E", digits = 2)
 
 			
 			if (relative.oft >= oft.ptv) {
