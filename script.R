@@ -100,21 +100,58 @@ folder <- dirname(sample_sheet_file)
 
 cat("Do you want to perform absolute or relative OFT?\n1. Absolute\n2. Relative\n")
 
-runType <- as.numeric(trimws(readLines("stdin",n=1)))
+answer <- readLines("stdin",n=1)
 
-if (runType == 1) {
-	runType = "absolute"
-} else {
-	runType = "relative"
-}
+runType <- switch(
+	answer, 
+	"1" = "absolute",
+	"2" = "relative", 
+	"relative")
 
-cat("\nVerified by? Hit enter to use 'Allen Yeoh Eng Juh'\n")
-verifier <- trimws(readLines("stdin",n=1))
+cat("\nVerified by?\n1. A/Prof Allen Yeoh\n2. blank\n")
+answer <- readLines("stdin",n=1)
 
-if (verifier == "") {
-	verifier <- "Allen Yeoh Eng Juh"
-	cat("Verified by Allen Yeoh Eng Juh\n\n")
-}
+
+verifier <- switch(
+	answer, 
+	"1" = "A/Prof Allen Yeoh",
+	"2" = "", 
+	answer)
+
+
+cat("\nRun by?\n1. Amanda Lee\n2. Huan Pei Tee\n3. Nurhilya\n4. blank\n")
+answer <- readLines("stdin",n=1)
+
+run_by <- switch(
+	answer, 
+	"1" = "Amanda Lee", 
+	"2" = "Huan Pei Tee", 
+	"3" = "Nurhilya", 
+	"4" = "", 
+	answer 
+	)
+
+cat("\nDate?\n1. ",format(Sys.Date(), "%d/%m/%Y") ,"\n2. blank\n")
+answer <- readLines("stdin",n=1)
+
+run_date <- switch(
+	answer, 
+	"1" = format(Sys.Date(), "%d/%m/%Y"), 
+	"2" = "", 
+	answer 
+	)
+
+cat("\nReported by?\n1. Shirley\n2. Huan Pei Tee\n3. Nurhilya\n4. blank\n")
+answer <- readLines("stdin",n=1)
+
+reported_by <- switch(
+	answer, 
+	"1" = "Shirly", 
+	"2" = "Huan Pei Tee", 
+	"3" = "Nurhilya", 
+	"4" = "", 
+	answer 
+	)
 
 
 cat(paste("Analyzing sample sheet", sample_sheet_file, "\n", sep=""))
@@ -698,6 +735,9 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			dx.baseline=dx.baseline, 
 			hl60.gus.dilutionX=hl60.gus.dilutionX, 
 			hl60.gus.concentration=hl60.gus.concentration, 
+			run_by=run_by, 
+			run_date=run_date, 
+			reported_by=reported_by, 
 			verifier=verifier, 
 			runType=runType,
 			date=Sys.time()), 

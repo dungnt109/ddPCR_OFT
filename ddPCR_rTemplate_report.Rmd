@@ -19,6 +19,9 @@ params:
   hl60.gus.concentration: ""
   show_outliers: TRUE
   runType: ""
+  run_by: ""
+  run_date: ""
+  reported_by: ""
   verifier: ""
 title: "ddPCR OFT results"
 fontsize: 10pt
@@ -463,8 +466,10 @@ if (params$runType == "absolute") {
 			                      
 			                      dx.baseline.formatted, 
 			                      background.level.formatted, 
+
+			                      total.cell.no, 
 			                      relative.oft.formatted, 
-			                      total.cell.no,  
+			                       
 
 			                      oft.ptv.formatted, 
 			                      oft.ntv.formatted, 
@@ -480,8 +485,10 @@ if (params$runType == "absolute") {
 			                             
 			                              "Tumour load", 
 			                              "HL60 Baseline", 
-			                              "OFT level", 
+
 			                              "Total Cell Numbers", 
+			                              "OFT level", 
+			                              
 
 			                              "PTV", 
 			                              "NTV", 
@@ -506,16 +513,16 @@ kable(oft.output.values, caption = "Summary of OFT level calculation.")
 \hline
  & Name & Signature & Date\\
 \hline
-&&&\\
-Run by&  &  & \\
-&&&\\
-\hline
-&&&\\
-Reported by &  &  & \\
+&&&\\     
+Run by&          `r params$run_by`    &    & `r params$run_date`  \\
 &&&\\
 \hline
 &&&\\
-Verified by &  `r params$verifier` &  & \\
+Reported by&    `r params$reported_by`    &  & \\
+&&&\\
+\hline
+&&&\\
+Verified by &    `r params$verifier` &  & \\
 &&&\\
 \hline
 \end{tabular}
