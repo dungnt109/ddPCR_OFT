@@ -465,8 +465,10 @@ if (params$runType == "absolute") {
 			                      background.level.formatted, 
 			                      relative.oft.formatted, 
 			                      total.cell.no,  
-			                      oft.ntv.formatted, 
+
 			                      oft.ptv.formatted, 
+			                      oft.ntv.formatted, 
+			                      
 			                      oft.call)
 
 			names(oft.output.values) <- c("FU OFT (copies/uL)", 
@@ -480,8 +482,10 @@ if (params$runType == "absolute") {
 			                              "HL60 Baseline", 
 			                              "OFT level", 
 			                              "Total Cell Numbers", 
-			                              "NTV", 
+
 			                              "PTV", 
+			                              "NTV", 
+			                             
 			                              "Call")
 			
 
