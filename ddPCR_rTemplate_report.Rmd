@@ -405,8 +405,10 @@ if (params$runType == "absolute") {
 			oft.output.values <- c(fu.marker.formatted, 
 			                      fu.gus.concentration.formatted, 
 			                      absolute.oft.formatted, 
-			                      absolute.ntv.formatted, 
+
 			                      absolute.ptv.formatted, 
+			                      absolute.ntv.formatted, 
+			                      
 			                      background.level.formatted, 
 			                      total.cell.no,
 			                      oft.call
@@ -415,8 +417,10 @@ if (params$runType == "absolute") {
 			names(oft.output.values) <- c("FU OFT (copies/uL)", 
 			                              "FU GUS (copies/uL)", 
 			                              "Absolute OFT level", 
-			                              "Absolute NTV", 
+
 			                              "Absolute PTV", 
+			                              "Absolute NTV", 
+			                              
 			                              "HL60 Baseline", 
 			                              "Total Cell Numbers",
 			                              "Call"
