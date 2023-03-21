@@ -141,12 +141,12 @@ run_date <- switch(
 	answer 
 	)
 
-cat("\nReported by?\n1. Shirley\n2. Huan Pei Tee\n3. Nurhilya\n4. blank\n")
+cat("\nReported by?\n1. Shirley Kham\n2. Huan Pei Tee\n3. Nurhilya\n4. blank\n")
 answer <- readLines("stdin",n=1)
 
 reported_by <- switch(
 	answer, 
-	"1" = "Shirly", 
+	"1" = "Shirley Kham", 
 	"2" = "Huan Pei Tee", 
 	"3" = "Nurhilya", 
 	"4" = "", 
