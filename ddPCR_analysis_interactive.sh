@@ -1,2 +1,0 @@
-Rscript  script.R Interactive
-
