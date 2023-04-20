@@ -90,39 +90,17 @@ clustering_and_threshold <- function(intensities) {
 
 manual_clustering_and_threshold <- function(intensities, threshold) {
 
-
 ## initialize from max and min
-
-
 km <- kmeans(as.matrix(intensities), c(max(intensities), min(intensities)), nstart=1000)
-
-
 c1 <- intensities[intensities >= threshold]
-
-
 c2 <- intensities[intensities < threshold]
-
-
 c1.median <- median(c1)
-
-
 c2.median <- median(c2)
-
-
 solution <- threshold
-
-
 ## identify outlier in high cluster
-
-
 intensities.highcluster <- intensities[intensities > solution]
-
-
 upper.bound <- mark.outlier(intensities.highcluster, niqr)$upper.bound
-
-
 return(list(c1.median=c1.median, c2.median=c2.median, threshold=solution, upper.bound = upper.bound, mask = intensities < upper.bound))
-
 
 }
 
