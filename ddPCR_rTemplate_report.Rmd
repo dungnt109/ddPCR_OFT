@@ -308,7 +308,7 @@ kable(qc.table, caption = "Quality control summary")
 
 # OFT calculation
 
-```{r mrd_calculation, echo=FALSE}
+```{r mrd_calculation, echo=FALSE, comment=""}
 # cell contration at fullow up
 fu.gus.info <- get_merged_info(c(params$fu.gus))
 fu.gus.dilution.factor <- as.numeric(gsub("x$", "", strsplit(rownames(fu.gus.info), "_", fixed=TRUE)[[1]][4]))
@@ -322,7 +322,9 @@ fu.marker.info <- get_merged_info(c(params$fu.marker))
 # absolute oft
 absolute.oft <- fu.marker.info[1, "concentration"] / fu.cell.concentration
 
+writeLines("Values input:")
 
+lineNum <- 0 
 
 # diagnostic baseline
 dx.baseline <- params$dx.baseline
@@ -331,9 +333,11 @@ if (is.na(dx.baseline)) {
 	dx.cell.concentration <- dx.gus.info[1, "concentration"] 
 	dx.marker.info <- get_merged_info(c(params$dx.marker))
 	dx.baseline <- dx.marker.info[1, "concentration"] / dx.cell.concentration
-	writeLines(paste("Using in-plate diagnostic baseline."))
+	lineNum <- lineNum + 1
+	writeLines(paste(lineNum, ". Using in-plate diagnostic baseline.", sep=""))
 } else {
-	writeLines(paste("Using preset diagnostic baseline", dx.baseline))
+	lineNum <- lineNum + 1
+	writeLines(paste(lineNum, ". Using preset diagnostic baseline ", dx.baseline, sep=""))
 }
 
 
@@ -342,7 +346,8 @@ if (is.na(dx.baseline)) {
 
 #writeLines(paste("Using HL60 GUS concentration", params$hl60.gus.concentration))
 
-writeLines(paste("Using HL60 dilution factor", params$hl60.gus.dilutionX))
+lineNum <- lineNum + 1
+writeLines(paste(lineNum, ". Using HL60 dilution factor ", params$hl60.gus.dilutionX, sep=""))
 
 
 
@@ -355,7 +360,8 @@ hl60.marker.info <- get_merged_info(c(params$hl60.marker))
 if (hl60.marker.info[1, "positive"] == 0) {
 	hl60.marker.info[1, "positive"] <- 1
 	hl60.marker.info[1, "concentration"] <- -log(1-(hl60.marker.info[1, "positive"]/hl60.marker.info[1, "used.events"]))/0.00085
-	writeLines("No positive event of marker observed in HL60 wells. 1 positive event assumed.")
+	lineNum <- lineNum + 1
+	writeLines(paste(lineNum, ". No positive event of marker observed in HL60 wells. 1 positive event assumed.", sep=""))
 }
 
 hl60.gus.info <- get_merged_info(c(params$hl60.gus))
