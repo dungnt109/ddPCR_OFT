@@ -173,23 +173,24 @@ cat("\nUse manual threshold?\n1. No\n2. Yes\n")
 answer <- readLines("stdin",n=1)
 
 is_manual_threshold <- FALSE
+
 if (runmode == "interactive"){
-is_manual_threshold <- switch(
-	answer, 
-	"1" = FALSE, 
-	"2" = TRUE, 
-	FALSE
-	)
+	is_manual_threshold <- switch(
+		answer, 
+		"1" = FALSE, 
+		"2" = TRUE, 
+		FALSE
+		)
 
-manual_threshold = 0 
+	manual_threshold = 0 
 
-if (is_manual_threshold){
+	if (is_manual_threshold){
 
-	cat("\nEnter the manual threshold value?\n")
+		cat("\nEnter the manual threshold value?\n")
 
-	manual_threshold = as.numeric(trimws(readLines("stdin",n=1)))
+		manual_threshold = as.numeric(trimws(readLines("stdin",n=1)))
 
-}
+	}
 }
 
 
