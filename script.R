@@ -169,12 +169,14 @@ reported_by <- switch(
 	answer 
 	)
 
-cat("\nUse manual threshold?\n1. No\n2. Yes\n")
-answer <- readLines("stdin",n=1)
 
 is_manual_threshold <- FALSE
 
 if (runmode == "interactive"){
+
+	cat("\nUse manual threshold?\n1. No\n2. Yes\n")
+	answer <- readLines("stdin",n=1)
+
 	is_manual_threshold <- switch(
 		answer, 
 		"1" = FALSE, 
