@@ -188,7 +188,7 @@ if (runmode == "interactive"){
 
 	if (is_manual_threshold){
 
-		cat("\nEnter the manual threshold value?\n")
+		cat("\nPlease key in the OFT assay's intensities threshold!\n")
 
 		manual_threshold = as.numeric(trimws(readLines("stdin",n=1)))
 
@@ -798,6 +798,8 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			reported_by=reported_by, 
 			verifier=verifier, 
 			runType=runType,
+			is_manual_threshold=is_manual_threshold, 
+			manual_threshold=manual_threshold,
 			date=Sys.time()), 
 			output_file = paste(folder, separator, fu.sid, "_", mid, "_", runmode, "_report.pdf", sep="")
 		)

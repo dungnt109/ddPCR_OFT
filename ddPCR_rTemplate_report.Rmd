@@ -23,6 +23,8 @@ params:
   run_date: ""
   reported_by: ""
   verifier: ""
+  is_manual_threshold: FALSE
+  manual_threshold: 0
 title: "ddPCR OFT results"
 fontsize: 10pt
 geometry: margin=1.5cm
@@ -353,6 +355,11 @@ absolute.oft <- fu.marker.info[1, "concentration"] / fu.cell.concentration
 writeLines("Values input:")
 
 lineNum <- 0 
+
+if (is_manual_threshold){
+	lineNum <- lineNum + 1
+	writeLines(paste(lineNum, ". Using OFT assay's intensities threshold ", manual_threshold, sep=""))
+}
 
 # diagnostic baseline
 dx.baseline <- params$dx.baseline
