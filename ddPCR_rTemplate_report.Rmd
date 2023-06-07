@@ -324,7 +324,9 @@ QC.status <- c(min.events.per.well.status,
 \hline
  \textbf{QC criteria} &  \textbf{QC criteria limit} &  \textbf{QC values} &  \textbf{QC status}\\
 \hline   
-1. Minimum Total Events per well &     $\ge$8000 total events        &  `r format(min.events.per.well, scientific = FALSE)`  &  `r min.events.per.well.status` \\
+1. Minimum Total Events per well &     $\ge$8000 total events        
+&  `r format(min.events.per.well, scientific = FALSE)`  
+&  `r min.events.per.well.status` \\
 
 2. Minium FU [250ng] GUS Conc. &  >5000 copies/uL (GOOD) \newline 1000-5000 copies/uL (ACCEPTABLE) \newline <1000 copies/uL (POOR)       
 & `r value1`  \leavevmode\newline `r value2`  \leavevmode\newline `r value3` 
@@ -332,13 +334,17 @@ QC.status <- c(min.events.per.well.status,
 
 3. Assay Controls for OFT Assay \newline \hspace*{0.3cm}- Positive (Dx [2.5ng] OFT Conc. \newline \hspace*{0.3cm}- NTC (H2O) OFT Conc. 
 & \leavevmode\newline $\ge$10 copies/uL \newline $\le$0.3copies/uL 
-& \leavevmode\newline `r min.dx.marker.con.perwell.formatted` \newline `r max.h2o.marker.con.perwell.formatted` 
-& \leavevmode\newline `r min.dx.marker.con.perwell.status`    \newline `r max.h2o.marker.con.perwell.status` \\
+& \leavevmode\newline `r min.dx.marker.con.perwell.formatted` 
+             \newline `r max.h2o.marker.con.perwell.formatted` 
+& \leavevmode\newline `r min.dx.marker.con.perwell.status`    
+             \newline `r max.h2o.marker.con.perwell.status` \\
 
 4. Assay Controls for GUS Assay \newline \hspace*{0.3cm}- Positive (HL60 [2.5ng] GUS Conc. \newline \hspace*{0.3cm}- NTC (H2O) GUS Conc.
 & \leavevmode\newline $\ge$ 30 copies/uL \newline $\le$0.1 copies/uL 
-& \leavevmode\newline `r min.hl60.gus.con.perwell.formatted` \newline `r max.h2o.gus.con.perwell.formatted` 
-& \leavevmode\newline `r min.hl60.gus.con.perwell.status`    \newline `r max.h2o.gus.con.perwell.status` \\
+& \leavevmode\newline `r min.hl60.gus.con.perwell.formatted` 
+             \newline `r max.h2o.gus.con.perwell.formatted` 
+& \leavevmode\newline `r min.hl60.gus.con.perwell.status`    
+             \newline `r max.h2o.gus.con.perwell.status` \\
 
 \hline
 
