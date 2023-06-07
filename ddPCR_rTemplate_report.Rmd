@@ -207,14 +207,34 @@ min.fu.gus.conc.perwell.formatted <- sprintf("%#.3f", min.fu.gus.conc.perwell)
 if (min.fu.gus.conc.perwell < 1000){
 
 	min.fu.gus.conc.perwell.status <- "\\textcolor{red}{POOR}"
+	value1 <- ""
+	status1 <- ""
+	value2 <- ""
+	status2 <- ""
+	value3 <- min.fu.gus.conc.perwell.formatted
+	status3 <- min.fu.gus.conc.perwell.status
 
 } else if (min.fu.gus.conc.perwell >= 1000 && min.fu.gus.conc.perwell <= 5000) {
 
 	min.fu.gus.conc.perwell.status  <- "\\textcolor{brown}{ACCEPTABLE}"
 
+	value1 <- ""
+	status1 <- ""
+	value2 <- min.fu.gus.conc.perwell.formatted
+	status2 <- min.fu.gus.conc.perwell.status
+	value3 <- ""
+	status3 <- ""
+
 } else {
 
 	min.fu.gus.conc.perwell.status  <- "\\textcolor{darkgreen}{GOOD}"
+
+	value1 <- min.fu.gus.conc.perwell.formatted
+	status1 <- min.fu.gus.conc.perwell.status
+	value2 <- ""
+	status2 <- ""
+	value3 <- ""
+	status3 <- ""
 
 }
 
@@ -277,7 +297,6 @@ if (max.h2o.gus.con.perwell <= 0.3) {
 
 final.qc.call <- c("\\textbf{\\textcolor{red}{FAIL}}","\\textbf{\\textcolor{darkgreen}{PASS}}")[(min.events.per.well.status == "\\textcolor{darkgreen}{PASS}" && min.fu.gus.conc.perwell.status != "\\textcolor{red}{POOR}" && min.dx.marker.con.perwell.status == "\\textcolor{darkgreen}{PASS}" && max.h2o.marker.con.perwell.status == "\\textcolor{darkgreen}{PASS}" && min.hl60.gus.con.perwell.status == "\\textcolor{darkgreen}{PASS}" && max.h2o.gus.con.perwell.status == "\\textcolor{darkgreen}{PASS}") + 1]
 
-QC.criteria <- c("", "", "", "", "", "", "")
 
 QC.values <- c(min.events.per.well, 
 						min.fu.gus.conc.perwell.formatted,
@@ -296,15 +315,6 @@ QC.status <- c(min.events.per.well.status,
 						final.qc.call)
 
 
-qc.names <- c("Min events per well ($\\ge\\!\\!$ 8000)", "Min FU GUS conc. (copies/uL; >5000, GOOD; 1000-5000; ACCEPTABLE; <1000 POOR)", "Assay controls for marker", "\\hspace{0.5cm}Positive (Dx marker conc., $\\ge\\!\\!$ 10 copies/uL)", "\\hspace{0.5cm}NTC (H2O marker conc., $\\le\\!\\!$ 0.3 copies/uL)", "Assay Controls for GUS", "\\hspace{0.5cm}Positive (HL60 GUS conc., $\\ge\\!\\!$ 30 copies/uL)", "\\hspace{0.5cm}NTC (H2O GUS conc., $\\le\\!\\!$ 0.1 copies/uL)", "\\textbf{Overall QC result}")
-
-qc.table <- cbind(QC.criteria, QC.values, QC.status)
-
-colnames (qc.table) <- c ("QC criteria limit", "QC values", "QC status")
-
-rownames(qc.table) <- qc.names
-
-kable(qc.table, caption = "Quality control summary")
 
 ```
 
@@ -316,7 +326,9 @@ kable(qc.table, caption = "Quality control summary")
 \hline   
 1. Minimum Total Events per well &     $\ge$8000 total events        &  `r format(min.events.per.well, scientific = FALSE)`  &  `r min.events.per.well.status` \\
 
-2. Minium FU [250ng] GUS Conc. &  >5000 copies/uL (GOOD) \newline 1000-5000 copies/uL (ACCEPTABLE) \newline <1000 copies/uL (POOR)       &  & \\
+2. Minium FU [250ng] GUS Conc. &  >5000 copies/uL (GOOD) \newline 1000-5000 copies/uL (ACCEPTABLE) \newline <1000 copies/uL (POOR)       
+& `r value1`  \leavevmode\newline `r value2`  \leavevmode\newline `r value3` 
+& `r status1` \leavevmode\newline `r status2` \leavevmode\newline `r status3`   \\
 
 3. Assay Controls for OFT Assay \newline \hspace*{0.3cm}- Positive (Dx [2.5ng] OFT Conc. \newline \hspace*{0.3cm}- NTC (H2O) OFT Conc. 
 & \leavevmode\newline $\ge$10 copies/uL \newline $\le$0.3copies/uL 
