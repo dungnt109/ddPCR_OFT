@@ -340,7 +340,7 @@ QC.status <- c(min.events.per.well.status,
              \newline `r max.h2o.marker.con.perwell.status` \\
 
 4. Assay Controls for GUS Assay \newline \hspace*{0.3cm}- Positive (HL60 [2.5ng]) GUS Conc. \newline \hspace*{0.3cm}- NTC (H2O) GUS Conc.
-& \leavevmode\newline $\ge$ 30 copies/uL \newline $\le$0.1 copies/uL 
+& \leavevmode\newline $\ge$30 copies/uL \newline $\le$0.1 copies/uL 
 & \leavevmode\newline `r min.hl60.gus.con.perwell.formatted` 
              \newline `r max.h2o.gus.con.perwell.formatted` 
 & \leavevmode\newline `r min.hl60.gus.con.perwell.status`    
