@@ -328,12 +328,12 @@ QC.status <- c(min.events.per.well.status,
 &  `r format(min.events.per.well, scientific = FALSE)`  
 &  `r min.events.per.well.status` \\
 
-2. Minium FU [250ng] GUS Conc. &  >5000 copies/uL (GOOD) \newline 1000-5000 copies/uL (ACCEPTABLE) \newline <1000 copies/uL (POOR)       
+2. Minimum FU [250ng] GUS Conc. &  >5000 copies/uL (GOOD) \newline 1000-5000 copies/uL (ACCEPTABLE) \newline <1000 copies/uL (POOR)       
 & `r value1`  \leavevmode\newline `r value2`  \leavevmode\newline `r value3` 
 & `r status1` \leavevmode\newline `r status2` \leavevmode\newline `r status3`   \\
 
 3. Assay Controls for OFT Assay \newline \hspace*{0.3cm}- Positive (Dx [2.5ng]) OFT Conc. \newline \hspace*{0.3cm}- NTC (H2O) OFT Conc. 
-& \leavevmode\newline $\ge$10 copies/uL \newline $\le$0.3copies/uL 
+& \leavevmode\newline $\ge$10 copies/uL \newline $\le$0.3 copies/uL 
 & \leavevmode\newline `r min.dx.marker.con.perwell.formatted` 
              \newline `r max.h2o.marker.con.perwell.formatted` 
 & \leavevmode\newline `r min.dx.marker.con.perwell.status`    
