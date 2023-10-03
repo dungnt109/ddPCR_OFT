@@ -264,7 +264,7 @@ files <- list.files(folder, pattern = "*.csv")
 
 
 
-well.position <- sapply(strsplit(files, "_", fixed=TRUE), "[[", 2)
+well.position <- sapply(lapply(strsplit(files , "_", fixed=TRUE), rev), "[[", 2)
 
 names(files) <- well.position
 
