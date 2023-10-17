@@ -489,7 +489,7 @@ gus.h2o.results.individual <- lapply(1:length(gus.h2o.samples), function(i) {
 
 
 
-cat("Analyzing marker wells...\n")
+cat("Analyzing OFT wells...\n")
 
 dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 	ff <- dx.marker.files[i]
