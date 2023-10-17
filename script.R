@@ -201,7 +201,7 @@ if (runmode == "interactive"){
 
 cat(paste("Analyzing sample sheet", sample_sheet_file, "\n", sep=""))
 
-cat("Please key in the OFT baseline in HL60.\n")
+cat("Please key in the OFT/GUS baseline in HL60.\n")
 
 hl60_baseline <- trimws(readLines("stdin",n=1))
 hl60_baseline <- as.numeric(hl60_baseline)

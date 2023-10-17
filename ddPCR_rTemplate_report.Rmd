@@ -487,7 +487,7 @@ if (params$runType == "absolute") {
 			                              "Absolute PTV", 
 			                              "Absolute NTV", 
 			                              
-			                              "OFT/GUS ratio in HL60", 
+			                              "OFT/GUS baseline in HL60", 
 			                              "Total GUS Copy Numbers",
 			                              "Call"
 			                             )
@@ -547,7 +547,7 @@ if (params$runType == "absolute") {
 			                              "Absolute NTV", 
 			                             
 			                              "OFT/GUS ratio at dx", 
-			                              "OFT/GUS ratio in HL60", 
+			                              "OFT/GUS baseline in HL60", 
 
 			                              "Total GUS Copy Numbers", 
 			                              "OFT/GUS ratio", 
