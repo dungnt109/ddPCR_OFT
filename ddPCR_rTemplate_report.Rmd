@@ -474,9 +474,12 @@ if (params$runType == "absolute") {
 
 			                      absolute.ptv.formatted, 
 			                      absolute.ntv.formatted, 
+			                      "", 
 			                      
 			                      background.level.formatted, 
 			                      total.cell.no,
+			                      "", 
+
 			                      oft.call
 			                      )
 
@@ -486,9 +489,12 @@ if (params$runType == "absolute") {
 
 			                              "Absolute PTV", 
 			                              "Absolute NTV", 
+			                              "", 
 			                              
 			                              "OFT/GUS baseline in HL60", 
 			                              "Total GUS Copy Numbers",
+			                              "", 
+
 			                              "Call"
 			                             )
 
@@ -526,11 +532,14 @@ if (params$runType == "absolute") {
 
 			                      absolute.ptv.formatted, 
 			                      absolute.ntv.formatted, 
+			                      "", 
 			                      
 			                      dx.baseline.formatted, 
 			                      background.level.formatted, 
 
 			                      total.cell.no, 
+			                      "", 
+			                      
 			                      relative.oft.formatted, 
 			                       
 
@@ -545,11 +554,14 @@ if (params$runType == "absolute") {
 
 			                              "Absolute PTV", 
 			                              "Absolute NTV", 
+			                              "", 
 			                             
 			                              "OFT/GUS ratio at dx", 
 			                              "OFT/GUS baseline in HL60", 
 
 			                              "Total GUS Copy Numbers", 
+			                              "", 
+
 			                              "OFT/GUS ratio", 
 			                              
 
