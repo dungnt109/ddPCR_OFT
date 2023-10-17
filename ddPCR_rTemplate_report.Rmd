@@ -16,6 +16,7 @@ params:
   fu.marker: ""
   dx.baseline: NA
   hl60.gus.dilutionX: 200
+  hl60_baseline: 0
   hl60.gus.concentration: ""
   show_outliers: TRUE
   runType: ""
@@ -249,7 +250,7 @@ min.dx.marker.con.perwell.formatted <- sprintf("%#.3f", min.dx.marker.con.perwel
 if (min.dx.marker.con.perwell >= 10) {
 	min.dx.marker.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
 } else {
-	min.dx.marker.con.perwell.status <- "\\textcolor{red}{FAIL}"
+	min.dx.marker.con.perwell.status <- "\\textcolor{yellow}{WARNING}"
 }
 
 #### Negative control just indicate value
@@ -264,7 +265,7 @@ max.h2o.marker.con.perwell <- max(h2o.marker.info.perwell[, "concentration"])
 max.h2o.marker.con.perwell.formatted <- sprintf("%#.3f", max.h2o.marker.con.perwell)
 
 
-if (max.h2o.marker.con.perwell <= 0.3){
+if (max.h2o.marker.con.perwell <= 0.1){
 	max.h2o.marker.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
 } else {
 	max.h2o.marker.con.perwell.status <- "\\textcolor{red}{FAIL}"
@@ -288,14 +289,14 @@ h2o.gus.info.perwell <- get_info(c(params$h2o.gus))
 max.h2o.gus.con.perwell <- max(h2o.gus.info.perwell[, "concentration"])
 max.h2o.gus.con.perwell.formatted <- sprintf("%#.3f", max.h2o.gus.con.perwell)
 
-if (max.h2o.gus.con.perwell <= 0.3) {
+if (max.h2o.gus.con.perwell <= 0.1) {
 	max.h2o.gus.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
 } else {
 	max.h2o.gus.con.perwell.status <- "\\textcolor{red}{FAIL}"
 }
 
 
-final.qc.call <- c("\\textbf{\\textcolor{red}{FAIL}}","\\textbf{\\textcolor{darkgreen}{PASS}}")[(min.events.per.well.status == "\\textcolor{darkgreen}{PASS}" && min.fu.gus.conc.perwell.status != "\\textcolor{red}{POOR}" && min.dx.marker.con.perwell.status == "\\textcolor{darkgreen}{PASS}" && max.h2o.marker.con.perwell.status == "\\textcolor{darkgreen}{PASS}" && min.hl60.gus.con.perwell.status == "\\textcolor{darkgreen}{PASS}" && max.h2o.gus.con.perwell.status == "\\textcolor{darkgreen}{PASS}") + 1]
+final.qc.call <- c("\\textbf{\\textcolor{red}{FAIL}}","\\textbf{\\textcolor{darkgreen}{PASS}}")[(min.events.per.well.status == "\\textcolor{darkgreen}{PASS}" && min.fu.gus.conc.perwell.status != "\\textcolor{red}{POOR}" && max.h2o.marker.con.perwell.status == "\\textcolor{darkgreen}{PASS}" && min.hl60.gus.con.perwell.status == "\\textcolor{darkgreen}{PASS}" && max.h2o.gus.con.perwell.status == "\\textcolor{darkgreen}{PASS}") + 1]
 
 
 QC.values <- c(min.events.per.well, 
@@ -334,7 +335,7 @@ QC.status <- c(min.events.per.well.status,
 & `r status1` \leavevmode\newline `r status2` \leavevmode\newline `r status3`   \\
 
 3. Assay Controls for OFT Assay \newline \hspace*{0.3cm}- Positive (Dx [2.5ng]) OFT Conc. \newline \hspace*{0.3cm}- NTC (H2O) OFT Conc. 
-& \leavevmode\newline $\ge$10 copies/uL \newline $\le$0.3 copies/uL 
+& \leavevmode\newline $\ge$10 copies/uL \newline $\le$0.1 copies/uL 
 & \leavevmode\newline `r min.dx.marker.con.perwell.formatted` 
              \newline `r max.h2o.marker.con.perwell.formatted` 
 & \leavevmode\newline `r min.dx.marker.con.perwell.status`    
@@ -424,7 +425,9 @@ hl60.gus.dilution.factor <- as.numeric(gsub("x$", "", strsplit(rownames(hl60.gus
 #background.level <- hl60.marker.info[1, "concentration"]*2/(hl60.gus.info[1, "concentration"] * hl60.gus.dilution.factor)
 #background.level <- hl60.marker.info[1, "concentration"]/(params$hl60.gus.concentration * params$hl60.gus.dilutionX )
 
-background.level <- hl60.marker.info[1, "concentration"]/(hl60.gus.info[1, "concentration"] * params$hl60.gus.dilutionX )
+##background.level <- hl60.marker.info[1, "concentration"]/(hl60.gus.info[1, "concentration"] * params$hl60.gus.dilutionX )
+
+background.level <- hl60_baseline
 
 # total cell no.
 total.cell.no <- ceiling(fu.cell.concentration * 20 * fu.marker.info[1, "replicates"])
@@ -485,7 +488,7 @@ if (params$runType == "absolute") {
 			                              "Absolute NTV", 
 			                              
 			                              "HL60 Baseline", 
-			                              "Total Cell Numbers",
+			                              "Total GUS Numbers",
 			                              "Call"
 			                             )
 
