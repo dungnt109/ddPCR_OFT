@@ -485,7 +485,7 @@ if (params$runType == "absolute") {
 
 			names(oft.output.values) <- c("FU OFT (copies/uL)", 
 			                              "FU GUS (copies/uL)", 
-			                              "Absolute OFT/GUS ratio", 
+			                              "Absolute OFT level", 
 
 			                              "Absolute PTV", 
 			                              "Absolute NTV", 
@@ -539,7 +539,7 @@ if (params$runType == "absolute") {
 
 			                      total.cell.no, 
 			                      "", 
-			                      
+
 			                      relative.oft.formatted, 
 			                       
 
@@ -550,7 +550,7 @@ if (params$runType == "absolute") {
 
 			names(oft.output.values) <- c("FU OFT (copies/uL)", 
 			                              "FU GUS (copies/uL)", 
-			                              "Absolute OFT/GUS ratio", 
+			                              "Absolute OFT level", 
 
 			                              "Absolute PTV", 
 			                              "Absolute NTV", 
@@ -562,7 +562,7 @@ if (params$runType == "absolute") {
 			                              "Total GUS Copy Numbers", 
 			                              "", 
 
-			                              "OFT/GUS ratio", 
+			                              "Relative OFT level", 
 			                              
 
 			                              "PTV", 
