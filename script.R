@@ -201,7 +201,7 @@ if (runmode == "interactive"){
 
 cat(paste("Analyzing sample sheet", sample_sheet_file, "\n", sep=""))
 
-cat("Please key in the HL60 baseline.\n")
+cat("Please key in the OFT baseline in HL60.\n")
 
 hl60_baseline <- trimws(readLines("stdin",n=1))
 hl60_baseline <- as.numeric(hl60_baseline)
@@ -711,7 +711,7 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 
 		if (runType == "relative") {
 		
-				cat(paste("Processing ", fu.sid, "_", mid, ". Please key in the tumour load at Dx or hit enter to use the value calculated from the current test.\n", sep=""));
+				cat(paste("Processing ", fu.sid, "_", mid, ". Please key in the OFT/GUS ratio at Dx or hit enter to use the value calculated from the current test.\n", sep=""));
 				dx.baseline <- trimws(readLines("stdin",n=1))
 				dx.baseline <- as.numeric(dx.baseline)
 				if(is.na(dx.baseline)) {
