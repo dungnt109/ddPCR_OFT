@@ -43,7 +43,7 @@ header-includes:
 }
 \pagestyle{plain}
 \center
-# Sample `r params$sid`, Marker `r params$mid`
+# Sample `r params$sid`, OFT `r params$mid`
 
 
 ```{r echo=FALSE}
@@ -136,7 +136,7 @@ get_merged_info <- function(multiwell.results, sample.names=NA) {
 ```
 
 
-`r if(length(params$dx.gus) > 0){"## Albumin, diagnostic sample"}`
+`r if(length(params$dx.gus) > 0){"## GUS, diagnostic sample"}`
 
 ```{r 2dFigures_dx_alb, fig.height=12, fig.width=12, fig.align="center", echo=FALSE}
 if (length(params$dx.gus) > 0) {
@@ -149,7 +149,7 @@ if (length(params$dx.gus) > 0) {
 ```
 
 
-## Albumin, HL60
+## GUS, HL60
 
 ```{r 2dFigures_mnc_alb, fig.height=12, fig.width=12, fig.align="center", echo=FALSE}
 for (i in 1:length(params$hl60.gus)) {
@@ -160,7 +160,7 @@ for (i in 1:length(params$hl60.gus)) {
 ```
 
 
-## Albumin, NTC/H2O
+## GUS, NTC/H2O
 
 ```{r 2dFigures_h2o_alb, fig.height=12, fig.width=12, fig.align="center", echo=FALSE}
 results <- c(params$hl60.gus, params$h2o.gus)
@@ -179,7 +179,7 @@ for (i in 1:length(params$h2o.gus)) {
 
 
 
-## Albumin, follow up
+## GUS, follow up
 
 ```{r 2dFigures_fu_alb, fig.height=12, fig.width=12, fig.align="center", echo=FALSE}
 for (i in 1:length(params$fu.gus)) {
@@ -192,7 +192,7 @@ for (i in 1:length(params$fu.gus)) {
 
 
 
-## Marker, diagnostic sample
+## OFT, diagnostic sample
 
 ```{r 2dFigures_dx_marker, fig.height=12, fig.width=12, fig.align="center", echo=FALSE}
 marker.results <- c(params$dx.marker, params$hl60.marker, params$h2o.marker, params$fu.marker)
@@ -210,7 +210,7 @@ for (i in 1:length(params$dx.marker)) {
 ```
 
 
-## Marker, HL60
+## OFT, HL60
 
 ```{r 2dFigures_mnc_marker, fig.height=12, fig.width=12, fig.align="center", echo=FALSE}
 for (i in 1:length(params$hl60.marker)) {
@@ -221,7 +221,7 @@ for (i in 1:length(params$hl60.marker)) {
 ```
 
 
-## Marker, NTC/H2O
+## OFT, NTC/H2O
 
 ```{r 2dFigures_h2o_marker, fig.height=12, fig.width=12, fig.align="center", echo=FALSE}
 for (i in 1:length(params$h2o.marker)) {
@@ -233,7 +233,7 @@ for (i in 1:length(params$h2o.marker)) {
 
 
 
-## Marker, follow up
+## OFT, follow up
 
 ```{r 2dFigures_fu_marker, fig.height=12, fig.width=12, fig.align="center", echo=FALSE}
 for (i in 1:length(params$fu.marker)) {

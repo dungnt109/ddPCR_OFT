@@ -250,7 +250,7 @@ min.dx.marker.con.perwell.formatted <- sprintf("%#.3f", min.dx.marker.con.perwel
 if (min.dx.marker.con.perwell >= 10) {
 	min.dx.marker.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
 } else {
-	min.dx.marker.con.perwell.status <- "\\textcolor{yellow}{WARNING}"
+	min.dx.marker.con.perwell.status <- "\\textcolor{orange}{WARNING}"
 }
 
 #### Negative control just indicate value
@@ -389,10 +389,10 @@ if (is.na(dx.baseline)) {
 	dx.marker.info <- get_merged_info(c(params$dx.marker))
 	dx.baseline <- dx.marker.info[1, "concentration"] / dx.cell.concentration
 	lineNum <- lineNum + 1
-	writeLines(paste(lineNum, ". Using in-plate OFT/GUS ratio at dx.", sep=""))
+	writeLines(paste(lineNum, ". Using in-plate OFT/GUS ratio at Dx.", sep=""))
 } else {
 	lineNum <- lineNum + 1
-	writeLines(paste(lineNum, ". Using preset OFT/GUS ratio at dx", dx.baseline, sep=""))
+	writeLines(paste(lineNum, ". Using preset OFT/GUS ratio at Dx ", dx.baseline, sep=""))
 }
 
 
@@ -545,6 +545,8 @@ if (params$runType == "absolute") {
 
 			                      oft.ptv.formatted, 
 			                      oft.ntv.formatted, 
+
+			                      "", 
 			                      
 			                      oft.call)
 
@@ -567,6 +569,8 @@ if (params$runType == "absolute") {
 
 			                              "PTV", 
 			                              "NTV", 
+
+			                              "", 
 			                             
 			                              "Call")
 			

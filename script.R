@@ -124,28 +124,33 @@ runType <- switch(
 	"2" = "relative", 
 	"relative")
 
-cat("\nVerified by?\n1. A/Prof Allen Yeoh\n2. blank\n")
+cat("\nVerified by?\n1. Prof Allen Yeoh\n2. Blank\n")
 answer <- readLines("stdin",n=1)
 
 
 verifier <- switch(
 	answer, 
-	"1" = "A/Prof Allen Yeoh",
+	"1" = "Prof Allen Yeoh",
 	"2" = "", 
 	answer)
 
 
-cat("\nRun by?\n1. Amanda Lee\n2. Huan Pei Tee\n3. Nurhilya\n4. blank\n")
+cat("\nRun by?\n1. Amanda Lee\n2. Huan Pei Tee\n3. Nurhilya\n4. Others\n5. Blank\n")
 answer <- readLines("stdin",n=1)
 
-run_by <- switch(
+if (answer == "4"){
+	cat("\nPlease specify:\n")
+	run_by <- readLines("stdin",n=1)
+} else {
+	run_by <- switch(
 	answer, 
 	"1" = "Amanda Lee", 
 	"2" = "Huan Pei Tee", 
 	"3" = "Nurhilya", 
-	"4" = "", 
+	"5" = "", 
 	answer 
 	)
+}
 
 cat("\nDate?\n1.",format(Sys.Date(), "%d/%m/%Y") ,"\n2. blank\n")
 answer <- readLines("stdin",n=1)
@@ -157,17 +162,22 @@ run_date <- switch(
 	answer 
 	)
 
-cat("\nReported by?\n1. Shirley Kham\n2. Huan Pei Tee\n3. Nurhilya\n4. blank\n")
+cat("\nReported by?\n1. Shirley Kham\n2. Huan Pei Tee\n3. Nurhilya\n4. Others\n5. Blank\n")
 answer <- readLines("stdin",n=1)
 
-reported_by <- switch(
-	answer, 
-	"1" = "Shirley Kham", 
-	"2" = "Huan Pei Tee", 
-	"3" = "Nurhilya", 
-	"4" = "", 
-	answer 
-	)
+if (answer == "4"){
+	cat("\nPlease specify:\n")
+	reported_by <- readLines("stdin",n=1)
+} else {
+	reported_by <- switch(
+		answer, 
+		"1" = "Shirley Kham", 
+		"2" = "Huan Pei Tee", 
+		"3" = "Nurhilya", 
+		"5" = "", 
+		answer 
+		)
+}
 
 
 is_manual_threshold <- FALSE
