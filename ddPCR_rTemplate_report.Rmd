@@ -17,7 +17,7 @@ params:
   dx.baseline: NA
   hl60.gus.dilutionX: 200
   hl60_baseline: 0
-  hl60.gus.concentration: ""
+  manual_hl60_baseline: TRUE
   show_outliers: TRUE
   runType: ""
   run_by: ""
@@ -26,6 +26,7 @@ params:
   verifier: ""
   is_manual_threshold: FALSE
   manual_threshold: 0
+  qc.concentration: 0 
 title: "ddPCR OFT results"
 fontsize: 10pt
 geometry: margin=1.5cm
@@ -167,14 +168,14 @@ kable(marker.merged.info, caption = "Per sample summary of OFT results")
 
 \newpage
 
-# GUS Results
+# GUSB Results
 
 ```{r fig1, fig.height=7, fig.width=12, fig.align="center", echo=FALSE}
-plot1d(c(params$dx.gus, params$hl60.gus, params$h2o.gus, params$fu.gus), 2, main="Intensities and annotation of GUS wells")
+plot1d(c(params$dx.gus, params$hl60.gus, params$h2o.gus, params$fu.gus), 2, main="Intensities and annotation of GUSB wells")
 alb.info <- get_info(c(params$dx.gus, params$hl60.gus, params$h2o.gus, params$fu.gus))
 alb.merged.info <- get_merged_info(c(params$dx.gus, params$hl60.gus, params$h2o.gus, params$fu.gus))
-kable(alb.info, caption = "Per well summary of GUS results")
-kable(alb.merged.info, caption = "Per sample summary of GUS results")
+kable(alb.info, caption = "Per well summary of GUSB results")
+kable(alb.merged.info, caption = "Per sample summary of GUSB results")
 ```
 
 \newpage
@@ -190,7 +191,7 @@ min.events.per.well <- min(alb.info[, "used.events"], marker.info[, "used.events
 if (min.events.per.well >= 8000){
 	min.events.per.well.status <- "\\textcolor{darkgreen}{PASS}"
 } else {
-	min.events.per.well.status <- "\\textcolor{red}{FAIL}"
+	min.events.per.well.status <- "\\textcolor{red}{WARNING}"
 }
 
 
@@ -203,7 +204,7 @@ if (min.events.per.well >= 8000){
 fu.gus.info.perwell <- get_info(c(params$fu.gus))
 fu.gus.dilution.factor.perwell <- as.numeric(gsub("x$", "", sapply(strsplit(rownames(fu.gus.info.perwell), "_", fixed=TRUE), "[[", 4)))
 min.fu.gus.conc.perwell <- min(fu.gus.info.perwell[, "concentration"] * fu.gus.dilution.factor.perwell)
-min.fu.gus.conc.perwell.formatted <- sprintf("%#.3f", min.fu.gus.conc.perwell)
+min.fu.gus.conc.perwell.formatted <- sprintf("%#.2f", min.fu.gus.conc.perwell)
 
 if (min.fu.gus.conc.perwell < 1000){
 
@@ -244,31 +245,31 @@ if (min.fu.gus.conc.perwell < 1000){
 ### positive marker control >=10
 dx.marker.info.perwell <- get_info(c(params$dx.marker))
 min.dx.marker.con.perwell <- min(dx.marker.info.perwell[, "concentration"])
-min.dx.marker.con.perwell.formatted <- sprintf("%#.3f", min.dx.marker.con.perwell)
+min.dx.marker.con.perwell.formatted <- sprintf("%#.2f", min.dx.marker.con.perwell)
 
 
 if (min.dx.marker.con.perwell >= 10) {
 	min.dx.marker.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
 } else {
-	min.dx.marker.con.perwell.status <- "\\textcolor{orange}{WARNING}"
+	min.dx.marker.con.perwell.status <- "\\textcolor{red}{WARNING}"
 }
 
 #### Negative control just indicate value
 #hl60.marker.info.perwell <- get_info(c(params$hl60.marker))
 #max.hl60.marker.con.perwell <- max(hl60.marker.info.perwell[, "concentration"])
-#max.hl60.marker.con.perwell.formatted <- sprintf("%#.3f", max.hl60.marker.con.perwell)
+#max.hl60.marker.con.perwell.formatted <- sprintf("%#.2f", max.hl60.marker.con.perwell)
 #
 
 ### NTC <= 2
 h2o.marker.info.perwell <- get_info(c(params$h2o.marker))
 max.h2o.marker.con.perwell <- max(h2o.marker.info.perwell[, "concentration"])
-max.h2o.marker.con.perwell.formatted <- sprintf("%#.3f", max.h2o.marker.con.perwell)
+max.h2o.marker.con.perwell.formatted <- sprintf("%#.2f", max.h2o.marker.con.perwell)
 
 
 if (max.h2o.marker.con.perwell <= 0.1){
 	max.h2o.marker.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
 } else {
-	max.h2o.marker.con.perwell.status <- "\\textcolor{red}{FAIL}"
+	max.h2o.marker.con.perwell.status <- "\\textcolor{red}{WARNING}"
 }
 
 
@@ -276,27 +277,27 @@ if (max.h2o.marker.con.perwell <= 0.1){
 ### positive albumin control >= 30
 hl60.gus.info.perwell <- get_info(c(params$hl60.gus))
 min.hl60.gus.con.perwell <- min(hl60.gus.info.perwell[, "concentration"])
-min.hl60.gus.con.perwell.formatted <- sprintf("%#.3f", min.hl60.gus.con.perwell)
+min.hl60.gus.con.perwell.formatted <- sprintf("%#.2f", min.hl60.gus.con.perwell)
 
 if (min.hl60.gus.con.perwell >= 30) {
 	min.hl60.gus.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
 } else {
-	min.hl60.gus.con.perwell.status <- "\\textcolor{red}{FAIL}"
+	min.hl60.gus.con.perwell.status <- "\\textcolor{red}{WARNING}"
 }
 
 ### NTC <= 2
 h2o.gus.info.perwell <- get_info(c(params$h2o.gus))
 max.h2o.gus.con.perwell <- max(h2o.gus.info.perwell[, "concentration"])
-max.h2o.gus.con.perwell.formatted <- sprintf("%#.3f", max.h2o.gus.con.perwell)
+max.h2o.gus.con.perwell.formatted <- sprintf("%#.2f", max.h2o.gus.con.perwell)
 
 if (max.h2o.gus.con.perwell <= 0.1) {
 	max.h2o.gus.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
 } else {
-	max.h2o.gus.con.perwell.status <- "\\textcolor{red}{FAIL}"
+	max.h2o.gus.con.perwell.status <- "\\textcolor{red}{WARNING}"
 }
 
 
-final.qc.call <- c("\\textbf{\\textcolor{red}{FAIL}}","\\textbf{\\textcolor{darkgreen}{PASS}}")[(min.events.per.well.status == "\\textcolor{darkgreen}{PASS}" && min.fu.gus.conc.perwell.status != "\\textcolor{red}{POOR}" && max.h2o.marker.con.perwell.status == "\\textcolor{darkgreen}{PASS}" && min.hl60.gus.con.perwell.status == "\\textcolor{darkgreen}{PASS}" && max.h2o.gus.con.perwell.status == "\\textcolor{darkgreen}{PASS}") + 1]
+final.qc.call <- c("\\textbf{\\textcolor{red}{WARNING}}","\\textbf{\\textcolor{darkgreen}{PASS}}")[(min.events.per.well.status == "\\textcolor{darkgreen}{PASS}" && min.fu.gus.conc.perwell.status != "\\textcolor{red}{POOR}" && max.h2o.marker.con.perwell.status == "\\textcolor{darkgreen}{PASS}" && min.hl60.gus.con.perwell.status == "\\textcolor{darkgreen}{PASS}" && max.h2o.gus.con.perwell.status == "\\textcolor{darkgreen}{PASS}") + 1]
 
 
 QC.values <- c(min.events.per.well, 
@@ -330,7 +331,7 @@ QC.status <- c(min.events.per.well.status,
 &  `r format(min.events.per.well, scientific = FALSE)`  
 &  `r min.events.per.well.status` \\
 
-2. Minimum FU [250ng] GUS Conc. &  >5000 copies/uL (GOOD) \newline 1000-5000 copies/uL (ACCEPTABLE) \newline <1000 copies/uL (POOR)       
+2. Minimum FU [250ng] GUSB Conc. &  >5000 copies/uL (GOOD) \newline 1000-5000 copies/uL (ACCEPTABLE) \newline <1000 copies/uL (POOR)       
 & `r value1`  \leavevmode\newline `r value2`  \leavevmode\newline `r value3` 
 & `r status1` \leavevmode\newline `r status2` \leavevmode\newline `r status3`   \\
 
@@ -341,12 +342,14 @@ QC.status <- c(min.events.per.well.status,
 & \leavevmode\newline `r min.dx.marker.con.perwell.status`    
              \newline `r max.h2o.marker.con.perwell.status` \\
 
-4. Assay Controls for GUS Assay \newline \hspace*{0.3cm}- Positive (HL60 [2.5ng]) GUS Conc. \newline \hspace*{0.3cm}- NTC (H2O) GUS Conc.
+4. Assay Controls for GUSB Assay \newline \hspace*{0.3cm}- Positive (HL60 [2.5ng]) GUSB Conc. \newline \hspace*{0.3cm}- NTC (H2O) GUSB Conc.
 & \leavevmode\newline $\ge$30 copies/uL \newline $\le$0.1 copies/uL 
 & \leavevmode\newline `r min.hl60.gus.con.perwell.formatted` 
              \newline `r max.h2o.gus.con.perwell.formatted` 
 & \leavevmode\newline `r min.hl60.gus.con.perwell.status`    
              \newline `r max.h2o.gus.con.perwell.status` \\
+
+5. QC concentration (copies/uL) & & `r qc.concentration` & \\
 
 \hline
 
@@ -381,53 +384,80 @@ if (is_manual_threshold){
 	writeLines(paste(lineNum, ". Using OFT assay's intensities threshold ", manual_threshold, sep=""))
 }
 
-# OFT/GUS ratio at dx
-dx.baseline <- params$dx.baseline
-if (is.na(dx.baseline)) {
-	dx.gus.info <- get_merged_info(c(params$dx.gus))
-	dx.cell.concentration <- dx.gus.info[1, "concentration"] 
-	dx.marker.info <- get_merged_info(c(params$dx.marker))
-	dx.baseline <- dx.marker.info[1, "concentration"] / dx.cell.concentration
-	lineNum <- lineNum + 1
-	writeLines(paste(lineNum, ". Using in-plate OFT/GUS ratio at Dx.", sep=""))
-} else {
-	lineNum <- lineNum + 1
-	writeLines(paste(lineNum, ". Using preset OFT/GUS ratio at Dx ", dx.baseline, sep=""))
+# OFT/GUSB ratio at dx
+
+if (params$runType == "relative") {
+
+	dx.baseline <- params$dx.baseline
+	if (is.na(dx.baseline)) {
+		dx.gus.info <- get_merged_info(c(params$dx.gus))
+		dx.cell.concentration <- dx.gus.info[1, "concentration"] 
+		dx.marker.info <- get_merged_info(c(params$dx.marker))
+		dx.baseline <- dx.marker.info[1, "concentration"] / dx.cell.concentration
+		lineNum <- lineNum + 1
+		writeLines(paste(lineNum, ". Using calculated OFT/GUSB baseline ratio in Dx.", sep=""))
+	} else {
+		lineNum <- lineNum + 1
+		writeLines(paste(lineNum, ". Using preset OFT/GUSB baseline ratio in Dx ", dx.baseline, "." , sep=""))
+	}
+
 }
 
 
-
-
-
-#writeLines(paste("Using HL60 GUS concentration", params$hl60.gus.concentration))
 
 lineNum <- lineNum + 1
 writeLines(paste(lineNum, ". Using HL60 dilution factor ", params$hl60.gus.dilutionX, sep=""))
 
 
+if (params$manual_hl60_baseline == TRUE) {
+	
+	lineNum <- lineNum + 1
+	writeLines(paste(lineNum, ". Using preset OFT/GUSB baseline ratio in HL60.", sep=""))
 
+} else {
+	
+	lineNum <- lineNum + 1
+	writeLines(paste(lineNum, ". Using calculated OFT/GUSB baseline ratio in HL60.", sep=""))
+}
 
 
 
 # oft in mnc
 hl60.marker.info <- get_merged_info(c(params$hl60.marker))
 
+if (hl60.marker.info[1, "positive"] > 0) {
+
+	hl60.marker.info[1, "concentration"] <- -log(1-(hl60.marker.info[1, "positive"]/hl60.marker.info[1, "used.events"]))/0.00085
+
+	lineNum <- lineNum + 1
+	writeLines(paste(lineNum, ". Warning! Positive event(s) found in HL60.", sep=""))
+
+}
+
+
+
 if (hl60.marker.info[1, "positive"] == 0) {
 	hl60.marker.info[1, "positive"] <- 1
 	hl60.marker.info[1, "concentration"] <- -log(1-(hl60.marker.info[1, "positive"]/hl60.marker.info[1, "used.events"]))/0.00085
-	lineNum <- lineNum + 1
-	writeLines(paste(lineNum, ". No positive event of OFT observed in HL60 wells. 1 positive event assumed.", sep=""))
+
 }
+
+
+
 
 hl60.gus.info <- get_merged_info(c(params$hl60.gus))
 hl60.gus.dilution.factor <- as.numeric(gsub("x$", "", strsplit(rownames(hl60.gus.info), "_", fixed=TRUE)[[1]][3]))
 
 #background.level <- hl60.marker.info[1, "concentration"]*2/(hl60.gus.info[1, "concentration"] * hl60.gus.dilution.factor)
-#background.level <- hl60.marker.info[1, "concentration"]/(params$hl60.gus.concentration * params$hl60.gus.dilutionX )
 
-##background.level <- hl60.marker.info[1, "concentration"]/(hl60.gus.info[1, "concentration"] * params$hl60.gus.dilutionX )
 
-background.level <- hl60_baseline
+
+if(params$manual_hl60_baseline) {
+	background.level <- hl60_baseline   
+} else {
+	background.level <- hl60.marker.info[1, "concentration"]/(hl60.gus.info[1, "concentration"] * params$hl60.gus.dilutionX ) 
+}
+
 
 # total cell no.
 total.cell.no <- ceiling(fu.cell.concentration * 20 * fu.marker.info[1, "replicates"])
@@ -448,8 +478,8 @@ absolute.ntv <- ntv/fu.cell.concentration
 
 
 
-fu.marker.formatted <- sprintf("%#.3f", fu.marker.info[1, "concentration"])
-fu.gus.concentration.formatted <- sprintf("%#.3f", fu.gus.concentration)
+fu.marker.formatted <- sprintf("%#.2f", fu.marker.info[1, "concentration"])
+fu.gus.concentration.formatted <- sprintf("%#.2f", fu.gus.concentration)
 absolute.oft.formatted <- formatC(absolute.oft, format = "E", digits = 2)
 absolute.ptv.formatted <- formatC(absolute.ptv, format = "E", digits = 2)
 absolute.ntv.formatted <- formatC(absolute.ntv, format = "E", digits = 2)
@@ -484,15 +514,15 @@ if (params$runType == "absolute") {
 			                      )
 
 			names(oft.output.values) <- c("FU OFT (copies/uL)", 
-			                              "FU GUS (copies/uL)", 
+			                              "FU GUSB (copies/uL)", 
 			                              "Absolute OFT level", 
 
 			                              "Absolute PTV", 
 			                              "Absolute NTV", 
 			                              "", 
 			                              
-			                              "OFT/GUS baseline in HL60", 
-			                              "Total GUS Copy Numbers",
+			                              "OFT/GUSB baseline in HL60", 
+			                              "Total GUSB Copy Numbers",
 			                              "", 
 
 			                              "Call"
@@ -509,7 +539,7 @@ if (params$runType == "absolute") {
 			oft.ptv <- (ptv/fu.cell.concentration)/dx.baseline
 			oft.ntv <- (ntv/fu.cell.concentration)/dx.baseline
 
-			dx.baseline.formatted <- sprintf("%#.3f", dx.baseline)
+			dx.baseline.formatted <- sprintf("%#.2f", dx.baseline)
 			relative.oft.formatted <- formatC(relative.oft, format = "E", digits = 2)
 			oft.ntv.formatted <- formatC(oft.ntv, format = "E", digits = 2)
 			oft.ptv.formatted <- formatC(oft.ptv, format = "E", digits = 2)
@@ -551,24 +581,24 @@ if (params$runType == "absolute") {
 			                      oft.call)
 
 			names(oft.output.values) <- c("FU OFT (copies/uL)", 
-			                              "FU GUS (copies/uL)", 
+			                              "FU GUSB (copies/uL)", 
 			                              "Absolute OFT level", 
 
 			                              "Absolute PTV", 
 			                              "Absolute NTV", 
 			                              "", 
 			                             
-			                              "OFT/GUS ratio at dx", 
-			                              "OFT/GUS baseline in HL60", 
+			                              "OFT/GUSB ratio at Dx", 
+			                              "OFT/GUSB baseline in HL60", 
 
-			                              "Total GUS Copy Numbers", 
+			                              "Total GUSB Copy Numbers", 
 			                              "", 
 
 			                              "Relative OFT level", 
 			                              
 
-			                              "PTV", 
-			                              "NTV", 
+			                              "Relative PTV", 
+			                              "Relative NTV", 
 
 			                              "", 
 			                             
