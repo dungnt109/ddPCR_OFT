@@ -135,7 +135,7 @@ verifier <- switch(
 cat("\nRun by?\n1. Amanda Lee\n2. Huan Pei Tee\n3. Nurhilya\n4. Dr Lu Yi\n5. Others\n6. Blank\n")
 answer <- readLines("stdin",n=1)
 
-if (answer == "4"){
+if (answer == "5"){
 	cat("\nPlease specify:\n")
 	run_by <- readLines("stdin",n=1)
 } else {
@@ -164,7 +164,7 @@ run_date <- switch(
 cat("\nReported by?\n1. Shirley Kham\n2. Huan Pei Tee\n3. Nurhilya\n4. Dr Lu Yi\n5. Others\n6. Blank\n")
 answer <- readLines("stdin",n=1)
 
-if (answer == "4"){
+if (answer == "5"){
 	cat("\nPlease specify:\n")
 	reported_by <- readLines("stdin",n=1)
 } else {

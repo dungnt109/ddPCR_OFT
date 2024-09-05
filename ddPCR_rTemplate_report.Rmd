@@ -454,26 +454,6 @@ if(params$manual_hl60_baseline) {
 	background.level <- hl60.marker.info[1, "concentration"]/(hl60.gus.info[1, "concentration"] * params$hl60.gus.dilutionX ) 
 }
 
-if (params$manual_hl60_baseline == TRUE) {
-	
-	lineNum <- lineNum + 1
-	writeLines(paste(lineNum, 
-	                 ". Using preset OFT/GUSB baseline ratio in HL60 for ", 
-	                 params$mid, 
-	                 " ", 
-	                 formatC(background.level, format = "E", digits = 2), 
-	                 ".", sep=""))
-
-} else {
-	
-	lineNum <- lineNum + 1
-	writeLines(paste(lineNum, ". Using calculated OFT/GUSB baseline ratio in HL60 for ",
-	                 params$mid, 
-	                 " ", 
-	                 formatC(background.level, format = "E", digits = 2),
-	                 ".",
-	                 sep=""))
-}
 
 
 # total cell no.
@@ -501,6 +481,29 @@ absolute.oft.formatted <- formatC(absolute.oft, format = "E", digits = 2)
 absolute.ptv.formatted <- formatC(absolute.ptv, format = "E", digits = 2)
 absolute.ntv.formatted <- formatC(absolute.ntv, format = "E", digits = 2)
 background.level.formatted <- formatC(background.level, format = "E", digits = 2)
+
+
+if (params$manual_hl60_baseline == TRUE) {
+	
+	lineNum <- lineNum + 1
+	writeLines(paste(lineNum, 
+	                 ". Using preset OFT/GUSB baseline ratio in HL60 for ", 
+	                 params$mid, 
+	                 " ", 
+	                 background.level.formatted, 
+	                 ".", sep=""))
+
+} else {
+	
+	lineNum <- lineNum + 1
+	writeLines(paste(lineNum, ". Using calculated OFT/GUSB baseline ratio in HL60 for ",
+	                 params$mid, 
+	                 " ", 
+	                 background.level.formatted,
+	                 ".",
+	                 sep=""))
+}
+
 
 
 if (params$runType == "absolute") {
