@@ -297,8 +297,7 @@ if (max.h2o.gus.con.perwell <= 0.1) {
 }
 
 
-final.qc.call <- c("\\textbf{\\textcolor{red}{WARNING}}","\\textbf{\\textcolor{darkgreen}{PASS}}")
-[(min.events.per.well.status == "\\textcolor{darkgreen}{PASS}" && 
+final.qc.call <- c("\\textbf{\\textcolor{red}{WARNING}}","\\textbf{\\textcolor{darkgreen}{PASS}}")[(min.events.per.well.status == "\\textcolor{darkgreen}{PASS}" && 
   min.fu.gus.conc.perwell.status != "\\textcolor{red}{POOR}" && 
   min.dx.marker.con.perwell.status == "\\textcolor{darkgreen}{PASS}" && 
   max.h2o.marker.con.perwell.status == "\\textcolor{darkgreen}{PASS}" && 
