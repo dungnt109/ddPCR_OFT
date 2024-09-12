@@ -513,8 +513,9 @@ if (params$manual_hl60_baseline == TRUE) {
 
 if (params$runType == "absolute") {
 
-			
-			if (absolute.oft >= absolute.ptv) {
+			if (absolute.oft == 0){
+                                oft.call <- "NEG" 
+			} else if (absolute.oft >= absolute.ptv) {
 				oft.call <- "POS"
 			} else if (absolute.oft < absolute.ntv) {
 				oft.call <- "NEG" 
@@ -565,8 +566,9 @@ if (params$runType == "absolute") {
 			oft.ntv.formatted <- formatC(oft.ntv, format = "E", digits = 2)
 			oft.ptv.formatted <- formatC(oft.ptv, format = "E", digits = 2)
 
-			
-			if (relative.oft >= oft.ptv) {
+		        if (relative.oft == 0 ) {
+                                oft.call <- "NEG" 
+			} else if (relative.oft >= oft.ptv) {
 				oft.call <- "POS"
 			} else if (relative.oft < oft.ntv) {
 				oft.call <- "NEG"
