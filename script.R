@@ -184,10 +184,6 @@ if (is.na(hl60.gus.dilutionX)) {
 
 
 
-#cat("Please key in the gus concentration (copies/uL, after dilution) of current HL60 batch:\n");
-#hl60.gus.concentration <- trimws(readLines("stdin",n=1))
-#hl60.gus.concentration <- as.numeric(hl60.gus.concentration)
-hl60.gus.concentration <- 0 
 
 
 
@@ -757,7 +753,6 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			dx.baseline=dx.baseline, 
 			hl60.gus.dilutionX=hl60.gus.dilutionX, 
 			hl60_baseline=hl60_baseline,
-			hl60.gus.concentration=hl60.gus.concentration, 
 			run_by=run_by, 
 			run_date=run_date, 
 			reported_by=reported_by, 
@@ -783,7 +778,6 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			show_outliers=show_outliers, 
 			dx.baseline=dx.baseline, 
 			hl60.gus.dilutionX=hl60.gus.dilutionX, 
-			hl60.gus.concentration=hl60.gus.concentration, 
 			date=Sys.time()), 
 			output_file = paste(folder, separator, fu.sid, "_", mid, "_", runmode, "_2dFigs.pdf", sep="")
 		)

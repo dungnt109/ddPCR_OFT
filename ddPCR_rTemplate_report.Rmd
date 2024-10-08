@@ -17,7 +17,6 @@ params:
   dx.baseline: NA
   hl60.gus.dilutionX: 200
   hl60_baseline: 0
-  hl60.gus.concentration: ""
   show_outliers: TRUE
   runType: ""
   run_by: ""
@@ -399,7 +398,6 @@ if (is.na(dx.baseline)) {
 
 
 
-#writeLines(paste("Using HL60 GUS concentration", params$hl60.gus.concentration))
 
 lineNum <- lineNum + 1
 writeLines(paste(lineNum, ". Using HL60 dilution factor ", params$hl60.gus.dilutionX, sep=""))
@@ -423,7 +421,6 @@ hl60.gus.info <- get_merged_info(c(params$hl60.gus))
 hl60.gus.dilution.factor <- as.numeric(gsub("x$", "", strsplit(rownames(hl60.gus.info), "_", fixed=TRUE)[[1]][3]))
 
 #background.level <- hl60.marker.info[1, "concentration"]*2/(hl60.gus.info[1, "concentration"] * hl60.gus.dilution.factor)
-#background.level <- hl60.marker.info[1, "concentration"]/(params$hl60.gus.concentration * params$hl60.gus.dilutionX )
 
 ##background.level <- hl60.marker.info[1, "concentration"]/(hl60.gus.info[1, "concentration"] * params$hl60.gus.dilutionX )
 

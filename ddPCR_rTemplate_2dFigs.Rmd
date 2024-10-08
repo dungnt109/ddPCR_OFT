@@ -16,7 +16,6 @@ params:
   fu.marker: ""
   dx.baseline: NA
   hl60.gus.dilutionX: 200
-  hl60.gus.concentration: ""
   show_outliers: TRUE
 title: "ddPCR laboratory results - 2D Figures"
 fontsize: 10pt
