@@ -427,9 +427,6 @@ if (hl60.marker.info[1, "positive"] == 0) {
 hl60.gus.info <- get_merged_info(c(params$hl60.gus))
 hl60.gus.dilution.factor <- as.numeric(gsub("x$", "", strsplit(rownames(hl60.gus.info), "_", fixed=TRUE)[[1]][3]))
 
-#background.level <- hl60.marker.info[1, "concentration"]*2/(hl60.gus.info[1, "concentration"] * hl60.gus.dilution.factor)
-
-##background.level <- hl60.marker.info[1, "concentration"]/(hl60.gus.info[1, "concentration"] * params$hl60.gus.dilutionX )
 
 if(params$manual_hl60_baseline) {
 	background.level <- hl60_baseline
