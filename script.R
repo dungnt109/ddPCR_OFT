@@ -1,3 +1,6 @@
+#import 
+source("custom_functions.R")
+
 ### configurations
 
 # channels
@@ -114,70 +117,15 @@ sample_sheet_file <-  file.choose(new = FALSE)
 
 folder <- dirname(sample_sheet_file)
 
-cat("Do you want to perform absolute or relative OFT?\n1. Absolute\n2. Relative\n")
+run_type = run_type_question()
 
-answer <- readLines("stdin",n=1)
+verifier = verifier_question()
 
-runType <- switch(
-	answer, 
-	"1" = "absolute",
-	"2" = "relative", 
-	"relative")
+run_by = run_by_question()
 
-cat("\nVerified by?\n1. Prof Allen Yeoh\n2. Blank\n")
-answer <- readLines("stdin",n=1)
+run_date = run_date_question()
 
-
-verifier <- switch(
-	answer, 
-	"1" = "Prof Allen Yeoh",
-	"2" = "", 
-	answer)
-
-
-cat("\nRun by?\n1. Amanda Lee\n2. Huan Pei Tee\n3. Nurhilya\n4. Others\n5. Blank\n")
-answer <- readLines("stdin",n=1)
-
-if (answer == "4"){
-	cat("\nPlease specify:\n")
-	run_by <- readLines("stdin",n=1)
-} else {
-	run_by <- switch(
-	answer, 
-	"1" = "Amanda Lee", 
-	"2" = "Huan Pei Tee", 
-	"3" = "Nurhilya", 
-	"5" = "", 
-	answer 
-	)
-}
-
-cat("\nDate?\n1.",format(Sys.Date(), "%d/%m/%Y") ,"\n2. blank\n")
-answer <- readLines("stdin",n=1)
-
-run_date <- switch(
-	answer, 
-	"1" = format(Sys.Date(), "%d/%m/%Y"), 
-	"2" = "", 
-	answer 
-	)
-
-cat("\nReported by?\n1. Shirley Kham\n2. Huan Pei Tee\n3. Nurhilya\n4. Others\n5. Blank\n")
-answer <- readLines("stdin",n=1)
-
-if (answer == "4"){
-	cat("\nPlease specify:\n")
-	reported_by <- readLines("stdin",n=1)
-} else {
-	reported_by <- switch(
-		answer, 
-		"1" = "Shirley Kham", 
-		"2" = "Huan Pei Tee", 
-		"3" = "Nurhilya", 
-		"5" = "", 
-		answer 
-		)
-}
+reported_by = reported_by_question()
 
 
 is_manual_threshold <- FALSE
