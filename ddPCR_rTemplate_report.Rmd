@@ -203,7 +203,7 @@ if (min.events.per.well >= 8000){
 fu.gus.info.perwell <- get_info(c(params$fu.gus))
 fu.gus.dilution.factor.perwell <- as.numeric(gsub("x$", "", sapply(strsplit(rownames(fu.gus.info.perwell), "_", fixed=TRUE), "[[", 4)))
 min.fu.gus.conc.perwell <- min(fu.gus.info.perwell[, "concentration"] * fu.gus.dilution.factor.perwell)
-min.fu.gus.conc.perwell.formatted <- sprintf("%#.3f", min.fu.gus.conc.perwell)
+min.fu.gus.conc.perwell.formatted <- sprintf("%#.2f", min.fu.gus.conc.perwell)
 
 if (min.fu.gus.conc.perwell < 1000){
 
@@ -244,7 +244,7 @@ if (min.fu.gus.conc.perwell < 1000){
 ### positive marker control >=10
 dx.marker.info.perwell <- get_info(c(params$dx.marker))
 min.dx.marker.con.perwell <- min(dx.marker.info.perwell[, "concentration"])
-min.dx.marker.con.perwell.formatted <- sprintf("%#.3f", min.dx.marker.con.perwell)
+min.dx.marker.con.perwell.formatted <- sprintf("%#.2f", min.dx.marker.con.perwell)
 
 
 if (min.dx.marker.con.perwell >= 10) {
@@ -256,13 +256,13 @@ if (min.dx.marker.con.perwell >= 10) {
 #### Negative control just indicate value
 #hl60.marker.info.perwell <- get_info(c(params$hl60.marker))
 #max.hl60.marker.con.perwell <- max(hl60.marker.info.perwell[, "concentration"])
-#max.hl60.marker.con.perwell.formatted <- sprintf("%#.3f", max.hl60.marker.con.perwell)
+#max.hl60.marker.con.perwell.formatted <- sprintf("%#.2f", max.hl60.marker.con.perwell)
 #
 
 ### NTC <= 2
 h2o.marker.info.perwell <- get_info(c(params$h2o.marker))
 max.h2o.marker.con.perwell <- max(h2o.marker.info.perwell[, "concentration"])
-max.h2o.marker.con.perwell.formatted <- sprintf("%#.3f", max.h2o.marker.con.perwell)
+max.h2o.marker.con.perwell.formatted <- sprintf("%#.2f", max.h2o.marker.con.perwell)
 
 
 if (max.h2o.marker.con.perwell <= 0.1){
@@ -276,7 +276,7 @@ if (max.h2o.marker.con.perwell <= 0.1){
 ### positive albumin control >= 30
 hl60.gus.info.perwell <- get_info(c(params$hl60.gus))
 min.hl60.gus.con.perwell <- min(hl60.gus.info.perwell[, "concentration"])
-min.hl60.gus.con.perwell.formatted <- sprintf("%#.3f", min.hl60.gus.con.perwell)
+min.hl60.gus.con.perwell.formatted <- sprintf("%#.2f", min.hl60.gus.con.perwell)
 
 if (min.hl60.gus.con.perwell >= 30) {
 	min.hl60.gus.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
@@ -287,7 +287,7 @@ if (min.hl60.gus.con.perwell >= 30) {
 ### NTC <= 2
 h2o.gus.info.perwell <- get_info(c(params$h2o.gus))
 max.h2o.gus.con.perwell <- max(h2o.gus.info.perwell[, "concentration"])
-max.h2o.gus.con.perwell.formatted <- sprintf("%#.3f", max.h2o.gus.con.perwell)
+max.h2o.gus.con.perwell.formatted <- sprintf("%#.2f", max.h2o.gus.con.perwell)
 
 if (max.h2o.gus.con.perwell <= 0.1) {
 	max.h2o.gus.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
@@ -448,8 +448,8 @@ absolute.ntv <- ntv/fu.cell.concentration
 
 
 
-fu.marker.formatted <- sprintf("%#.3f", fu.marker.info[1, "concentration"])
-fu.gus.concentration.formatted <- sprintf("%#.3f", fu.gus.concentration)
+fu.marker.formatted <- sprintf("%#.2f", fu.marker.info[1, "concentration"])
+fu.gus.concentration.formatted <- sprintf("%#.2f", fu.gus.concentration)
 absolute.oft.formatted <- formatC(absolute.oft, format = "E", digits = 2)
 absolute.ptv.formatted <- formatC(absolute.ptv, format = "E", digits = 2)
 absolute.ntv.formatted <- formatC(absolute.ntv, format = "E", digits = 2)
@@ -509,7 +509,7 @@ if (params$runType == "absolute") {
 			oft.ptv <- (ptv/fu.cell.concentration)/dx.baseline
 			oft.ntv <- (ntv/fu.cell.concentration)/dx.baseline
 
-			dx.baseline.formatted <- sprintf("%#.3f", dx.baseline)
+			dx.baseline.formatted <- sprintf("%#.2f", dx.baseline)
 			relative.oft.formatted <- formatC(relative.oft, format = "E", digits = 2)
 			oft.ntv.formatted <- formatC(oft.ntv, format = "E", digits = 2)
 			oft.ptv.formatted <- formatC(oft.ptv, format = "E", digits = 2)
