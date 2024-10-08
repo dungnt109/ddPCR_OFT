@@ -17,6 +17,7 @@ params:
   dx.baseline: NA
   hl60.gus.dilutionX: 200
   hl60_baseline: 0
+  manual_hl60_baseline: TRUE
   show_outliers: TRUE
   runType: ""
   run_by: ""
@@ -430,7 +431,11 @@ hl60.gus.dilution.factor <- as.numeric(gsub("x$", "", strsplit(rownames(hl60.gus
 
 ##background.level <- hl60.marker.info[1, "concentration"]/(hl60.gus.info[1, "concentration"] * params$hl60.gus.dilutionX )
 
-background.level <- hl60_baseline
+if(params$manual_hl60_baseline) {
+	background.level <- hl60_baseline
+} else {
+	background.level <- hl60.marker.info[1, "concentration"]/(hl60.gus.info[1, "concentration"] * params$hl60.gus.dilutionX )
+}
 
 # total cell no.
 total.cell.no <- ceiling(fu.cell.concentration * 20 * fu.marker.info[1, "replicates"])
