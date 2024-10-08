@@ -189,7 +189,7 @@ min.events.per.well <- min(alb.info[, "used.events"], marker.info[, "used.events
 if (min.events.per.well >= 8000){
 	min.events.per.well.status <- "\\textcolor{darkgreen}{PASS}"
 } else {
-	min.events.per.well.status <- "\\textcolor{red}{FAIL}"
+	min.events.per.well.status <- "\\textcolor{orange}{ALERT}"
 }
 
 
@@ -267,7 +267,7 @@ max.h2o.marker.con.perwell.formatted <- sprintf("%#.2f", max.h2o.marker.con.perw
 if (max.h2o.marker.con.perwell <= 0.1){
 	max.h2o.marker.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
 } else {
-	max.h2o.marker.con.perwell.status <- "\\textcolor{red}{FAIL}"
+	max.h2o.marker.con.perwell.status <- "\\textcolor{orange}{ALERT}"
 }
 
 
@@ -280,7 +280,7 @@ min.hl60.gus.con.perwell.formatted <- sprintf("%#.2f", min.hl60.gus.con.perwell)
 if (min.hl60.gus.con.perwell >= 30) {
 	min.hl60.gus.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
 } else {
-	min.hl60.gus.con.perwell.status <- "\\textcolor{red}{FAIL}"
+	min.hl60.gus.con.perwell.status <- "\\textcolor{orange}{ALERT}"
 }
 
 ### NTC <= 2
@@ -291,11 +291,17 @@ max.h2o.gus.con.perwell.formatted <- sprintf("%#.2f", max.h2o.gus.con.perwell)
 if (max.h2o.gus.con.perwell <= 0.1) {
 	max.h2o.gus.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
 } else {
-	max.h2o.gus.con.perwell.status <- "\\textcolor{red}{FAIL}"
+	max.h2o.gus.con.perwell.status <- "\\textcolor{orange}{ALERT}"
 }
 
+if (min.events.per.well >= 8000 && min.fu.gus.conc.perwell >= 1000 && max.h2o.marker.con.perwell <= 0.1 && min.hl60.gus.con.perwell >= 30 && max.h2o.gus.con.perwell <= 0.1 ){
 
-final.qc.call <- c("\\textbf{\\textcolor{red}{FAIL}}","\\textbf{\\textcolor{darkgreen}{PASS}}")[(min.events.per.well.status == "\\textcolor{darkgreen}{PASS}" && min.fu.gus.conc.perwell.status != "\\textcolor{red}{POOR}" && max.h2o.marker.con.perwell.status == "\\textcolor{darkgreen}{PASS}" && min.hl60.gus.con.perwell.status == "\\textcolor{darkgreen}{PASS}" && max.h2o.gus.con.perwell.status == "\\textcolor{darkgreen}{PASS}") + 1]
+	final.qc.call <- "\\textbf{\\textcolor{darkgreen}{PASS}}"
+
+} else {
+	final.qc.call <- "\\textbf{\\textcolor{orange}{ALERT}}"
+}
+
 
 
 QC.values <- c(min.events.per.well, 
