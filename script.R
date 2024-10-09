@@ -159,16 +159,6 @@ if (runmode == "interactive"){
 
 cat(paste("Analyzing sample sheet", sample_sheet_file, "\n", sep=""))
 
-cat("Please key in the OFT/GUSB baseline ratio in HL60, or press Enter to use the calculated value from the test.\n")
-
-hl60_baseline <- trimws(readLines("stdin",n=1))
-hl60_baseline <- as.numeric(hl60_baseline)
-
-if (is.na(hl60_baseline)) {
-	manual_hl60_baseline <- FALSE 
-} else {
-	manual_hl60_baseline <- TRUE
-}
 
 
 cat("Please key in the HL60 dilution factor or hit enter to use the default value (100x).\n")
@@ -758,8 +748,6 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			show_outliers=show_outliers, 
 			dx.baseline=dx.baseline, 
 			hl60.gus.dilutionX=hl60.gus.dilutionX, 
-			hl60_baseline=hl60_baseline,
-			manual_hl60_baseline=manual_hl60_baseline,
 			run_by=run_by, 
 			run_date=run_date, 
 			reported_by=reported_by, 
