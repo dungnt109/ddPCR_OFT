@@ -117,7 +117,7 @@ sample_sheet_file <-  file.choose(new = FALSE)
 
 folder <- dirname(sample_sheet_file)
 
-run_type = run_type_question()
+runType = run_type_question()
 
 verifier = verifier_question()
 
@@ -159,7 +159,7 @@ if (runmode == "interactive"){
 
 cat(paste("Analyzing sample sheet", sample_sheet_file, "\n", sep=""))
 
-cat("Please key in the OFT/GUS baseline in HL60.\n")
+cat("Please key in the OFT/GUSB baseline ratio in HL60, or press Enter to use the calculated value from the test.\n")
 
 hl60_baseline <- trimws(readLines("stdin",n=1))
 hl60_baseline <- as.numeric(hl60_baseline)
