@@ -20,21 +20,19 @@ verifier_question <- function(){
 
 	cat("\nVerified by?
 	1. Prof Allen Yeoh
-	2. Dr Lu Yi
-	3. Others
-	4. Blank\n")
+	2. Others
+	3. Blank\n")
 
 	answer <- readLines("stdin",n=1)
 
-	if (answer == "3"){
+	if (answer == "2"){
 		cat("Please specify:")
 		verifier <- readLines("stdin",n=1)
 	} else {
 		verifier <- switch(
 		answer, 
 		"1" = "Prof Allen Yeoh",
-		"2" = "Dr Lu Yi", 
-		"4" = "", 
+		"3" = "", 
 		answer)
 	}
 
