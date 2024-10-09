@@ -248,7 +248,7 @@ min.dx.marker.con.perwell.formatted <- sprintf("%#.3f", min.dx.marker.con.perwel
 if (min.dx.marker.con.perwell >= 10) {
 	min.dx.marker.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
 } else {
-	min.dx.marker.con.perwell.status <- "\\textcolor{darkorange}{ALERT}"
+	min.dx.marker.con.perwell.status <- "\\textcolor{orange}{ALERT}"
 }
 
 #### Negative control just indicate value
@@ -304,26 +304,11 @@ if (min.events.per.well >= 8000 &&
 	final.qc.call <- "\\textbf{\\textcolor{darkgreen}{PASS}}"
 
 } else {
-	final.qc.call <- "\\textbf{\\textcolor{darkorange}{ALERT}}"
+	final.qc.call <- "\\textbf{\\textcolor{orange}{ALERT}}"
 }
 
 
 
-QC.values <- c(min.events.per.well, 
-						min.fu.gus.conc.perwell.formatted,
-						"",
-						min.dx.marker.con.perwell.formatted, max.h2o.marker.con.perwell.formatted,
-						"",
-						min.hl60.gus.con.perwell.formatted,max.h2o.gus.con.perwell.formatted,
-						""
-						)
-QC.status <- c(min.events.per.well.status, 
-						min.fu.gus.conc.perwell.status,
-						"",
-						min.dx.marker.con.perwell.status, max.h2o.marker.con.perwell.status,
-						"",
-						min.hl60.gus.con.perwell.status,max.h2o.gus.con.perwell.status,
-						final.qc.call)
 
 
 
