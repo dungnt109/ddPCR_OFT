@@ -459,6 +459,12 @@ if (params$runType == "absolute") {
 				oft.call <- "PNQ"
 			}
 
+			if (absolute.oft < 1E-5) {
+			    callForReporting <- "NEG"
+			} else {
+				callForReporting <- oft.call 
+			}
+
 
 			oft.output.values <- c(fu.marker.formatted, 
 			                      fu.gus.concentration.formatted, 
@@ -472,7 +478,8 @@ if (params$runType == "absolute") {
 			                      total.cell.no,
 			                      "", 
 
-			                      oft.call
+			                      oft.call, 
+			                      callForReporting
 			                      )
 
 			names(oft.output.values) <- c("FU OFT (copies/uL)", 
@@ -488,7 +495,8 @@ if (params$runType == "absolute") {
 			                              "Total GUS Copy Numbers",
 			                              "", 
 
-			                              "Call"
+			                              "Call", 
+			                              "Call (for reporting)"
 			                             )
 
 	
@@ -516,6 +524,12 @@ if (params$runType == "absolute") {
 			} else {
 				oft.call <- "PNQ"
 			}
+
+			if (relative.oft < 1E-5) {
+			    callForReporting <- "NEG"
+			} else {
+				callForReporting <- oft.call 
+			}
 				
 
 
@@ -541,7 +555,8 @@ if (params$runType == "absolute") {
 
 			                      "", 
 			                      
-			                      oft.call)
+			                      oft.call, 
+			                      callForReporting)
 
 			names(oft.output.values) <- c("FU OFT (copies/uL)", 
 			                              "FU GUS (copies/uL)", 
@@ -565,7 +580,8 @@ if (params$runType == "absolute") {
 
 			                              "", 
 			                             
-			                              "Call")
+			                              "Call", 
+			                              "Call (for reporting)")
 			
 
  }
