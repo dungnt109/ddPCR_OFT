@@ -50,40 +50,73 @@ writeValueRow7(callForReporting, "G")
 writeValueRow7("", "H")
 writeValueRow7(ifelse(runmode == "silence", "Algorithm", ifelse(is_manual_threshold, "Manual", "Algorithm")), "I")
 
-writeValueRow7("J7", "J")
-writeValueRow7("K7", "K")
-writeValueRow7("L7", "L")
-writeValueRow7("M7", "M")
-writeValueRow7("N7", "N")
-writeValueRow7(extract_value(min.dx.marker.con.perwell.status), "O")
-writeValueRow7("P7", "P")
-writeValueRow7("Q7", "Q")
-writeValueRow7("R7", "R")
-writeValueRow7("S7", "S")
-writeValueRow7(extract_value(max.h2o.marker.con.perwell.status), "T")
-writeValueRow7("U7", "U")
-writeValueRow7("V7", "V")
-writeValueRow7("W7", "W")
-writeValueRow7("X7", "X")
+writeValueRow7(marker.info[1, "threshold"], "J")
+
+if (length(rownames(marker.merged.info)) == 4){ 
+	writeValueRow7(strsplit(rownames(marker.merged.info)[1], "_")[[1]][3], "K")
+	writeValueRow7(strsplit(rownames(marker.merged.info)[1], "_")[[1]][5], "L")
+	writeValueRow7(marker.merged.info[1, "concentration"], "M")
+	writeValueRow7(marker.merged.info[1, "positive"], "N")
+	writeValueRow7(extract_value(min.dx.marker.con.perwell.status), "O")
+	writeValueRow7(marker.merged.info[2, "concentration"], "P")
+	writeValueRow7(marker.merged.info[2, "positive"], "Q")
+	writeValueRow7(marker.merged.info[3, "concentration"], "R")
+	writeValueRow7(marker.merged.info[3, "positive"], "S")
+	writeValueRow7(extract_value(max.h2o.marker.con.perwell.status), "T")
+	writeValueRow7(strsplit(rownames(marker.merged.info)[4], "_")[[1]][5], "U")
+	writeValueRow7(marker.merged.info[4, "concentration"], "V")
+	writeValueRow7(marker.merged.info[4, "positive"], "W")
+	writeValueRow7(marker.merged.info[4, "replicates"], "X")
+}
+
 writeValueRow7("", "Y")
-writeValueRow7("Z7", "Z")
 
-writeValueRow7("AA7", "AA")
-writeValueRow7("AB7", "AB")
+if (length(rownames(alb.merged.info)) == 4){ 
 
-writeValueRow7(extract_value(min.hl60.gus.con.perwell.status), "AC")
-writeValueRow7("AD7", "AD")
-writeValueRow7("AE7", "AE")
-writeValueRow7(extract_value(max.h2o.gus.con.perwell.status), "AF")
-writeValueRow7("AG7", "AG")
-writeValueRow7("AH7", "AH")
-writeValueRow7("AI7", "AI")
-writeValueRow7("AJ7", "AJ")
-writeValueRow7("AK7", "AK")
+	writeValueRow7(strsplit(rownames(alb.merged.info)[2], "_")[[1]][4], "Z")
+
+	writeValueRow7(alb.merged.info[2, "concentration"], "AA")
+	writeValueRow7(alb.merged.info[2, "positive"], "AB")
+	writeValueRow7(extract_value(min.hl60.gus.con.perwell.status), "AC")
+
+	writeValueRow7(alb.merged.info[3, "concentration"], "AD")
+	writeValueRow7(alb.merged.info[3, "positive"], "AE")
+	writeValueRow7(extract_value(max.h2o.gus.con.perwell.status), "AF")
+
+	writeValueRow7(alb.merged.info[1, "concentration"], "AG")
+	writeValueRow7(alb.merged.info[1, "positive"], "AH")
+
+	writeValueRow7(alb.merged.info[4, "concentration"], "AI")
+	writeValueRow7(alb.merged.info[4, "positive"], "AJ")
+	writeValueRow7(alb.merged.info[4, "replicates"], "AK")
+
+} else if (length(rownames(alb.merged.info)) == 3){
+
+	writeValueRow7(strsplit(rownames(alb.merged.info)[1], "_")[[1]][4], "Z")
+
+	writeValueRow7(alb.merged.info[1, "concentration"], "AA")
+	writeValueRow7(alb.merged.info[1, "positive"], "AB")
+	writeValueRow7(extract_value(min.hl60.gus.con.perwell.status), "AC")
+
+	writeValueRow7(alb.merged.info[2, "concentration"], "AD")
+	writeValueRow7(alb.merged.info[2, "positive"], "AE")
+	writeValueRow7(extract_value(max.h2o.gus.con.perwell.status), "AF")
+
+	writeValueRow7("N.A.", "AG")
+	writeValueRow7("N.A.", "AH")
+
+	writeValueRow7(alb.merged.info[3, "concentration"], "AI")
+	writeValueRow7(alb.merged.info[3, "positive"], "AJ")
+	writeValueRow7(alb.merged.info[3, "replicates"], "AK")
+
+}
+
+
+
 writeValueRow7(extract_value(min.fu.gus.conc.perwell.status), "AL")
 writeValueRow7("", "AM")
 writeValueRow7(extract_value(final.qc.call), "AN")
-writeValueRow7("date", "AO")
+writeValueRow7(paste("",generated_date), "AO")
 writeValueRow7( pipeline_version, "AP")
 writeValueRow7(runmode, "AQ")
 

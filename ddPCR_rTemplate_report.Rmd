@@ -612,7 +612,7 @@ Verified by &    `r verifier` &  & \\
 
 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning = FALSE}
 
 source("create_run_records.R", local=TRUE)
 
