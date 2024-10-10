@@ -18,10 +18,6 @@ params:
   hl60.gus.dilutionX: 200
   show_outliers: TRUE
   runType: ""
-  run_by: ""
-  run_date: ""
-  reported_by: ""
-  verifier: ""
   is_manual_threshold: FALSE
   manual_threshold: 0
 title: "ddPCR OFT results"
@@ -602,18 +598,24 @@ kable(oft.output.values, caption = "Summary of OFT level calculation.")
  & Name & Signature & Date\\
 \hline
 &&&\\     
-Run by&          `r params$run_by`    &    & `r params$run_date`  \\
+Run by&          `r run_by`    &    & `r run_date`  \\
 &&&\\
 \hline
 &&&\\
-Reported by&    `r params$reported_by`    &  & \\
+Reported by&    `r reported_by`    &  & \\
 &&&\\
 \hline
 &&&\\
-Verified by &    `r params$verifier` &  & \\
+Verified by &    `r verifier` &  & \\
 &&&\\
 \hline
 \end{tabular}
 
 
+
+```{r}
+
+source("create_run_records.R", local=TRUE)
+
+```
 
