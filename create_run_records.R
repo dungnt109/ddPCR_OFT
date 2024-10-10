@@ -1,13 +1,15 @@
 # Load openxlsx package
 library(openxlsx)
 
+sheet_name = paste(params$sid, "_", params$mid)
+
 col_letter_to_index <- function(letter) {
   # Match the column letter(s) to their numeric index
   return(sum((match(rev(strsplit(toupper(letter), "")[[1]]), LETTERS) * 26^(0:(nchar(letter)-1)))))
 }
 
 writeDataAtCell <- function(value, col, row){
-	writeData(wb, "ddPCR OFT Run Records", value, startCol = col_letter_to_index(col), startRow = row)
+	writeData(wb, sheet_name, value, startCol = col_letter_to_index(col), startRow = row)
 }
 
 writeValueRow7 <- function(value, col){
@@ -23,24 +25,25 @@ extract_value <- function(string){
 	return(result)
 }
 
+capitalize_first <- function(s) {
+  paste0(toupper(substring(s, 1, 1)), substring(s, 2))
+}
+
 existing_file_path <- "run_records_template.xlsx"
 
 wb <- loadWorkbook(existing_file_path)
 
-data <- data.frame(
-  Col1 = c(1, 2, 3),
-  Col2 = c(4, 5, 6),
-  Col3 = c(7, 8, 9),
-  Col4 = c(10, 11, 12)
-)
+
+
+renameWorksheet(wb, sheet = 1, newName = sheet_name)
 
 # Write data
-writeDataAtCell(params$sid, "A", 1)
-writeDataAtCell(params$mid, "A", 2)
+writeDataAtCell(paste("Sample ", params$sid), "A", 1)
+writeDataAtCell(paste("OFT: ", params$mid), "A", 2)
 
 row <- 7 
 
-writeValueRow7(ifelse(is.na(dx.baseline), "in-plate", "preset"), "A")
+writeValueRow7(ifelse(is.na(dx.baseline), "In-plate", "Preset"), "A")
 writeValueRow7(round(dx.baseline, digits=3), "B")
 writeValueRow7(ifelse(runType == "absolute", absolute.ptv.formatted, oft.ptv.formatted), "C")
 writeValueRow7(ifelse(runType == "absolute", absolute.ntv.formatted, oft.ntv.formatted), "D")
@@ -118,12 +121,14 @@ writeValueRow7("", "AM")
 writeValueRow7(extract_value(final.qc.call), "AN")
 writeValueRow7(paste("",generated_date), "AO")
 writeValueRow7( pipeline_version, "AP")
-writeValueRow7(runmode, "AQ")
+writeValueRow7(capitalize_first(runmode), "AQ")
 
 
 
 # Merge header cells
+center_style <- createStyle(halign = "center")
 
+addStyle(wb, sheet_name, center_style, rows = 7, cols = 1:2, gridExpand = TRUE)
 
 # Save workbook
-saveWorkbook(wb, paste(folder, "ddPCR OFT Run Records.xlsx", sep=separator), overwrite = TRUE)
+saveWorkbook(wb, paste(folder, separator, params$sid, "_", params$mid, "_", runmode, "_Run_Records.xlsx", sep=""), overwrite = TRUE)
