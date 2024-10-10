@@ -592,7 +592,7 @@ kable(oft.output.values, caption = "Summary of OFT level calculation.")
 
 ```
 
-\vspace{1.2cm}
+\vspace{0.8cm}
 \begin{tabular}{|p{2cm}|p{4cm}|p{4cm}|p{4cm}|}
 \hline
  & Name & Signature & Date\\
