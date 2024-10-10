@@ -64,6 +64,10 @@ run_date = run_date_question()
 
 reported_by = reported_by_question()
 
+generated_date <- Sys.time()
+
+pipeline_version <- "Version 2.1, 07 Oct 2024"
+
 
 is_manual_threshold <- FALSE
 manual_threshold = 0
@@ -687,8 +691,7 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			hl60.gus.dilutionX=hl60.gus.dilutionX, 
 			runType=runType,
 			is_manual_threshold=is_manual_threshold, 
-			manual_threshold=manual_threshold,
-			date=Sys.time()), 
+			manual_threshold=manual_threshold), 
 			output_file = paste(folder, separator, fu.sid, "_", mid, "_", runmode, "_report.pdf", sep="")
 		)
 		## draw figure 
@@ -705,8 +708,7 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			h2o.marker=h2o.marker, 
 			show_outliers=show_outliers, 
 			dx.baseline=dx.baseline, 
-			hl60.gus.dilutionX=hl60.gus.dilutionX, 
-			date=Sys.time()), 
+			hl60.gus.dilutionX=hl60.gus.dilutionX), 
 			output_file = paste(folder, separator, fu.sid, "_", mid, "_", runmode, "_2dFigs.pdf", sep="")
 		)
 	

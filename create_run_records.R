@@ -14,6 +14,15 @@ writeValueRow7 <- function(value, col){
 	writeDataAtCell(value, col, 7)
 }
 
+extract_value <- function(string){
+	result <- gsub("[a-z]", "", string)
+	result <- gsub("\\\\", "", result)
+	result <- gsub("\\{", "", result)
+	result <- gsub("\\}", "", result)
+	result <- gsub(" ", "", result)
+	return(result)
+}
+
 existing_file_path <- "run_records_template.xlsx"
 
 wb <- loadWorkbook(existing_file_path)
@@ -26,59 +35,59 @@ data <- data.frame(
 )
 
 # Write data
-writeDataAtCell("A1", "A", 1)
-writeDataAtCell("A2", "A", 2)
+writeDataAtCell(params$sid, "A", 1)
+writeDataAtCell(params$mid, "A", 2)
 
 row <- 7 
 
-writeValueRow7("A7", "A")
-writeValueRow7("B7", "B")
-writeValueRow7("C7", "C")
-writeValueRow7("D7", "D")
-writeValueRow7("E7", "E")
-writeValueRow7("F7", "F")
-writeValueRow7("G7", "G")
-writeValueRow7("H7", "H")
-writeValueRow7("I7", "I")
+writeValueRow7(ifelse(is.na(dx.baseline), "in-plate", "preset"), "A")
+writeValueRow7(round(dx.baseline, digits=3), "B")
+writeValueRow7(ifelse(runType == "absolute", absolute.ptv.formatted, oft.ptv.formatted), "C")
+writeValueRow7(ifelse(runType == "absolute", absolute.ntv.formatted, oft.ntv.formatted), "D")
+writeValueRow7(oft.call, "E")
+writeValueRow7(ifelse(runType == "absolute", absolute.oft.formatted, relative.oft.formatted ), "F")
+writeValueRow7(callForReporting, "G")
+writeValueRow7("", "H")
+writeValueRow7(ifelse(runmode == "silence", "Algorithm", ifelse(is_manual_threshold, "Manual", "Algorithm")), "I")
+
 writeValueRow7("J7", "J")
 writeValueRow7("K7", "K")
 writeValueRow7("L7", "L")
 writeValueRow7("M7", "M")
 writeValueRow7("N7", "N")
-writeValueRow7("O7", "O")
+writeValueRow7(extract_value(min.dx.marker.con.perwell.status), "O")
 writeValueRow7("P7", "P")
 writeValueRow7("Q7", "Q")
 writeValueRow7("R7", "R")
 writeValueRow7("S7", "S")
-writeValueRow7("T7", "T")
+writeValueRow7(extract_value(max.h2o.marker.con.perwell.status), "T")
 writeValueRow7("U7", "U")
 writeValueRow7("V7", "V")
 writeValueRow7("W7", "W")
 writeValueRow7("X7", "X")
-writeValueRow7("Y7", "Y")
+writeValueRow7("", "Y")
 writeValueRow7("Z7", "Z")
 
 writeValueRow7("AA7", "AA")
 writeValueRow7("AB7", "AB")
-writeValueRow7("AC7", "AC")
+
+writeValueRow7(extract_value(min.hl60.gus.con.perwell.status), "AC")
 writeValueRow7("AD7", "AD")
 writeValueRow7("AE7", "AE")
-writeValueRow7("AF7", "AF")
+writeValueRow7(extract_value(max.h2o.gus.con.perwell.status), "AF")
 writeValueRow7("AG7", "AG")
 writeValueRow7("AH7", "AH")
 writeValueRow7("AI7", "AI")
 writeValueRow7("AJ7", "AJ")
 writeValueRow7("AK7", "AK")
-writeValueRow7("AL7", "AL")
-writeValueRow7("AM7", "AM")
-writeValueRow7("AN7", "AN")
-writeValueRow7("AO7", "AO")
-writeValueRow7("AP7", "AP")
-writeValueRow7("AQ7", "AQ")
+writeValueRow7(extract_value(min.fu.gus.conc.perwell.status), "AL")
+writeValueRow7("", "AM")
+writeValueRow7(extract_value(final.qc.call), "AN")
+writeValueRow7("date", "AO")
+writeValueRow7( pipeline_version, "AP")
+writeValueRow7(runmode, "AQ")
 
-print(sample_sheet_file)
 
-writeDataAtCell(sample_sheet_file, "A", 3)
 
 # Merge header cells
 
