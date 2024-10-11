@@ -258,10 +258,18 @@ max.h2o.marker.con.perwell <- max(h2o.marker.info.perwell[, "concentration"])
 max.h2o.marker.con.perwell.formatted <- sprintf("%#.3f", max.h2o.marker.con.perwell)
 
 
-if (max.h2o.marker.con.perwell <= 0.1){
+if (max.h2o.marker.con.perwell <= 0){
+
 	max.h2o.marker.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
+
+} else if (max.h2o.marker.con.perwell > 0 && max.h2o.marker.con.perwell <= 0.1 ) {
+
+	max.h2o.marker.con.perwell.status <- "\\textcolor{orange}{ALERT}" 
+
 } else {
+
 	max.h2o.marker.con.perwell.status <- "\\textcolor{red}{FAIL}"
+
 }
 
 
@@ -282,23 +290,40 @@ h2o.gus.info.perwell <- get_info(c(params$h2o.gus))
 max.h2o.gus.con.perwell <- max(h2o.gus.info.perwell[, "concentration"])
 max.h2o.gus.con.perwell.formatted <- sprintf("%#.3f", max.h2o.gus.con.perwell)
 
-if (max.h2o.gus.con.perwell <= 0.1) {
+if (max.h2o.gus.con.perwell <= 0) {
+
 	max.h2o.gus.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
+
+} else if (max.h2o.gus.con.perwell > 0 && max.h2o.gus.con.perwell <=  0.1) {
+
+	max.h2o.gus.con.perwell.status <- "\\textcolor{orange}{ALERT}"
+
 } else {
+
 	max.h2o.gus.con.perwell.status <- "\\textcolor{red}{FAIL}"
+
 }
 
 if (min.events.per.well >= 8000 && 
     min.fu.gus.conc.perwell >= 1000 && 
     min.dx.marker.con.perwell >= 10 &&
-    max.h2o.marker.con.perwell <= 0.1 && 
+    max.h2o.marker.con.perwell <= 0 && 
     min.hl60.gus.con.perwell >= 30 && 
-    max.h2o.gus.con.perwell <= 0.1 )
+    max.h2o.gus.con.perwell <= 0 )
 {
 
 	final.qc.call <- "\\textbf{\\textcolor{darkgreen}{PASS}}"
 
+} else if (min.events.per.well < 8000 ||
+		   max.h2o.marker.con.perwell > 0.1 ||
+		   min.hl60.gus.con.perwell < 30 ||
+		   max.h2o.gus.con.perwell > 0.1) 
+{
+
+	final.qc.call <- "\\textbf{\\textcolor{red}{FAIL}}"
+
 } else {
+
 	final.qc.call <- "\\textbf{\\textcolor{orange}{ALERT}}"
 }
 

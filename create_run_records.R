@@ -43,7 +43,7 @@ writeDataAtCell(paste("OFT: ", params$mid), "A", 2)
 
 row <- 7 
 
-writeValueRow7(ifelse(is.na(dx.baseline), "In-plate", "Preset"), "A")
+writeValueRow7(ifelse(is.na(params$dx.baseline), "In-plate", "Preset"), "A")
 writeValueRow7(round(dx.baseline, digits=3), "B")
 writeValueRow7(ifelse(runType == "absolute", absolute.ptv.formatted, oft.ptv.formatted), "C")
 writeValueRow7(ifelse(runType == "absolute", absolute.ntv.formatted, oft.ntv.formatted), "D")
