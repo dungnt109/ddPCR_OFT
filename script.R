@@ -677,7 +677,7 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 		h2o.marker <- h2o.results
 		
 		## draw figure 
-		render(paste0("./ddPCR_rTemplate_report_", version_number, ".Rmd")  , params = list(
+		render("./ddPCR_rTemplate_report.Rmd"  , params = list(
 			sid = fu.sid, 
 			mid = mid, 
 			dx.gus = dx.gus, 
@@ -694,10 +694,10 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			runType=runType,
 			is_manual_threshold=is_manual_threshold, 
 			manual_threshold=manual_threshold), 
-			output_file = paste(folder, separator, fu.sid, "_", mid, "_", runmode, "_report.pdf", sep="")
+			output_file = paste(folder, separator, fu.sid, "_", mid, "_", runmode, "_report", version_number,".pdf", sep="")
 		)
 		## draw figure 
-		render(paste0("./ddPCR_rTemplate_2dFigs_", version_number, ".Rmd"), params = list(
+		render("./ddPCR_rTemplate_2dFigs.Rmd", params = list(
 			sid = fu.sid, 
 			mid = mid, 
 			dx.gus = dx.gus, 
@@ -711,7 +711,7 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			show_outliers=show_outliers, 
 			dx.baseline=dx.baseline, 
 			hl60.gus.dilutionX=hl60.gus.dilutionX), 
-			output_file = paste(folder, separator, fu.sid, "_", mid, "_", runmode, "_2dFigs.pdf", sep="")
+			output_file = paste(folder, separator, fu.sid, "_", mid, "_", runmode, "_2dFigs_", version_number, ".pdf", sep="")
 		)
 	
 	}
