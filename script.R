@@ -694,7 +694,7 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			runType=runType,
 			is_manual_threshold=is_manual_threshold, 
 			manual_threshold=manual_threshold), 
-			output_file = paste(folder, separator, fu.sid, "_", mid, "_", runmode, "_report", version_number,".pdf", sep="")
+			output_file = paste(folder, separator, fu.sid, "_", mid, "_", runmode, "_report_", version_number,".pdf", sep="")
 		)
 		## draw figure 
 		render("./ddPCR_rTemplate_2dFigs.Rmd", params = list(
