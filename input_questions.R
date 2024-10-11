@@ -45,15 +45,13 @@ run_by_question <- function(){
 	cat("\nRun by?
 	1. Amanda Lee
 	2. Dr Lu Yi
-	3. Florence Lim
-	4. Huan Pei Tee
-	5. Maliha
-	6. Nurhilya
-	7. Others
-	8. Blank\n")
+	3. Huan Pei Tee
+	4. Nurhilya
+	5. Others
+	6. Blank\n")
 	answer <- readLines("stdin",n=1)
 
-	if (answer == "7"){
+	if (answer == "5"){
 		cat("Please specify:")
 		run_by <- readLines("stdin",n=1)
 	} else {
@@ -61,11 +59,9 @@ run_by_question <- function(){
 		answer, 
 		"1" = "Amanda Lee", 
 		"2" = "Dr Lu Yi", 
-		"3" = "Florence Lim", 
-		"4" = "Huan Pei Tee", 
-		"5" = "Maliha", 
-		"6" = "Nurhilya",
-		"8" = "", 
+		"3" = "Huan Pei Tee", 
+		"4" = "Nurhilya",
+		"6" = "", 
 		answer 
 		)
 	}

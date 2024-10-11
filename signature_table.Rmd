@@ -1,0 +1,18 @@
+\vspace{0.8cm}
+\begin{tabular}{|p{2cm}|p{4cm}|p{4cm}|p{4cm}|}
+\hline
+ & Name & Signature & Date\\
+\hline
+&&&\\     
+Run by&          `r run_by`    &    & `r run_date`  \\
+&&&\\
+\hline
+&&&\\
+Reported by&    `r reported_by`    &  & \\
+&&&\\
+\hline
+&&&\\
+Verified by &    `r verifier` &  & \\
+&&&\\
+\hline
+\end{tabular}

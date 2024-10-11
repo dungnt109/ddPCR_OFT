@@ -131,4 +131,4 @@ center_style <- createStyle(halign = "center")
 addStyle(wb, sheet_name, center_style, rows = 7, cols = 1:44, gridExpand = TRUE)
 
 # Save workbook
-saveWorkbook(wb, paste(folder, separator, params$sid, "_", params$mid, "_", runmode, "_Run_Records.xlsx", sep=""), overwrite = TRUE)
+saveWorkbook(wb, paste(folder, separator, params$sid, "_", params$mid, "_", runmode, "_RunData_", version_number, ".xlsx", sep=""), overwrite = TRUE)

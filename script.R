@@ -66,6 +66,8 @@ reported_by = reported_by_question()
 
 generated_date <- Sys.time()
 
+version_number <- "v2.1" 
+
 pipeline_version <- "Version 2.1, 07 Oct 2024"
 
 
@@ -675,7 +677,7 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 		h2o.marker <- h2o.results
 		
 		## draw figure 
-		render("./ddPCR_rTemplate_report.Rmd", params = list(
+		render(paste0("./ddPCR_rTemplate_report_", version_number, ".Rmd")  , params = list(
 			sid = fu.sid, 
 			mid = mid, 
 			dx.gus = dx.gus, 
@@ -695,7 +697,7 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			output_file = paste(folder, separator, fu.sid, "_", mid, "_", runmode, "_report.pdf", sep="")
 		)
 		## draw figure 
-		render("./ddPCR_rTemplate_2dFigs.Rmd", params = list(
+		render(paste0("./ddPCR_rTemplate_2dFigs_", version_number, ".Rmd"), params = list(
 			sid = fu.sid, 
 			mid = mid, 
 			dx.gus = dx.gus, 
