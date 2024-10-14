@@ -42,9 +42,13 @@ writeDataAtCell(paste("Sample ", params$sid), "A", 1)
 writeDataAtCell(paste("OFT: ", params$mid), "A", 2)
 
 row <- 7 
-
-writeValueRow7(ifelse(is.na(params$dx.baseline), "In-plate", "Preset"), "A")
-writeValueRow7(round(dx.baseline, digits=3), "B")
+if (runType == "absolute"){
+	writeValueRow7("N.A.", "A")
+        writeValueRow7("N.A.", "B")
+} else {
+	writeValueRow7(ifelse(is.na(params$dx.baseline), "In-plate", "Preset"), "A")
+	writeValueRow7(round(dx.baseline, digits=3), "B")
+}
 writeValueRow7(ifelse(runType == "absolute", absolute.ptv.formatted, oft.ptv.formatted), "C")
 writeValueRow7(ifelse(runType == "absolute", absolute.ntv.formatted, oft.ntv.formatted), "D")
 writeValueRow7(oft.call, "E")
@@ -121,7 +125,7 @@ writeValueRow7("", "AM")
 writeValueRow7(extract_value(final.qc.call), "AN")
 writeValueRow7(paste("",generated_date), "AO")
 writeValueRow7( pipeline_version, "AP")
-writeValueRow7(capitalize_first(runmode), "AQ")
+writeValueRow7(ifelse(runmode=="interactive", "Interactive", "Silent"), "AQ")
 
 
 
