@@ -52,7 +52,33 @@ if (runType == "absolute"){
 writeValueRow7(ifelse(runType == "absolute", absolute.ptv.formatted, oft.ptv.formatted), "C")
 writeValueRow7(ifelse(runType == "absolute", absolute.ntv.formatted, oft.ntv.formatted), "D")
 writeValueRow7(oft.call, "E")
-writeValueRow7(ifelse(runType == "absolute", absolute.oft.formatted, relative.oft.formatted ), "F")
+
+if (runType == "absolute"){
+
+	if (absolute.oft.formatted == "-0.00E+00"){
+		
+		writeValueRow7("1.00E-08", "F")
+
+	} else {
+
+		writeValueRow7(absolute.oft.formatted, "F")
+
+	}
+
+
+} else {
+
+	if(relative.oft.formatted == "-0.00E+00"){
+
+		writeValueRow7("1.00E-08", "F")
+
+	} else {
+
+		writeValueRow7( relative.oft.formatted, "F")
+
+	}
+
+}
 writeValueRow7(callForReporting, "G")
 writeValueRow7("", "H")
 writeValueRow7(ifelse(runmode == "silence", "Algorithm", ifelse(is_manual_threshold, "Manual", "Algorithm")), "I")
