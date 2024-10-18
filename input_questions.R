@@ -44,24 +44,22 @@ run_by_question <- function(){
 
 	cat("\nRun by?
 	1. Amanda Lee
-	2. Dr Lu Yi
-	3. Huan Pei Tee
-	4. Nurhilya
-	5. Others
-	6. Blank\n")
+	2. Huan Pei Tee
+	3. Nurhilya
+	4. Others
+	5. Blank\n")
 	answer <- readLines("stdin",n=1)
 
-	if (answer == "5"){
+	if (answer == "4"){
 		cat("Please specify:")
 		run_by <- readLines("stdin",n=1)
 	} else {
 		run_by <- switch(
 		answer, 
 		"1" = "Amanda Lee", 
-		"2" = "Dr Lu Yi", 
-		"3" = "Huan Pei Tee", 
-		"4" = "Nurhilya",
-		"6" = "", 
+		"2" = "Huan Pei Tee", 
+		"3" = "Nurhilya",
+		"5" = "", 
 		answer 
 		)
 	}
