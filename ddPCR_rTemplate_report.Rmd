@@ -118,7 +118,7 @@ get_info <- function(multiwell.results) {
 		used.events <- events - outliers
 		threshold <- round(results$threshold)
 		positive <- results$n.positive.droplets
-		concentration <- round(results$concentration, digits=3)
+		concentration <- round(results$concentration, digits=5)
 		c(events, outliers, used.events, threshold, positive, concentration)
 	}))
 	rownames(tab) <- sapply(multiwell.results, "[[", "name")
@@ -139,7 +139,7 @@ get_merged_info <- function(multiwell.results, sample.names=NA) {
 	total.used.events <- tapply(tab[, "used.events"], sample.names, sum)[unique.names]
 	total.positive <- tapply(tab[, "positive"], sample.names, sum)[unique.names]
 	concentration <- -log(1-(total.positive/total.used.events))/0.00085
-	concentration <- round(concentration[unique.names], digits=3)
+	concentration <- round(concentration[unique.names], digits=5)
 	replicates <- tapply(tab[, "events"], sample.names, length)[unique.names]
 	info <- cbind(replicates=replicates, events=total.events, outliers=total.outliers, used.events=total.used.events,positive=total.positive,concentration=concentration )
 	rownames(info) <- unique.names
