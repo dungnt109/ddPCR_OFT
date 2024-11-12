@@ -240,7 +240,9 @@ min.dx.marker.con.perwell <- min(dx.marker.info.perwell[, "concentration"])
 min.dx.marker.con.perwell.formatted <- sprintf("%#.3f", min.dx.marker.con.perwell)
 
 
-if (min.dx.marker.con.perwell >= 10) {
+if (min.dx.marker.con.perwell <= 0){
+        min.dx.marker.con.perwell.status <- "\\textcolor{red}{FAIL}"
+} else if (min.dx.marker.con.perwell >= 10) {
 	min.dx.marker.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
 } else {
 	min.dx.marker.con.perwell.status <- "\\textcolor{orange}{ALERT}"
@@ -315,6 +317,7 @@ if (min.events.per.well >= 8000 &&
 	final.qc.call <- "\\textbf{\\textcolor{darkgreen}{PASS}}"
 
 } else if (min.events.per.well < 8000 ||
+	           min.dx.marker.con.perwell <= 0 ||
 		   max.h2o.marker.con.perwell > 0.1 ||
 		   min.hl60.gus.con.perwell < 30 ||
 		   max.h2o.gus.con.perwell > 0.1) 
