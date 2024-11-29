@@ -254,10 +254,31 @@ if (min.dx.marker.con.perwell <= 0){
 #max.hl60.marker.con.perwell.formatted <- sprintf("%#.3f", max.hl60.marker.con.perwell)
 #
 
+
+hl60.marker.con.perwell <- marker.merged.info[2, "concentration"]
+hl60.marker.con.perwell.formatted <- sprintf("%#.3f", hl60.marker.con.perwell)
+
+if (hl60.marker.con.perwell <= 0){
+	
+	hl60.marker.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
+
+} else if (hl60.marker.con.perwell > 0 && hl60.marker.con.perwell <= 0.1){
+	
+	hl60.marker.con.perwell.status <- "\\textcolor{orange}{ALERT}" 
+
+} else{
+	
+	hl60.marker.con.perwell.status <- "\\textcolor{red}{FAIL}"
+}
+
+
 ### NTC <= 2
 h2o.marker.info.perwell <- get_info(c(params$h2o.marker))
 max.h2o.marker.con.perwell <- max(h2o.marker.info.perwell[, "concentration"])
 max.h2o.marker.con.perwell.formatted <- sprintf("%#.3f", max.h2o.marker.con.perwell)
+
+
+
 
 
 if (max.h2o.marker.con.perwell <= 0){
@@ -275,16 +296,18 @@ if (max.h2o.marker.con.perwell <= 0){
 }
 
 
-## controls for albumin
-### positive albumin control >= 30
+## controls for GUSB
+### positive GUSB control >= 30
 hl60.gus.info.perwell <- get_info(c(params$hl60.gus))
 min.hl60.gus.con.perwell <- min(hl60.gus.info.perwell[, "concentration"])
 min.hl60.gus.con.perwell.formatted <- sprintf("%#.3f", min.hl60.gus.con.perwell)
 
-if (min.hl60.gus.con.perwell >= 30) {
+if (min.hl60.gus.con.perwell >= 85 && min.hl60.gus.con.perwell <= 185) {
 	min.hl60.gus.con.perwell.status <- "\\textcolor{darkgreen}{PASS}"
+} else if (min.hl60.gus.con.perwell < 60 || min.hl60.gus.con.perwell > 210){
+    min.hl60.gus.con.perwell.status <- "\\textcolor{red}{FAIL}"
 } else {
-	min.hl60.gus.con.perwell.status <- "\\textcolor{red}{FAIL}"
+	min.hl60.gus.con.perwell.status <- "\\textcolor{orange}{ALERT}"
 }
 
 ### NTC <= 2
@@ -309,8 +332,9 @@ if (max.h2o.gus.con.perwell <= 0) {
 if (min.events.per.well >= 8000 && 
     min.fu.gus.conc.perwell >= 1000 && 
     min.dx.marker.con.perwell >= 10 &&
+    hl60.marker.con.perwell <= 0 &&
     max.h2o.marker.con.perwell <= 0 && 
-    min.hl60.gus.con.perwell >= 30 && 
+    min.hl60.gus.con.perwell >= 85 && min.hl60.gus.con.perwell <= 185 &&
     max.h2o.gus.con.perwell <= 0 )
 {
 
@@ -318,8 +342,9 @@ if (min.events.per.well >= 8000 &&
 
 } else if (min.events.per.well < 8000 ||
 	           min.dx.marker.con.perwell <= 0 ||
+	       hl60.marker.con.perwell > 0.1 ||
 		   max.h2o.marker.con.perwell > 0.1 ||
-		   min.hl60.gus.con.perwell < 30 ||
+		   min.hl60.gus.con.perwell < 60 || min.hl60.gus.con.perwell > 210 ||
 		   max.h2o.gus.con.perwell > 0.1) 
 {
 
@@ -352,15 +377,17 @@ if (min.events.per.well >= 8000 &&
 & `r value1`  \leavevmode\newline `r value2`  \leavevmode\newline `r value3` 
 & `r status1` \leavevmode\newline `r status2` \leavevmode\newline `r status3`   \\
 
-3. Assay Controls for OFT Assay \newline \hspace*{0.3cm}- Positive (Dx [2.5ng]) OFT Conc. \newline \hspace*{0.3cm}- NTC (H2O) OFT Conc. 
-& \leavevmode\newline $\ge$10 copies/uL \newline $\le$0.1 copies/uL 
+3. Assay Controls for OFT Assay \newline \hspace*{0.3cm}- Positive (Dx [2.5ng]) OFT Conc. \newline \hspace*{0.3cm}-Negative (HL60 [250ng]) OFT Conc. \newline \hspace*{0.3cm}- NTC (H2O) OFT Conc. 
+& \leavevmode\newline $\ge$10 copies/uL \newline $\le$0.1 copies/uL \newline $\le$0.1 copies/uL 
 & \leavevmode\newline `r min.dx.marker.con.perwell.formatted` 
+			 \newline `r hl60.marker.con.perwell.formatted`
              \newline `r max.h2o.marker.con.perwell.formatted` 
-& \leavevmode\newline `r min.dx.marker.con.perwell.status`    
+& \leavevmode\newline `r min.dx.marker.con.perwell.status`   
+			 \newline `r hl60.marker.con.perwell.status` 
              \newline `r max.h2o.marker.con.perwell.status` \\
 
 4. Assay Controls for GUSB Assay \newline \hspace*{0.3cm}- Positive (HL60 [2.5ng]) GUSB Conc. \newline \hspace*{0.3cm}- NTC (H2O) GUSB Conc.
-& \leavevmode\newline $\ge$30 copies/uL \newline $\le$0.1 copies/uL 
+& \leavevmode\newline 85-185 copies/uL \newline $\le$0.1 copies/uL 
 & \leavevmode\newline `r min.hl60.gus.con.perwell.formatted` 
              \newline `r max.h2o.gus.con.perwell.formatted` 
 & \leavevmode\newline `r min.hl60.gus.con.perwell.status`    
