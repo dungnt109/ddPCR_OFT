@@ -134,7 +134,7 @@ get_merged_info <- function(multiwell.results, sample.names=NA) {
 ```
 
 
-`r if(length(params$dx.gus) > 0){"## GUS, diagnostic sample"}`
+`r if(length(params$dx.gus) > 0){"## GUSB, diagnostic sample"}`
 
 ```{r 2dFigures_dx_alb, fig.height=12, fig.width=12, fig.align="center", echo=FALSE}
 if (length(params$dx.gus) > 0) {
@@ -147,7 +147,7 @@ if (length(params$dx.gus) > 0) {
 ```
 
 
-## GUS, HL60
+## GUSB, HL60
 
 ```{r 2dFigures_mnc_alb, fig.height=12, fig.width=12, fig.align="center", echo=FALSE}
 for (i in 1:length(params$hl60.gus)) {
@@ -158,7 +158,7 @@ for (i in 1:length(params$hl60.gus)) {
 ```
 
 
-## GUS, NTC/H2O
+## GUSB, NTC/H2O
 
 ```{r 2dFigures_h2o_alb, fig.height=12, fig.width=12, fig.align="center", echo=FALSE}
 results <- c(params$hl60.gus, params$h2o.gus)
@@ -177,7 +177,7 @@ for (i in 1:length(params$h2o.gus)) {
 
 
 
-## GUS, follow up
+## GUSB, follow up
 
 ```{r 2dFigures_fu_alb, fig.height=12, fig.width=12, fig.align="center", echo=FALSE}
 for (i in 1:length(params$fu.gus)) {
