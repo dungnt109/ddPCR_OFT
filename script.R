@@ -171,8 +171,8 @@ names(files) <- well.position
 
 
 #### get the control
-## get GUS, HL60
-hl60.gus <- samples[grepl("^HL60_GUS_", samples)]    ##MNC_ALB  => HL60_GUS 
+## get GUSB, HL60
+hl60.gus <- samples[grepl("^HL60_GUSB_", samples)]    ##MNC_ALB  => HL60_GUSB 
 
 hl60.gus.file <- paste(folder, files[names(hl60.gus)], sep=separator) 
 
@@ -191,8 +191,8 @@ hl60.gus.clust <- clustering_and_threshold(hl60.gus.int[, gus.channel])
 ##	lines(c(-1e6, 1e6), c(hl60.gus.clust$threshold, hl60.gus.clust$threshold), lty=2, col=2)
 ##}
 
-# NTC, GUS
-h2o.gus <- samples[grepl("^H2O_GUS_", samples)]                      ##H20_ALB => H2O_GUS
+# NTC, GUSB
+h2o.gus <- samples[grepl("^H2O_GUSB_", samples)]                      ##H20_ALB => H2O_GUSB
 h2o.gus.file <-paste(folder, files[names(h2o.gus)], sep=separator) 
 h2o.gus.int <- read.csv(h2o.gus.file, header=TRUE)
 h2o.gus.int <- h2o.gus.int[sample(nrow(h2o.gus.int)), ]
@@ -269,8 +269,8 @@ h2o.sample.ng <- as.numeric(gsub("ng", "", sapply(strsplit(h2o.marker.samples, "
 
 
 
-### get GUS samples
-gus.samples <- samples[grepl("GUS", samples)]                                 ## ALB => GUS 
+### get GUSB samples
+gus.samples <- samples[grepl("GUSB", samples)]                                 ## ALB => GUSB 
 gus.files <- paste(folder, files[names(gus.samples)], sep=separator)
 
 
@@ -279,14 +279,14 @@ gus.files <- paste(folder, files[names(gus.samples)], sep=separator)
 
 
 
-gus.samples.h2o <- gus.samples[grepl("^H2O_GUS", gus.samples)]                 ## H2O_ALB => H2O_GUS 
-gus.files <- gus.files[!grepl("^H2O_GUS", gus.samples)]
-gus.samples <- gus.samples[!grepl("^H2O_GUS", gus.samples)]
+gus.samples.h2o <- gus.samples[grepl("^H2O_GUSB", gus.samples)]                 ## H2O_ALB => H2O_GUSB 
+gus.files <- gus.files[!grepl("^H2O_GUSB", gus.samples)]
+gus.samples <- gus.samples[!grepl("^H2O_GUSB", gus.samples)]
 gus.samples.split <- strsplit(gus.samples, "_", fixed=TRUE)
 gus.samples.info <- sapply(gus.samples.split, function(x) {x[1:3]})
 
 
-gus.h2o.samples <- samples[grepl("^H2O_GUS", samples)]
+gus.h2o.samples <- samples[grepl("^H2O_GUSB", samples)]
 gus.h2o.files <- paste(folder, files[names(gus.h2o.samples)], sep=separator)
 
 
@@ -351,7 +351,7 @@ gus.h2o.results.individual <- lapply(1:length(gus.h2o.samples), function(i) {
 	gus.h2o.int <- gus.h2o.int[sample(nrow(gus.h2o.int)), ]
 
 	
-	gus.hl60 <- gus.results.individual[grepl("^HL60_GUS", gus.samples)]   ##MNC_ALB => HL60_GUS
+	gus.hl60 <- gus.results.individual[grepl("^HL60_GUSB", gus.samples)]   ##MNC_ALB => HL60_GUSB
 	gus.hl60[[1]]$threshold
 	
 	gus.min <- min(c(gus.hl60[[1]]$intensities[, gus.channel], gus.h2o.int[, gus.channel]))
@@ -604,7 +604,7 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 
 		if (runType == "relative") {
 		
-				cat(paste("Processing ", fu.sid, "_", mid, ". Please key in the OFT/GUS ratio at Dx or hit enter to use the value calculated from the current test.\n", sep=""));
+				cat(paste("Processing ", fu.sid, "_", mid, ". Please key in the OFT/GUSB ratio at Dx or hit enter to use the value calculated from the current test.\n", sep=""));
 				dx.baseline <- trimws(readLines("stdin",n=1))
 				dx.baseline <- as.numeric(dx.baseline)
 				if(is.na(dx.baseline)) {

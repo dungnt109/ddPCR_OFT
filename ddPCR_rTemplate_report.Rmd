@@ -377,7 +377,7 @@ if (min.events.per.well >= 8000 &&
 & `r value1`  \leavevmode\newline `r value2`  \leavevmode\newline `r value3` 
 & `r status1` \leavevmode\newline `r status2` \leavevmode\newline `r status3`   \\
 
-3. Assay Controls for OFT Assay \newline \hspace*{0.3cm}- Positive (Dx [2.5ng]) OFT Conc. \newline \hspace*{0.3cm}-Negative (HL60 [250ng]) OFT Conc. \newline \hspace*{0.3cm}- NTC (H2O) OFT Conc. 
+3. Assay Controls for OFT Assay \newline \hspace*{0.3cm}- Positive (Dx [2.5ng]) OFT Conc. \newline \hspace*{0.3cm}- Negative (HL60 [250ng]) OFT Conc. \newline \hspace*{0.3cm}- NTC (H2O) OFT Conc. 
 & \leavevmode\newline $\ge$10 copies/uL \newline $\le$0.1 copies/uL \newline $\le$0.1 copies/uL 
 & \leavevmode\newline `r min.dx.marker.con.perwell.formatted` 
 			 \newline `r hl60.marker.con.perwell.formatted`
