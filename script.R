@@ -64,9 +64,9 @@ run_date = run_date_question()
 
 reported_by = reported_by_question()
 
-generated_date <- Sys.time()
+generated_date <- format(Sys.time(), format="%Y-%m-%d %H:%M:%S")
 
-version_number <- "v2.1" 
+version_number <- "v2.2" 
 
 pipeline_version <- "Version 2.2, 02 Dec 2024"
 
