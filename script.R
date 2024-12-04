@@ -68,7 +68,7 @@ generated_date <- format(Sys.time(), format="%Y-%m-%d %H:%M:%S")
 
 version_number <- "v2.2" 
 
-pipeline_version <- "Version 2.2, 02 Dec 2024"
+pipeline_version <- "Version 2.2, 09 Dec 2024"
 
 
 is_manual_threshold <- FALSE

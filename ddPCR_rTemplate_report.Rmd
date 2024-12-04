@@ -256,7 +256,7 @@ if (min.dx.marker.con.perwell <= 0){
 
 
 hl60.marker.con.perwell <- marker.merged.info[2, "concentration"]
-hl60.marker.con.perwell.formatted <- sprintf("%#.3f", hl60.marker.con.perwell)
+hl60.marker.con.perwell.formatted <- sprintf("%#.3f", abs(hl60.marker.con.perwell))
 
 if (hl60.marker.con.perwell <= 0){
 	
@@ -275,7 +275,7 @@ if (hl60.marker.con.perwell <= 0){
 ### NTC <= 2
 h2o.marker.info.perwell <- get_info(c(params$h2o.marker))
 max.h2o.marker.con.perwell <- max(h2o.marker.info.perwell[, "concentration"])
-max.h2o.marker.con.perwell.formatted <- sprintf("%#.3f", max.h2o.marker.con.perwell)
+max.h2o.marker.con.perwell.formatted <- sprintf("%#.3f", abs(max.h2o.marker.con.perwell))
 
 
 
@@ -313,7 +313,7 @@ if (min.hl60.gus.con.perwell >= 85 && min.hl60.gus.con.perwell <= 185) {
 ### NTC <= 2
 h2o.gus.info.perwell <- get_info(c(params$h2o.gus))
 max.h2o.gus.con.perwell <- max(h2o.gus.info.perwell[, "concentration"])
-max.h2o.gus.con.perwell.formatted <- sprintf("%#.3f", max.h2o.gus.con.perwell)
+max.h2o.gus.con.perwell.formatted <- sprintf("%#.3f", abs(max.h2o.gus.con.perwell))
 
 if (max.h2o.gus.con.perwell <= 0) {
 
