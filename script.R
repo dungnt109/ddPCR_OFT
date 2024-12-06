@@ -15,9 +15,9 @@ silence <- FALSE
 
 runmode <- "interactive"
 
-if (length(args) > 0 && args[1] == "Silence") {
+if (length(args) > 0 && args[1] == "Silent") {
 	silence <- TRUE
-	runmode <- "silence"
+	runmode <- "silent"
 }
 
 cat(paste(args[1], "\n"))
