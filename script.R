@@ -494,6 +494,8 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 		hl60.file <- paste(folder, files[names(hl60.samples)[j]], sep=separator)
 		hl60.marker.int <- read.csv(hl60.file, header=TRUE)
 		hl60.marker.int <- hl60.marker.int[sample(nrow(hl60.marker.int)), ]
+		
+		hl60_threshold = dx.marker.clust2$threshold
 
 
 		hl60.mask <- (hl60.marker.int[, gus.channel] < outlier.in.silence.channel$upper.bound) & (hl60.marker.int[, gus.channel] > outlier.in.silence.channel$lower.bound) & (hl60.marker.int[, marker.channel] < dx.marker.clust2$upper.bound)
@@ -508,20 +510,20 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			y.max <- max(c(hl60.marker.int[, gus.channel], dx.marker.int[, gus.channel]))
 			
 			
-			plot(hl60.marker.int[,marker.channel], hl60.marker.int[,gus.channel], col = (hl60.marker.int[,marker.channel] > dx.marker.clust2$threshold) + 1,
+			plot(hl60.marker.int[,marker.channel], hl60.marker.int[,gus.channel], col = (hl60.marker.int[,marker.channel] > hl60_threshold) + 1,
 					pch = c(4, 16)[hl60.mask + 1],
 					main=paste(hl60.samples[j], names(hl60.samples)[j], "\n Click to remove, and click the middle key when done." ), xlab = "Channel 1", ylab="Channel 2", xlim=c(x.min, x.max), ylim=c(y.min, y.max))
-			lines(c(dx.marker.clust2$threshold, dx.marker.clust2$threshold), c(-1e8, 1e8), col=2, lwd=1.5)
+			lines(c(hl60_threshold, hl60_threshold), c(-1e8, 1e8), col=2, lwd=1.5)
 			hl60.to.inverse <- identify(hl60.marker.int[,1], hl60.marker.int[,2], c("✓", "x")[hl60.mask + 1], col="blue")
 			hl60.mask[hl60.to.inverse] <- !hl60.mask[hl60.to.inverse]
 		}
-		n.positive.droplets <- sum(hl60.marker.int[,marker.channel][hl60.mask] > dx.marker.clust2$threshold)
+		n.positive.droplets <- sum(hl60.marker.int[,marker.channel][hl60.mask] > hl60_threshold)
 		n.droplets <- sum(hl60.mask)
 		n.outliers <- sum(!hl60.mask)
 		concentration <- -log(1-(n.positive.droplets/n.droplets))/0.00085
 	
 		list(intensities=hl60.marker.int, 
-						threshold=dx.marker.clust2$threshold, 
+						threshold=hl60_threshold, 
 						mask=hl60.mask, 
 						n.positive.droplets=n.positive.droplets, 
 						n.droplets = n.droplets, 
@@ -544,7 +546,7 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 		h2o.marker.int <- read.csv(h2o.file, header=TRUE)
 		h2o.marker.int <- h2o.marker.int[sample(nrow(h2o.marker.int)), ]
 
-		
+		h20_threshold = dx.marker.clust2$threshold
 		
 		h2o.mask <- (h2o.marker.int[, gus.channel] < outlier.in.silence.channel$upper.bound) & (h2o.marker.int[, gus.channel] > outlier.in.silence.channel$lower.bound) & (h2o.marker.int[, marker.channel] < dx.marker.clust2$upper.bound)
 		
@@ -556,11 +558,11 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			y.max <- max(c(h2o.marker.int[, gus.channel], dx.marker.int[, gus.channel]))
 			
 			
-			plot(h2o.marker.int[,marker.channel], h2o.marker.int[,gus.channel], col = (h2o.marker.int[,marker.channel] > dx.marker.clust2$threshold) + 1,
+			plot(h2o.marker.int[,marker.channel], h2o.marker.int[,gus.channel], col = (h2o.marker.int[,marker.channel] > h20_threshold) + 1,
 					pch = c(4, 16)[h2o.mask + 1],
 					main=paste(h2o.samples[j], names(h2o.samples)[j], "\n Click to remove, and click the middle key when done." ), xlab = "Channel 1", ylab="Channel 2",
 					xlim=c(x.min, x.max), ylim=c(y.min, y.max))
-			lines(c(dx.marker.clust2$threshold, dx.marker.clust2$threshold), c(-1e8, 1e8), col=2, lwd=1.5)
+			lines(c(h20_threshold, h20_threshold), c(-1e8, 1e8), col=2, lwd=1.5)
 			h2o.to.inverse <- identify(h2o.marker.int[,1], h2o.marker.int[,2], c("✓", "x")[h2o.mask + 1], col="blue")
 			h2o.mask[h2o.to.inverse] <- !h2o.mask[h2o.to.inverse]
 			#pos.droplets <- sum(h2o.marker.int[h2o.mask, marker.channel] > dx.marker.clust2$threshold)
@@ -568,13 +570,13 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			#list(int = h2o.marker.int, h2o.mask = h2o.mask, pos.droplets = pos.droplets)
 		}
 		
-		n.positive.droplets <- sum(h2o.marker.int[,marker.channel][h2o.mask] > dx.marker.clust2$threshold)
+		n.positive.droplets <- sum(h2o.marker.int[,marker.channel][h2o.mask] > h20_threshold)
 		n.droplets <- sum(h2o.mask)
 		n.outliers <- sum(!h2o.mask)
 		concentration <- -log(1-(n.positive.droplets/n.droplets))/0.00085
 	
 		list(intensities=h2o.marker.int, 
-						threshold=dx.marker.clust2$threshold, 
+						threshold=h20_threshold, 
 						mask=h2o.mask, 
 						n.positive.droplets=n.positive.droplets, 
 						n.droplets = n.droplets, 
@@ -624,6 +626,8 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			fu.file <- paste(folder, files[names(fu.samples)[j]], sep=separator)
 			fu.marker.int <- read.csv(fu.file, header=TRUE)
 			fu.marker.int <- fu.marker.int[sample(nrow(fu.marker.int)), ]
+			
+			fu_threshold = dx.marker.clust2$threshold
 
 			fu.mask <- (fu.marker.int[, gus.channel] < outlier.in.silence.channel$upper.bound) & (fu.marker.int[, gus.channel] > outlier.in.silence.channel$lower.bound) & (fu.marker.int[, marker.channel] < dx.marker.clust2$upper.bound)
 			
@@ -636,26 +640,26 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			
 			
 				
-				plot(fu.marker.int[,marker.channel], fu.marker.int[,gus.channel], col = (fu.marker.int[,marker.channel] > dx.marker.clust2$threshold) + 1,
+				plot(fu.marker.int[,marker.channel], fu.marker.int[,gus.channel], col = (fu.marker.int[,marker.channel] > fu_threshold) + 1,
 						pch = c(4, 16)[fu.mask + 1],
 						main=paste(fu.samples[j], names(fu.samples)[j], "\n Click to remove, and click the middle key when done." ), xlab = "Channel 1", ylab="Channel 2")
-				lines(c(dx.marker.clust2$threshold, dx.marker.clust2$threshold), c(-1e8, 1e8), col=2, lwd=1.5)
+				lines(c(fu_threshold, fu_threshold), c(-1e8, 1e8), col=2, lwd=1.5)
 				fu.to.inverse <- identify(fu.marker.int[,1], fu.marker.int[,2], c("✓", "x")[fu.mask + 1], col="blue")
 				fu.mask[fu.to.inverse] <- !fu.mask[fu.to.inverse]
 			}
 			
-			pos.droplets <- sum(fu.marker.int[fu.mask, marker.channel] > dx.marker.clust2$threshold)
+			pos.droplets <- sum(fu.marker.int[fu.mask, marker.channel] > fu_threshold)
 			
 			list(int = fu.marker.int, fu.mask = fu.mask, pos.droplets = pos.droplets)
 			
 			
-			n.positive.droplets <- sum(fu.marker.int[,marker.channel][fu.mask] > dx.marker.clust2$threshold)
+			n.positive.droplets <- sum(fu.marker.int[,marker.channel][fu.mask] > fu_threshold)
 			n.droplets <- sum(fu.mask)
 			n.outliers <- sum(!fu.mask)
 			concentration <- -log(1-(n.positive.droplets/n.droplets))/0.00085
 		
 			list(intensities=fu.marker.int, 
-							threshold=dx.marker.clust2$threshold, 
+							threshold=fu_threshold, 
 							mask=fu.mask, 
 							n.positive.droplets=n.positive.droplets, 
 							n.droplets = n.droplets, 
