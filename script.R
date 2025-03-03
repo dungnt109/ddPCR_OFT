@@ -66,36 +66,16 @@ reported_by = reported_by_question()
 
 generated_date <- format(Sys.time(), format="%Y-%m-%d %H:%M:%S")
 
-version_number <- "v2.2" 
+version_number <- "v2.3" 
 
-pipeline_version <- "Version 2.2, 09 Dec 2024"
+pipeline_version <- "Version 2.3, 03 Mar 2025"
 
 
 is_manual_threshold <- FALSE
 manual_threshold = 0
+is_single_manual_threshold <- FALSE
 
-if (runmode == "interactive"){
 
-	cat("\nUse manual threshold?\n1. No\n2. Yes\n")
-	answer <- readLines("stdin",n=1)
-
-	is_manual_threshold <- switch(
-		answer, 
-		"1" = FALSE, 
-		"2" = TRUE, 
-		FALSE
-		)
-
-	 
-
-	if (is_manual_threshold){
-
-		cat("\nPlease key in the OFT assay's intensities threshold!\n")
-
-		manual_threshold = as.numeric(trimws(readLines("stdin",n=1)))
-
-	}
-}
 
 
 
@@ -117,7 +97,6 @@ if (is.na(hl60.gus.dilutionX)) {
 } else {
 	cat(paste("Using user-specified value ", hl60.gus.dilutionX, "\n", sep=""))
 }
-
 
 
 
@@ -294,7 +273,7 @@ gus.h2o.files <- paste(folder, files[names(gus.h2o.samples)], sep=separator)
 
 
 
-cat("Analyzing gus wells...\n")
+cat("Analyzing GUSB wells...\n")
 
 
 gus.results.individual <- lapply(1:length(gus.samples), function(i) {
@@ -384,6 +363,38 @@ gus.h2o.results.individual <- lapply(1:length(gus.h2o.samples), function(i) {
 
 cat("Analyzing OFT wells...\n")
 
+
+if (runmode == "interactive"){
+
+	cat("\nUse manual threshold for OFT assay?\n1. No\n2. Yes\n")
+	answer <- readLines("stdin",n=1)
+
+	is_manual_threshold <- switch(
+		answer, 
+		"1" = FALSE, 
+		"2" = TRUE, 
+		FALSE
+		)
+
+	 
+
+	if (is_manual_threshold){
+	
+	
+		cat("\nUse single manual thresholds?\n1. Single threshold\n2. Multiple thresholds\n")
+		answer <- readLines("stdin",n=1)
+		
+		is_single_manual_threshold <- switch(
+			answer, 
+			"1" = TRUE, 
+			"2" = FALSE, 
+			FALSE
+		)
+		
+
+	}
+}
+
 dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 	ff <- dx.marker.files[i]
 
@@ -410,13 +421,36 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 	
 
 
-	if (!is_manual_threshold) {
+	if (runmode == "silent") {
 
 		dx.marker.clust <- clustering_and_threshold(dx.marker.int[outlier.in.silence.channel$mask, marker.channel])
+		
 
 	} else {
+	
+		if (is_manual_threshold == FALSE) {
+		
+			dx.marker.clust <- clustering_and_threshold(dx.marker.int[outlier.in.silence.channel$mask, marker.channel])
+		
+		} else {
+		
+				if (is_single_manual_threshold == FALSE) {
+	
+					cat(paste("\nPlease key in the threshold for Dx:", names(dx.marker.samples)[i], "?\n"))
 
-		dx.marker.clust <- manual_clustering_and_threshold(dx.marker.int[outlier.in.silence.channel$mask, marker.channel], manual_threshold)
+					manual_threshold = as.numeric(trimws(readLines("stdin",n=1)))
+				
+				} else {
+				
+					cat("\nPlease key in the OFT assay's intensities threshold!\n")
+
+					manual_threshold = as.numeric(trimws(readLines("stdin",n=1)))
+				
+				}
+
+				dx.marker.clust <- manual_clustering_and_threshold(dx.marker.int[outlier.in.silence.channel$mask, marker.channel], manual_threshold)
+				
+		} 
 	}
 
 
@@ -449,6 +483,8 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 		dx.marker.clust2 <- clustering_and_threshold(dx.marker.int[dx.mask, marker.channel])
 
 	} else {
+	
+
 
 		dx.marker.clust2 <- manual_clustering_and_threshold(dx.marker.int[dx.mask, marker.channel], manual_threshold)
 	}
@@ -495,7 +531,16 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 		hl60.marker.int <- read.csv(hl60.file, header=TRUE)
 		hl60.marker.int <- hl60.marker.int[sample(nrow(hl60.marker.int)), ]
 		
-		hl60_threshold = dx.marker.clust2$threshold
+		if (runmode == "interactive" && is_manual_threshold == TRUE && is_single_manual_threshold == FALSE){
+			
+				cat(paste("\nPlease key in the threshold for HL60:", names(hl60.samples)[j], "?\n"))
+				hl60_threshold = as.numeric(trimws(readLines("stdin",n=1)))
+		
+		} else {
+		
+			hl60_threshold = dx.marker.clust2$threshold
+		
+		}
 
 
 		hl60.mask <- (hl60.marker.int[, gus.channel] < outlier.in.silence.channel$upper.bound) & (hl60.marker.int[, gus.channel] > outlier.in.silence.channel$lower.bound) & (hl60.marker.int[, marker.channel] < dx.marker.clust2$upper.bound)
@@ -545,8 +590,18 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 		h2o.file <- paste(folder, files[names(h2o.samples)[j]], sep=separator)
 		h2o.marker.int <- read.csv(h2o.file, header=TRUE)
 		h2o.marker.int <- h2o.marker.int[sample(nrow(h2o.marker.int)), ]
-
-		h20_threshold = dx.marker.clust2$threshold
+		
+		if (runmode == "interactive" && is_manual_threshold == TRUE && is_single_manual_threshold == FALSE){
+			
+				cat(paste("\nPlease key in the threshold for H2O:", names(h2o.samples)[j], "?\n"))
+				
+				h20_threshold = as.numeric(trimws(readLines("stdin",n=1)))
+			
+		} else {
+		
+			h20_threshold = dx.marker.clust2$threshold
+		
+		}
 		
 		h2o.mask <- (h2o.marker.int[, gus.channel] < outlier.in.silence.channel$upper.bound) & (h2o.marker.int[, gus.channel] > outlier.in.silence.channel$lower.bound) & (h2o.marker.int[, marker.channel] < dx.marker.clust2$upper.bound)
 		
@@ -627,7 +682,17 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 			fu.marker.int <- read.csv(fu.file, header=TRUE)
 			fu.marker.int <- fu.marker.int[sample(nrow(fu.marker.int)), ]
 			
-			fu_threshold = dx.marker.clust2$threshold
+			if (runmode == "interactive" && is_manual_threshold == TRUE && is_single_manual_threshold == FALSE){
+				
+					cat(paste("\nPlease key in the threshold for follow-ups:", names(fu.samples)[j], "?\n") )
+					
+					fu_threshold = as.numeric(trimws(readLines("stdin",n=1)))
+				
+			} else {
+			
+				fu_threshold = dx.marker.clust2$threshold
+			
+			}
 
 			fu.mask <- (fu.marker.int[, gus.channel] < outlier.in.silence.channel$upper.bound) & (fu.marker.int[, gus.channel] > outlier.in.silence.channel$lower.bound) & (fu.marker.int[, marker.channel] < dx.marker.clust2$upper.bound)
 			

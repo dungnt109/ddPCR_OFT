@@ -422,8 +422,14 @@ writeLines("Values input:")
 lineNum <- 0 
 
 if (is_manual_threshold){
-	lineNum <- lineNum + 1
-	writeLines(paste(lineNum, ". Using OFT assay's intensities threshold ", manual_threshold, sep=""))
+	if (is_single_manual_threshold){
+		lineNum <- lineNum + 1
+		writeLines(paste(lineNum, ". Using OFT assay's intensities threshold ", manual_threshold, sep=""))
+	} else {
+		lineNum <- lineNum + 1
+		writeLines(paste(lineNum, ". Using OFT assay's intensities threshold - individual samples",  sep=""))
+	
+	}
 }
 
 # OFT/GUSB ratio at dx

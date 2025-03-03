@@ -83,7 +83,11 @@ writeValueRow7(callForReporting, "G")
 writeValueRow7("", "H")
 writeValueRow7(ifelse(runmode == "silent", "Algorithm", ifelse(is_manual_threshold, "Manual", "Algorithm")), "I")
 
-writeValueRow7(marker.info[1, "threshold"], "J")
+if (runmode == "interactive" && is_manual_threshold == TRUE && is_single_manual_threshold == FALSE){
+	writeValueRow7("Individual samples", "J")
+} else {
+	writeValueRow7(marker.info[1, "threshold"], "J")
+}
 
 if (length(rownames(marker.merged.info)) == 4){ 
 	writeValueRow7(strsplit(rownames(marker.merged.info)[1], "_")[[1]][3], "K")
