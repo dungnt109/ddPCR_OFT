@@ -66,9 +66,9 @@ reported_by = reported_by_question()
 
 generated_date <- format(Sys.time(), format="%Y-%m-%d %H:%M:%S")
 
-version_number <- "v2.3" 
+version_number <- "v2.4" 
 
-pipeline_version <- "Version 2.3, 03 Mar 2025"
+pipeline_version <- "Version 2.4, 27 May 2025"
 
 
 is_manual_threshold <- FALSE
@@ -155,7 +155,7 @@ hl60.gus <- samples[grepl("^HL60_GUSB_", samples)]    ##MNC_ALB  => HL60_GUSB
 
 hl60.gus.file <- paste(folder, files[names(hl60.gus)], sep=separator) 
 
-hl60.gus.int <- read.csv(hl60.gus.file, header=TRUE)
+hl60.gus.int <- read_csv(hl60.gus.file)
 
 hl60.gus.int <- hl60.gus.int[sample(nrow(hl60.gus.int)), ]
 
@@ -173,7 +173,7 @@ hl60.gus.clust <- clustering_and_threshold(hl60.gus.int[, gus.channel])
 # NTC, GUSB
 h2o.gus <- samples[grepl("^H2O_GUSB_", samples)]                      ##H20_ALB => H2O_GUSB
 h2o.gus.file <-paste(folder, files[names(h2o.gus)], sep=separator) 
-h2o.gus.int <- read.csv(h2o.gus.file, header=TRUE)
+h2o.gus.int <- read_csv(h2o.gus.file)
 h2o.gus.int <- h2o.gus.int[sample(nrow(h2o.gus.int)), ]
 
 
@@ -280,7 +280,7 @@ gus.results.individual <- lapply(1:length(gus.samples), function(i) {
 	ff <- gus.files[i]
 
 
-	gus.int <- read.csv(ff, header=TRUE)
+	gus.int <- read_csv(ff)
 	gus.int <- gus.int[sample(nrow(gus.int)), ]
 
 	
@@ -326,7 +326,7 @@ gus.h2o.results.individual <- lapply(1:length(gus.h2o.samples), function(i) {
 	ff <- gus.h2o.files[i]
 
 
-	gus.h2o.int <- read.csv(ff, header=TRUE)
+	gus.h2o.int <- read_csv(ff)
 	gus.h2o.int <- gus.h2o.int[sample(nrow(gus.h2o.int)), ]
 
 	
@@ -410,7 +410,7 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 	mid <- dx.sample.mid[i]
 
 	
-	dx.marker.int <- read.csv(ff, header=TRUE)
+	dx.marker.int <- read_csv(ff)
 	dx.marker.int <- dx.marker.int[sample(nrow(dx.marker.int)), ]
 	
 	#if (!silence) {
@@ -528,7 +528,7 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 	
 	hl60.results <- lapply(1:length(hl60.samples), function(j) {
 		hl60.file <- paste(folder, files[names(hl60.samples)[j]], sep=separator)
-		hl60.marker.int <- read.csv(hl60.file, header=TRUE)
+		hl60.marker.int <- read_csv(hl60.file)
 		hl60.marker.int <- hl60.marker.int[sample(nrow(hl60.marker.int)), ]
 		
 		if (runmode == "interactive" && is_manual_threshold == TRUE && is_single_manual_threshold == FALSE){
@@ -588,7 +588,7 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 	
 	h2o.results <- lapply(1:length(h2o.samples), function(j) {
 		h2o.file <- paste(folder, files[names(h2o.samples)[j]], sep=separator)
-		h2o.marker.int <- read.csv(h2o.file, header=TRUE)
+		h2o.marker.int <- read_csv(h2o.file)
 		h2o.marker.int <- h2o.marker.int[sample(nrow(h2o.marker.int)), ]
 		
 		if (runmode == "interactive" && is_manual_threshold == TRUE && is_single_manual_threshold == FALSE){
@@ -679,7 +679,7 @@ dx.sample.clust <- lapply(1:length(dx.marker.samples), function(i) {
 		fu.files <- fu.marker.files[fu.sample.pid == pid & fu.sample.mid == mid & fu.sample.sid == fu.sid]
 		fu.results <- lapply (1:length(fu.samples), function(j) {
 			fu.file <- paste(folder, files[names(fu.samples)[j]], sep=separator)
-			fu.marker.int <- read.csv(fu.file, header=TRUE)
+			fu.marker.int <- read_csv(fu.file)
 			fu.marker.int <- fu.marker.int[sample(nrow(fu.marker.int)), ]
 			
 			if (runmode == "interactive" && is_manual_threshold == TRUE && is_single_manual_threshold == FALSE){
