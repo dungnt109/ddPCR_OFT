@@ -70,7 +70,7 @@ read_csv <- function(string){
 		data <- read.csv(string, header=TRUE)
 		header = colnames(data)
 
-		if (header[1] == "Ch1 Amplitude" && header[2] == "Ch2 Amplitude"){
+		if (header[1] == "Ch1.Amplitude" && header[2] == "Ch2.Amplitude"){
 
 			print("The csv file is in old format.")
 	  		return(data)
