@@ -1,0 +1,313 @@
+```{r, echo=FALSE, warning = FALSE}
+annealing_temperature_checklist = get_annealing_temperature(mnc.alb.file, separator) 
+
+if (runType == "absolute"){
+	dx_baseline_checklist = "N.A."
+} else {
+	if (is.na(params$dx.baseline)){
+		dx_baseline_checklist = paste(round(dx.baseline, digits=3), " (in-plate)")
+	} else {
+		dx_baseline_checklist = paste(round(dx.baseline, digits=3), " (preset)")
+	}
+}
+
+mnc_alb_concentraton_checklist = params$mnc.alb.concentration
+mnc_alb_factor_checklist = params$mnc.alb.dilutionX
+fu_alb_factor_checklist = fu.alb.dilution.factor
+overall_qc_checklist = extract_value(final.qc.call)
+
+
+if (length(params$dx.alb) == 0) {
+
+	mrd_marker_checklist = "N.A."
+
+} else {
+
+	dx.alb.info <- get_merged_info(c(params$dx.alb))
+	dx.cell.concentration <- dx.alb.info[1, "concentration"] / 2
+
+
+	if (is.na(dx.cell.concentration)){
+
+		mrd_marker_checklist = "N.A."
+		
+	} else {
+
+		dx.marker.info <- get_merged_info(c(params$dx.marker))
+
+		mrd_marker_checklist = round(dx.marker.info[1, "concentration"] / dx.cell.concentration, digits=3)
+
+	}
+}
+
+alb_assay_checklist = paste(sprintf("%#.5f", min.mnc.alb.con.perwell), " (", extract_value(min.mnc.alb.con.perwell.status), ")", sep="")
+
+if (callForReporting == "NEG" || callForReporting == "PNQ"){
+	mrd_result_checklist = callForReporting
+} else {
+	if (runType == "absolute"){
+		mrd_result_checklist = absolute.mrd.formatted
+	} else {
+		mrd_result_checklist = relative.mrd.formatted
+	}
+}
+
+if(runType == "absolute"){
+	positive_threshold_checklist = absolute.ptv.formatted
+} else {
+	positive_threshold_checklist = mrd.ptv.formatted
+}
+
+if(runType == "absolute"){
+	negative_threshold_checklist = absolute.ntv.formatted
+} else {
+	negative_threshold_checklist = mrd.ntv.formatted
+}
+
+ quality_dna_checklist = extract_value(min.fu.alb.conc.perwell.status)
+
+mdata  <- read_template_file(sample_sheet_file)
+
+```
+\newpage
+
+\thispagestyle{lastpage}
+
+\newcolumntype{C}{>{\centering\arraybackslash}p{0.44cm}}
+
+\newcommand{\fixedheight}{\rule{0pt}{0.38cm}} 
+\newcommand{\shortheight}{\rule{0pt}{0.005cm}} 
+
+\phantomsection
+\addcontentsline{toc}{section}{Checklist}
+
+\renewcommand{\arraystretch}{0.8} 
+\small
+\begin{longtable}{|C|l l C C C C C C C C C C C C C |C C C |C C C|} % 22 columns, outer borders only
+\multicolumn{22}{l}{\underline{\textbf{Checklist for checking and vetting of ddPCR MRD report}}} \\ % Row 1
+\multicolumn{22}{l}{} \\ % Row 2
+\multicolumn{2}{l}{\textbf{Sample:}} & \multicolumn{20}{l}{`r params$sid`} \\ % Row 3
+\multicolumn{2}{l}{\textbf{Marker:}} & \multicolumn{20}{l}{`r params$mid`} \\ % Row 4
+\multicolumn{22}{l}{} \\ % Row 5
+\hline
+\fixedheight \textbf{No.}& \multicolumn{4}{l}{\textbf{Item}} & & & & & & & & & & & & \multicolumn{3}{c|}{\textbf{Checked by}} & \multicolumn{3}{c|}{\textbf{Vetted by}} \\ % Row 6
+\fixedheight     & & & & & & & & & & & & & & & & \multicolumn{3}{c|}{`r run_by`} & \multicolumn{3}{c|}{`r reported_by`} \\ % Row 7
+\hline
+\fixedheight 1 & \multicolumn{14}{l}{Assays Conditions} & & & & & & & \\ % Row 8
+\cline{18-18} \cline{21-21}
+\fixedheight &(a)&\multicolumn{13}{l}{Plate Layout (\textcolor{blue}{Blue}: MRD Marker Assay, \textcolor{darkbrown}{Brown}: ALB Assay)} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 9
+\cline{4-15} \cline{18-18} \cline{21-21}
+\fixedheight & & &
+\multicolumn{1}{|c}{1}  &
+\multicolumn{1}{|c}{2} &
+\multicolumn{1}{|c}{3} &
+\multicolumn{1}{|c}{4} &
+\multicolumn{1}{|c}{5} &
+\multicolumn{1}{|c}{6} &
+\multicolumn{1}{|c}{7} &
+\multicolumn{1}{|c}{8} &
+\multicolumn{1}{|c}{9} &
+\multicolumn{1}{|c}{10} &
+\multicolumn{1}{|c}{11} &
+\multicolumn{1}{|c|}{12} & & & & & & & \\ % Row 10
+\cline{3-15}
+\fixedheight & &
+\multicolumn{1}{|c}{A}  &
+\multicolumn{1}{|c}{`r mdata["A", "1"]` } &
+\multicolumn{1}{|c}{`r mdata["A", "2"]`} &
+\multicolumn{1}{|c}{`r mdata["A", "3"]`} &
+\multicolumn{1}{|c}{`r mdata["A", "4"]`} &
+\multicolumn{1}{|c}{`r mdata["A", "5"]`} &
+\multicolumn{1}{|c}{`r mdata["A", "6"]`} &
+\multicolumn{1}{|c}{`r mdata["A", "7"]`} &
+\multicolumn{1}{|c}{`r mdata["A", "8"]`} &
+\multicolumn{1}{|c}{`r mdata["A", "9"]`} &
+\multicolumn{1}{|c}{`r mdata["A", "10"]`} &
+\multicolumn{1}{|c}{`r mdata["A", "11"]`} &
+\multicolumn{1}{|c|}{`r mdata["A", "12"]`} & & & & & & & \\ % Row 11
+
+\cline{3-15}
+\fixedheight & &
+\multicolumn{1}{|c}{B}  &
+\multicolumn{1}{|c}{`r mdata["B", "1"]`} &
+\multicolumn{1}{|c}{`r mdata["B", "2"]`} &
+\multicolumn{1}{|c}{`r mdata["B", "3"]`} &
+\multicolumn{1}{|c}{`r mdata["B", "4"]`} &
+\multicolumn{1}{|c}{`r mdata["B", "5"]`} &
+\multicolumn{1}{|c}{`r mdata["B", "6"]`} &
+\multicolumn{1}{|c}{`r mdata["B", "7"]`} &
+\multicolumn{1}{|c}{`r mdata["B", "8"]`} &
+\multicolumn{1}{|c}{`r mdata["B", "9"]`} &
+\multicolumn{1}{|c}{`r mdata["B", "10"]`} &
+\multicolumn{1}{|c}{`r mdata["B", "11"]`} &
+\multicolumn{1}{|c|}{`r mdata["B", "12"]`} & & & & & & & \\ % Row 12
+
+\cline{3-15}
+\fixedheight & &
+\multicolumn{1}{|c}{C}  &
+\multicolumn{1}{|c}{`r mdata["C", "1"]`} &
+\multicolumn{1}{|c}{`r mdata["C", "2"]`} &
+\multicolumn{1}{|c}{`r mdata["C", "3"]`} &
+\multicolumn{1}{|c}{`r mdata["C", "4"]`} &
+\multicolumn{1}{|c}{`r mdata["C", "5"]`} &
+\multicolumn{1}{|c}{`r mdata["C", "6"]`} &
+\multicolumn{1}{|c}{`r mdata["C", "7"]`} &
+\multicolumn{1}{|c}{`r mdata["C", "8"]`} &
+\multicolumn{1}{|c}{`r mdata["C", "9"]`} &
+\multicolumn{1}{|c}{`r mdata["C", "10"]`} &
+\multicolumn{1}{|c}{`r mdata["C", "11"]`} &
+\multicolumn{1}{|c|}{`r mdata["C", "12"]`} & & & & & & & \\ % Row 13
+
+\cline{3-15}
+\fixedheight & &
+\multicolumn{1}{|c}{D}  &
+\multicolumn{1}{|c}{`r mdata["D", "1"]`} &
+\multicolumn{1}{|c}{`r mdata["D", "2"]`} &
+\multicolumn{1}{|c}{`r mdata["D", "3"]`} &
+\multicolumn{1}{|c}{`r mdata["D", "4"]`} &
+\multicolumn{1}{|c}{`r mdata["D", "5"]`} &
+\multicolumn{1}{|c}{`r mdata["D", "6"]`} &
+\multicolumn{1}{|c}{`r mdata["D", "7"]`} &
+\multicolumn{1}{|c}{`r mdata["D", "8"]`} &
+\multicolumn{1}{|c}{`r mdata["D", "9"]`} &
+\multicolumn{1}{|c}{`r mdata["D", "10"]`} &
+\multicolumn{1}{|c}{`r mdata["D", "11"]`} &
+\multicolumn{1}{|c|}{`r mdata["D", "12"]`} & & & & & & & \\ % Row 14
+
+\cline{3-15}
+\fixedheight & &
+\multicolumn{1}{|c}{E}  &
+\multicolumn{1}{|c}{`r mdata["E", "1"]`} &
+\multicolumn{1}{|c}{`r mdata["E", "2"]`} &
+\multicolumn{1}{|c}{`r mdata["E", "3"]`} &
+\multicolumn{1}{|c}{`r mdata["E", "4"]`} &
+\multicolumn{1}{|c}{`r mdata["E", "5"]`} &
+\multicolumn{1}{|c}{`r mdata["E", "6"]`} &
+\multicolumn{1}{|c}{`r mdata["E", "7"]`} &
+\multicolumn{1}{|c}{`r mdata["E", "8"]`} &
+\multicolumn{1}{|c}{`r mdata["E", "9"]`} &
+\multicolumn{1}{|c}{`r mdata["E", "10"]`} &
+\multicolumn{1}{|c}{`r mdata["E", "11"]`} &
+\multicolumn{1}{|c|}{`r mdata["E", "12"]`} & & & & & & & \\ % Row 15
+
+\cline{3-15}
+\fixedheight & &
+\multicolumn{1}{|c}{F}  &
+\multicolumn{1}{|c}{`r mdata["F", "1"]`} &
+\multicolumn{1}{|c}{`r mdata["F", "2"]`} &
+\multicolumn{1}{|c}{`r mdata["F", "3"]`} &
+\multicolumn{1}{|c}{`r mdata["F", "4"]`} &
+\multicolumn{1}{|c}{`r mdata["F", "5"]`} &
+\multicolumn{1}{|c}{`r mdata["F", "6"]`} &
+\multicolumn{1}{|c}{`r mdata["F", "7"]`} &
+\multicolumn{1}{|c}{`r mdata["F", "8"]`} &
+\multicolumn{1}{|c}{`r mdata["F", "9"]`} &
+\multicolumn{1}{|c}{`r mdata["F", "10"]`} &
+\multicolumn{1}{|c}{`r mdata["F", "11"]`} &
+\multicolumn{1}{|c|}{`r mdata["F", "12"]`} & & & & & & & \\ % Row 16
+
+\cline{3-15}
+\fixedheight & &
+\multicolumn{1}{|c}{G}  &
+\multicolumn{1}{|c}{`r mdata["G", "1"]`} &
+\multicolumn{1}{|c}{`r mdata["G", "2"]`} &
+\multicolumn{1}{|c}{`r mdata["G", "3"]`} &
+\multicolumn{1}{|c}{`r mdata["G", "4"]`} &
+\multicolumn{1}{|c}{`r mdata["G", "5"]`} &
+\multicolumn{1}{|c}{`r mdata["G", "6"]`} &
+\multicolumn{1}{|c}{`r mdata["G", "7"]`} &
+\multicolumn{1}{|c}{`r mdata["G", "8"]`} &
+\multicolumn{1}{|c}{`r mdata["G", "9"]`} &
+\multicolumn{1}{|c}{`r mdata["G", "10"]`} &
+\multicolumn{1}{|c}{`r mdata["G", "11"]`} &
+\multicolumn{1}{|c|}{`r mdata["G", "12"]`} & & & & & & & \\ % Row 17
+
+\cline{3-15}
+\fixedheight & &
+\multicolumn{1}{|c}{H}  &
+\multicolumn{1}{|c}{`r mdata["H", "1"]`} &
+\multicolumn{1}{|c}{`r mdata["H", "2"]`} &
+\multicolumn{1}{|c}{`r mdata["H", "3"]`} &
+\multicolumn{1}{|c}{`r mdata["H", "4"]`} &
+\multicolumn{1}{|c}{`r mdata["H", "5"]`} &
+\multicolumn{1}{|c}{`r mdata["H", "6"]`} &
+\multicolumn{1}{|c}{`r mdata["H", "7"]`} &
+\multicolumn{1}{|c}{`r mdata["H", "8"]`} &
+\multicolumn{1}{|c}{`r mdata["H", "9"]`} &
+\multicolumn{1}{|c}{`r mdata["H", "10"]`} &
+\multicolumn{1}{|c}{`r mdata["H", "11"]`} &
+\multicolumn{1}{|c|}{`r mdata["H", "12"]`} & & & & & & & \\ % Row 18
+
+\cline{3-15}
+
+\fixedheight & & \multicolumn{6}{l}{Remarks (if any):} & & & & & & & & & & & & & & \\ % Row 19
+\fixedheight & & & & & & & & & & & & & & & & & & & & & \\ % Row 20
+\cline{18-18} \cline{21-21}
+\fixedheight &(b)& \multicolumn{8}{l}{Annealing Temperature:} & \multicolumn{5}{l}{`r annealing_temperature_checklist`$^\circ$C} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 21
+\cline{18-18} \cline{21-21}
+\fixedheight & & & & & & & & & & & & & & & & & & & & & \\ % Row 22
+\hline
+\fixedheight 2 &\multicolumn{14}{l}{Values Input}& & & & & & & \\  % Row 23
+\cline{18-18} \cline{21-21}
+\fixedheight   &(a)&\multicolumn{8}{l}{Dx Baseline:}& \multicolumn{5}{l}{`r dx_baseline_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 24
+\cline{18-18} \cline{21-21}
+\fixedheight   &(b)&\multicolumn{8}{l}{MNC ALB Concentration:} & \multicolumn{5}{l}{`r mnc_alb_concentraton_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 25
+\cline{18-18} \cline{21-21}
+\fixedheight   &(c)&\multicolumn{8}{l}{MNC ALB Dilution Factor:}& \multicolumn{5}{l}{`r mnc_alb_factor_checklist`x} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 26
+\cline{18-18} \cline{21-21}
+\fixedheight   &(d)&\multicolumn{8}{l}{FU ALB Dilution Factor:}& \multicolumn{5}{l}{`r fu_alb_factor_checklist`x} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 27
+\cline{18-18} \cline{21-21}
+\fixedheight   & & & & & & & & & & & & & & & & & & & & & \\ % Row 28
+\hline
+\fixedheight 3 &\multicolumn{14}{l}{Quality Control Summary} & & & & & & & \\ % Row 29
+\cline{18-18} \cline{21-21}
+\fixedheight   &(a)& \multicolumn{8}{l}{Overall QC Status:} & \multicolumn{5}{l}{`r overall_qc_checklist`}  & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 30
+\cline{18-18} \cline{21-21}
+\fixedheight   & & \multicolumn{5}{l}{Remarks (if any):} & & & & & & & & & & & & & & & \\ % Row 31
+\fixedheight   & & & & & & & & & & & & & & & & & & & & & \\ % Row 32
+\hline
+\fixedheight 4 &\multicolumn{14}{l}{Inter-assay Performance Monitorinng} & & & & & & & \\ % Row 33
+\cline{18-18} \cline{21-21}
+\fixedheight   &(a) & \multicolumn{8}{l}{MRD Marker Assay - In-plate Dx Baseline:}   & \multicolumn{5}{l}{`r mrd_marker_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 34
+\cline{18-18} \cline{21-21}
+\fixedheight   &(b) & \multicolumn{8}{l}{ALB Assay - MNC (200x) Concentration:}   & \multicolumn{5}{l}{`r alb_assay_checklist`} & & &  \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\  % Row 35
+\cline{18-18} \cline{21-21}
+\fixedheight & & & & & & & & & & & & & & & & & & & & & \\ % Row 36
+\hline
+\fixedheight 5 &\multicolumn{14}{l}{Data Input in Lab Test Report} & & & & & & & \\ % Row 37
+\cline{18-18} \cline{21-21}
+\fixedheight &(a) &\multicolumn{13}{l}{Demographic and Identifying Information} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 38
+\cline{18-18} \cline{21-21}
+\fixedheight   &(b) &\multicolumn{8}{l}{Marker Name:} & \multicolumn{5}{l}{`r params$mid`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 39
+\cline{18-18} \cline{21-21}
+\fixedheight   &(c) &\multicolumn{8}{l}{MRD Results to report} & \multicolumn{5}{l}{`r mrd_result_checklist`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 40
+\cline{18-18} \cline{21-21}
+\fixedheight   &(d) &\multicolumn{8}{l}{Positive Threshold:} & \multicolumn{5}{l}{`r positive_threshold_checklist`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 41
+\cline{18-18} \cline{21-21}
+\fixedheight   &(e) &\multicolumn{8}{l}{Negative Threshold} & \multicolumn{5}{l}{`r negative_threshold_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 42
+\cline{18-18} \cline{21-21}
+\fixedheight   &(f) &\multicolumn{8}{l}{Result Interpretation:} & \multicolumn{5}{l}{`r callForReporting`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 43
+\cline{18-18} \cline{21-21}
+\fixedheight   &(g) &\multicolumn{8}{l}{Quality of DNA:} & \multicolumn{5}{l}{`r quality_dna_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 44
+\cline{18-18} \cline{21-21}
+\fixedheight   &(h) &\multicolumn{13}{l}{Risk Stratification (if applicable)} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 45
+\cline{18-18} \cline{21-21}
+\fixedheight   &(i) &\multicolumn{13}{l}{Condensed Patient Identifiers in Header} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 46
+\cline{18-18} \cline{21-21}
+\fixedheight   &(j) &\multicolumn{14}{l|}{Clinical/Biological Information at Diagnosis/Relapse (if applicable)} & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 47
+\cline{18-18} \cline{21-21}
+\fixedheight   &(k) &\multicolumn{13}{l}{Technical Comments (if applicable)} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 48
+\cline{18-18} \cline{21-21}
+\fixedheight   &(l) &\multicolumn{13}{l}{Information for Laboratory} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 49
+\cline{18-18} \cline{21-21}
+\fixedheight & & & & & & & & & & & & & & & & & & & & & \\ % Row 50
+\hline
+\shortheight & & & & & & & & & & & & & & & & & & & & & \\
+\fixedheight & & & & & & & & & & & &   \multicolumn{3}{r}{\textbf{Signature}} & & & & & & & \\ % Row 51
+\shortheight & & & & & & & & & & & & & & & & & & & & & \\
+\hline
+\shortheight & & & & & & & & & & & & & & & & & & & & & \\
+\fixedheight & & & & & & & & & & & &  \multicolumn{3}{r}{\textbf{Date}} & & & & & & & \\ % Row 52
+\shortheight & & & & & & & & & & & & & & & & & & & & & \\
+\hline
+\end{longtable}
