@@ -39,6 +39,7 @@ header-includes:
 
 ---
 \definecolor{darkgreen}{HTML}{188a06}
+\definecolor{darkbrown}{HTML}{A52A2A}
 
 <!--- Define Headers and Footers --->
 \fancypagestyle{plain}{%
