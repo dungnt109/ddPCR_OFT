@@ -81,13 +81,13 @@ read_template_file <- function(file_path){
             plate_data[row_name, col_name] = "\\textcolor{blue}{FU}"
          } else if(grepl("HL60_OFT", plate_data[row_name, col_name], fixed=TRUE)){
             plate_data[row_name, col_name] = "\\textcolor{blue}{HL60}"
-         } else if(grepl("Dx_GUS", plate_data[row_name, col_name], fixed=TRUE)){
+         } else if(grepl("Dx_GUSB", plate_data[row_name, col_name], fixed=TRUE)){
             plate_data[row_name, col_name] = "\\textcolor{darkbrown}{Dx}"
-         } else if(grepl("NTC_GUS", plate_data[row_name, col_name], fixed=TRUE)){
+         } else if(grepl("NTC_GUSB", plate_data[row_name, col_name], fixed=TRUE)){
             plate_data[row_name, col_name] = "\\textcolor{darkbrown}{NTC}"
-         } else if(grepl("FU_GUS", plate_data[row_name, col_name], fixed=TRUE)){
+         } else if(grepl("FU_GUSB", plate_data[row_name, col_name], fixed=TRUE)){
             plate_data[row_name, col_name] = "\\textcolor{darkbrown}{FU}"
-         } else if(grepl("HL60_GUS", plate_data[row_name, col_name], fixed=TRUE)){
+         } else if(grepl("HL60_GUSB", plate_data[row_name, col_name], fixed=TRUE)){
             plate_data[row_name, col_name] = "\\textcolor{darkbrown}{HL60}"
          }
 
