@@ -1,5 +1,6 @@
 source("input_questions.R") 
 source("custom_functions.R")
+source("read_template_file.R")
 
 ### configurations
 
