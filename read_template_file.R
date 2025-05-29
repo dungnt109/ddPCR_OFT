@@ -75,7 +75,7 @@ read_template_file <- function(file_path){
 
     	 } else if(grepl("Dx_OFT", plate_data[row_name, col_name], fixed=TRUE)){
     	 	plate_data[row_name, col_name] = "\\textcolor{blue}{Dx}"
-    	 } else if(grepl("NTC_OFT", plate_data[row_name, col_name], fixed=TRUE)){
+    	 } else if(grepl("H2O_OFT", plate_data[row_name, col_name], fixed=TRUE)){
             plate_data[row_name, col_name] = "\\textcolor{blue}{NTC}"
          } else if(grepl("FU_OFT", plate_data[row_name, col_name], fixed=TRUE)){
             plate_data[row_name, col_name] = "\\textcolor{blue}{FU}"
@@ -83,7 +83,7 @@ read_template_file <- function(file_path){
             plate_data[row_name, col_name] = "\\textcolor{blue}{HL60}"
          } else if(grepl("Dx_GUSB", plate_data[row_name, col_name], fixed=TRUE)){
             plate_data[row_name, col_name] = "\\textcolor{darkbrown}{Dx}"
-         } else if(grepl("NTC_GUSB", plate_data[row_name, col_name], fixed=TRUE)){
+         } else if(grepl("H2O_GUSB", plate_data[row_name, col_name], fixed=TRUE)){
             plate_data[row_name, col_name] = "\\textcolor{darkbrown}{NTC}"
          } else if(grepl("FU_GUSB", plate_data[row_name, col_name], fixed=TRUE)){
             plate_data[row_name, col_name] = "\\textcolor{darkbrown}{FU}"

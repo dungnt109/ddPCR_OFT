@@ -1,70 +1,72 @@
 ```{r, echo=FALSE, warning = FALSE}
-annealing_temperature_checklist = get_annealing_temperature(mnc.alb.file, separator) 
+annealing_temperature_checklist = get_annealing_temperature(hl60.gus.file, separator) 
 
 if (runType == "absolute"){
-	dx_baseline_checklist = "N.A."
+	oft_gusb_ratio_checklist = "N.A."
 } else {
 	if (is.na(params$dx.baseline)){
-		dx_baseline_checklist = paste(round(dx.baseline, digits=3), " (in-plate)")
+		oft_gusb_ratio_checklist = paste(round(dx.baseline, digits=3), " (in-plate)")
 	} else {
-		dx_baseline_checklist = paste(round(dx.baseline, digits=3), " (preset)")
+		oft_gusb_ratio_checklist = paste(round(dx.baseline, digits=3), " (preset)")
 	}
 }
 
-mnc_alb_concentraton_checklist = params$mnc.alb.concentration
-mnc_alb_factor_checklist = params$mnc.alb.dilutionX
-fu_alb_factor_checklist = fu.alb.dilution.factor
+
+hl60_gusb_dilution_checklist = params$hl60.gus.dilutionX 
+
+fu_gusb_dilution_checklist = fu.gus.dilution.factor
+
 overall_qc_checklist = extract_value(final.qc.call)
 
 
-if (length(params$dx.alb) == 0) {
+if (length(params$dx.gus) == 0) {
 
-	mrd_marker_checklist = "N.A."
+	oft_assay_checklist = "N.A."
 
 } else {
 
-	dx.alb.info <- get_merged_info(c(params$dx.alb))
-	dx.cell.concentration <- dx.alb.info[1, "concentration"] / 2
+	dx.gus.info <- get_merged_info(c(params$dx.gus))
+	dx.cell.concentration <- dx.gus.info[1, "concentration"]
 
 
 	if (is.na(dx.cell.concentration)){
 
-		mrd_marker_checklist = "N.A."
+		oft_assay_checklist = "N.A."
 		
 	} else {
 
 		dx.marker.info <- get_merged_info(c(params$dx.marker))
 
-		mrd_marker_checklist = round(dx.marker.info[1, "concentration"] / dx.cell.concentration, digits=3)
+		oft_assay_checklist = round(dx.marker.info[1, "concentration"] / dx.cell.concentration, digits=3)
 
 	}
 }
 
-alb_assay_checklist = paste(sprintf("%#.5f", min.mnc.alb.con.perwell), " (", extract_value(min.mnc.alb.con.perwell.status), ")", sep="")
+gusb_assay_checklist = paste(sprintf("%#.5f", min.hl60.gus.con.perwell), " (", extract_value(min.hl60.gus.con.perwell.status), ")", sep="")
 
 if (callForReporting == "NEG" || callForReporting == "PNQ"){
-	mrd_result_checklist = callForReporting
+	oft_result_checklist = callForReporting
 } else {
 	if (runType == "absolute"){
-		mrd_result_checklist = absolute.mrd.formatted
+		oft_result_checklist = absolute.oft.formatted
 	} else {
-		mrd_result_checklist = relative.mrd.formatted
+		oft_result_checklist = relative.oft.formatted
 	}
 }
 
 if(runType == "absolute"){
 	positive_threshold_checklist = absolute.ptv.formatted
 } else {
-	positive_threshold_checklist = mrd.ptv.formatted
+	positive_threshold_checklist = oft.ptv.formatted
 }
 
 if(runType == "absolute"){
 	negative_threshold_checklist = absolute.ntv.formatted
 } else {
-	negative_threshold_checklist = mrd.ntv.formatted
+	negative_threshold_checklist = oft.ntv.formatted
 }
 
- quality_dna_checklist = extract_value(min.fu.alb.conc.perwell.status)
+ quality_rna_checklist = extract_value(min.fu.gus.conc.perwell.status)
 
 mdata  <- read_template_file(sample_sheet_file)
 
@@ -249,11 +251,11 @@ mdata  <- read_template_file(sample_sheet_file)
 \hline
 \fixedheight 2 &\multicolumn{14}{l}{Values Input}& & & & & & & \\  % Row 23
 \cline{18-18} \cline{21-21}
-\fixedheight   &(a)&\multicolumn{8}{l}{OFT/GUSB Ratio at Dx:}& \multicolumn{5}{l}{`r dx_baseline_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 24
+\fixedheight   &(a)&\multicolumn{8}{l}{OFT/GUSB Ratio at Dx:}& \multicolumn{5}{l}{`r oft_gusb_ratio_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 24
 \cline{18-18} \cline{21-21}
-\fixedheight   &(b)&\multicolumn{8}{l}{HL60 GUSB Dilution Factor:} & \multicolumn{5}{l}{`r mnc_alb_concentraton_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 25
+\fixedheight   &(b)&\multicolumn{8}{l}{HL60 GUSB Dilution Factor:} & \multicolumn{5}{l}{`r hl60_gusb_dilution_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 25
 \cline{18-18} \cline{21-21}
-\fixedheight   &(c)&\multicolumn{8}{l}{FU GUSB Dilution Factor:}& \multicolumn{5}{l}{`r mnc_alb_factor_checklist`x} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 26
+\fixedheight   &(c)&\multicolumn{8}{l}{FU GUSB Dilution Factor:}& \multicolumn{5}{l}{`r fu_gusb_dilution_checklist`x} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 26
 \cline{18-18} \cline{21-21}
 \fixedheight   & & & & & & & & & & & & & & & & & & & & & \\ % Row 28
 \hline
@@ -266,9 +268,9 @@ mdata  <- read_template_file(sample_sheet_file)
 \hline
 \fixedheight 4 &\multicolumn{14}{l}{Inter-assay Performance Monitorinng} & & & & & & & \\ % Row 33
 \cline{18-18} \cline{21-21}
-\fixedheight   &(a) & \multicolumn{8}{l}{OFT Assay - In-plate OFT/GUSB Ratio at Dx:}   & \multicolumn{5}{l}{`r mrd_marker_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 34
+\fixedheight   &(a) & \multicolumn{8}{l}{OFT Assay - In-plate OFT/GUSB Ratio at Dx:}   & \multicolumn{5}{l}{`r oft_assay_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 34
 \cline{18-18} \cline{21-21}
-\fixedheight   &(b) & \multicolumn{8}{l}{GUSB Assay - HL60 (E-2) Concentration:}   & \multicolumn{5}{l}{`r alb_assay_checklist`} & & &  \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\  % Row 35
+\fixedheight   &(b) & \multicolumn{8}{l}{GUSB Assay - HL60 (E-2) Concentration:}   & \multicolumn{5}{l}{`r gusb_assay_checklist`} & & &  \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\  % Row 35
 \cline{18-18} \cline{21-21}
 \fixedheight & & & & & & & & & & & & & & & & & & & & & \\ % Row 36
 \hline
@@ -278,9 +280,9 @@ mdata  <- read_template_file(sample_sheet_file)
 \cline{18-18} \cline{21-21}
 \fixedheight   &(b) &\multicolumn{8}{l}{OFT:} & \multicolumn{5}{l}{`r params$mid`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 39
 \cline{18-18} \cline{21-21}
-\fixedheight   &(c) &\multicolumn{8}{l}{OFT Quantitation} & \multicolumn{5}{l}{`r mrd_result_checklist`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 40
+\fixedheight   &(c) &\multicolumn{8}{l}{OFT Quantitation} & \multicolumn{5}{l}{`r runType`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 40
 \cline{18-18} \cline{21-21}
-\fixedheight   &(d) &\multicolumn{8}{l}{OFT Results to report:} & \multicolumn{5}{l}{`r mrd_result_checklist`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 40
+\fixedheight   &(d) &\multicolumn{8}{l}{OFT Results to report:} & \multicolumn{5}{l}{`r oft_result_checklist`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 40
 \cline{18-18} \cline{21-21}
 \fixedheight   &(e) &\multicolumn{8}{l}{Positive Threshold:} & \multicolumn{5}{l}{`r positive_threshold_checklist`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 41
 \cline{18-18} \cline{21-21}
@@ -288,7 +290,7 @@ mdata  <- read_template_file(sample_sheet_file)
 \cline{18-18} \cline{21-21}
 \fixedheight   &(g) &\multicolumn{8}{l}{Result Interpretation:} & \multicolumn{5}{l}{`r callForReporting`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 43
 \cline{18-18} \cline{21-21}
-\fixedheight   &(h) &\multicolumn{8}{l}{Quality of RNA:} & \multicolumn{5}{l}{`r quality_dna_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 44
+\fixedheight   &(h) &\multicolumn{8}{l}{Quality of RNA:} & \multicolumn{5}{l}{`r quality_rna_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 44
 \cline{18-18} \cline{21-21}
 \fixedheight   &(i) &\multicolumn{13}{l}{Condensed Patient Identifiers in Header} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 46
 \cline{18-18} \cline{21-21}

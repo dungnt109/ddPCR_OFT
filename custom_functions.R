@@ -54,6 +54,17 @@ manual_clustering_and_threshold <- function(intensities, threshold) {
 
 }
 
+get_annealing_temperature <- function(string, separator){
+        parts <- strsplit(string, separator)[[1]]
+        last_part <- tail(parts, n=1)
+    parts <- strsplit(last_part, ";")[[1]]
+        second_part <- strsplit(parts[2], "-")[[1]]
+        extracted_text <- trimws(second_part[1])
+        cleaned_text <- gsub("C", "", extracted_text)
+        return(cleaned_text)
+}
+
+
 
 read_csv <- function(string){
 

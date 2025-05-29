@@ -1,4 +1,4 @@
-\vspace{0.4cm}
+\vspace{0.08cm}
 \begin{tabular}{|p{2cm}|p{4cm}|p{4cm}|p{4cm}|}
 \hline
  & Name & Signature & Date\\
@@ -16,3 +16,5 @@ Verified by &    `r verifier` &  & \\
 &&&\\
 \hline
 \end{tabular}
+
+\label{docendlabel}
