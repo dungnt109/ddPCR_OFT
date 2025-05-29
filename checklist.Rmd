@@ -84,10 +84,10 @@ mdata  <- read_template_file(sample_sheet_file)
 \renewcommand{\arraystretch}{0.8} 
 \small
 \begin{longtable}{|C|l l C C C C C C C C C C C C C |C C C |C C C|} % 22 columns, outer borders only
-\multicolumn{22}{l}{\underline{\textbf{Checklist for checking and vetting of ddPCR MRD report}}} \\ % Row 1
+\multicolumn{22}{l}{\underline{\textbf{Checklist for checking and vetting of ddPCR OFT report}}} \\ % Row 1
 \multicolumn{22}{l}{} \\ % Row 2
 \multicolumn{2}{l}{\textbf{Sample:}} & \multicolumn{20}{l}{`r params$sid`} \\ % Row 3
-\multicolumn{2}{l}{\textbf{Marker:}} & \multicolumn{20}{l}{`r params$mid`} \\ % Row 4
+\multicolumn{2}{l}{\textbf{OFT:}} & \multicolumn{20}{l}{`r params$mid`} \\ % Row 4
 \multicolumn{22}{l}{} \\ % Row 5
 \hline
 \fixedheight \textbf{No.}& \multicolumn{4}{l}{\textbf{Item}} & & & & & & & & & & & & \multicolumn{3}{c|}{\textbf{Checked by}} & \multicolumn{3}{c|}{\textbf{Vetted by}} \\ % Row 6
@@ -95,7 +95,7 @@ mdata  <- read_template_file(sample_sheet_file)
 \hline
 \fixedheight 1 & \multicolumn{14}{l}{Assays Conditions} & & & & & & & \\ % Row 8
 \cline{18-18} \cline{21-21}
-\fixedheight &(a)&\multicolumn{13}{l}{Plate Layout (\textcolor{blue}{Blue}: MRD Marker Assay, \textcolor{darkbrown}{Brown}: ALB Assay)} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 9
+\fixedheight &(a)&\multicolumn{13}{l}{Plate Layout (\textcolor{blue}{Blue}: OFT Assay, \textcolor{darkbrown}{Brown}: GUSB Assay)} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 9
 \cline{4-15} \cline{18-18} \cline{21-21}
 \fixedheight & & &
 \multicolumn{1}{|c}{1}  &
@@ -249,13 +249,11 @@ mdata  <- read_template_file(sample_sheet_file)
 \hline
 \fixedheight 2 &\multicolumn{14}{l}{Values Input}& & & & & & & \\  % Row 23
 \cline{18-18} \cline{21-21}
-\fixedheight   &(a)&\multicolumn{8}{l}{Dx Baseline:}& \multicolumn{5}{l}{`r dx_baseline_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 24
+\fixedheight   &(a)&\multicolumn{8}{l}{OFT/GUSB Ratio at Dx:}& \multicolumn{5}{l}{`r dx_baseline_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 24
 \cline{18-18} \cline{21-21}
-\fixedheight   &(b)&\multicolumn{8}{l}{MNC ALB Concentration:} & \multicolumn{5}{l}{`r mnc_alb_concentraton_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 25
+\fixedheight   &(b)&\multicolumn{8}{l}{HL60 GUSB Dilution Factor:} & \multicolumn{5}{l}{`r mnc_alb_concentraton_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 25
 \cline{18-18} \cline{21-21}
-\fixedheight   &(c)&\multicolumn{8}{l}{MNC ALB Dilution Factor:}& \multicolumn{5}{l}{`r mnc_alb_factor_checklist`x} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 26
-\cline{18-18} \cline{21-21}
-\fixedheight   &(d)&\multicolumn{8}{l}{FU ALB Dilution Factor:}& \multicolumn{5}{l}{`r fu_alb_factor_checklist`x} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 27
+\fixedheight   &(c)&\multicolumn{8}{l}{FU GUSB Dilution Factor:}& \multicolumn{5}{l}{`r mnc_alb_factor_checklist`x} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 26
 \cline{18-18} \cline{21-21}
 \fixedheight   & & & & & & & & & & & & & & & & & & & & & \\ % Row 28
 \hline
@@ -268,9 +266,9 @@ mdata  <- read_template_file(sample_sheet_file)
 \hline
 \fixedheight 4 &\multicolumn{14}{l}{Inter-assay Performance Monitorinng} & & & & & & & \\ % Row 33
 \cline{18-18} \cline{21-21}
-\fixedheight   &(a) & \multicolumn{8}{l}{MRD Marker Assay - In-plate Dx Baseline:}   & \multicolumn{5}{l}{`r mrd_marker_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 34
+\fixedheight   &(a) & \multicolumn{8}{l}{OFT Assay - In-plate OFT/GUSB Ratio at Dx:}   & \multicolumn{5}{l}{`r mrd_marker_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 34
 \cline{18-18} \cline{21-21}
-\fixedheight   &(b) & \multicolumn{8}{l}{ALB Assay - MNC (200x) Concentration:}   & \multicolumn{5}{l}{`r alb_assay_checklist`} & & &  \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\  % Row 35
+\fixedheight   &(b) & \multicolumn{8}{l}{GUSB Assay - HL60 (E-2) Concentration:}   & \multicolumn{5}{l}{`r alb_assay_checklist`} & & &  \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\  % Row 35
 \cline{18-18} \cline{21-21}
 \fixedheight & & & & & & & & & & & & & & & & & & & & & \\ % Row 36
 \hline
@@ -278,27 +276,25 @@ mdata  <- read_template_file(sample_sheet_file)
 \cline{18-18} \cline{21-21}
 \fixedheight &(a) &\multicolumn{13}{l}{Demographic and Identifying Information} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 38
 \cline{18-18} \cline{21-21}
-\fixedheight   &(b) &\multicolumn{8}{l}{Marker Name:} & \multicolumn{5}{l}{`r params$mid`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 39
+\fixedheight   &(b) &\multicolumn{8}{l}{OFT:} & \multicolumn{5}{l}{`r params$mid`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 39
 \cline{18-18} \cline{21-21}
-\fixedheight   &(c) &\multicolumn{8}{l}{MRD Results to report} & \multicolumn{5}{l}{`r mrd_result_checklist`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 40
+\fixedheight   &(c) &\multicolumn{8}{l}{OFT Quantitation} & \multicolumn{5}{l}{`r mrd_result_checklist`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 40
 \cline{18-18} \cline{21-21}
-\fixedheight   &(d) &\multicolumn{8}{l}{Positive Threshold:} & \multicolumn{5}{l}{`r positive_threshold_checklist`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 41
+\fixedheight   &(d) &\multicolumn{8}{l}{OFT Results to report:} & \multicolumn{5}{l}{`r mrd_result_checklist`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 40
 \cline{18-18} \cline{21-21}
-\fixedheight   &(e) &\multicolumn{8}{l}{Negative Threshold} & \multicolumn{5}{l}{`r negative_threshold_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 42
+\fixedheight   &(e) &\multicolumn{8}{l}{Positive Threshold:} & \multicolumn{5}{l}{`r positive_threshold_checklist`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 41
 \cline{18-18} \cline{21-21}
-\fixedheight   &(f) &\multicolumn{8}{l}{Result Interpretation:} & \multicolumn{5}{l}{`r callForReporting`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 43
+\fixedheight   &(f) &\multicolumn{8}{l}{Negative Threshold} & \multicolumn{5}{l}{`r negative_threshold_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 42
 \cline{18-18} \cline{21-21}
-\fixedheight   &(g) &\multicolumn{8}{l}{Quality of DNA:} & \multicolumn{5}{l}{`r quality_dna_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 44
+\fixedheight   &(g) &\multicolumn{8}{l}{Result Interpretation:} & \multicolumn{5}{l}{`r callForReporting`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 43
 \cline{18-18} \cline{21-21}
-\fixedheight   &(h) &\multicolumn{13}{l}{Risk Stratification (if applicable)} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 45
+\fixedheight   &(h) &\multicolumn{8}{l}{Quality of RNA:} & \multicolumn{5}{l}{`r quality_dna_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 44
 \cline{18-18} \cline{21-21}
 \fixedheight   &(i) &\multicolumn{13}{l}{Condensed Patient Identifiers in Header} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 46
 \cline{18-18} \cline{21-21}
-\fixedheight   &(j) &\multicolumn{14}{l|}{Clinical/Biological Information at Diagnosis/Relapse (if applicable)} & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 47
+\fixedheight   &(j) &\multicolumn{13}{l}{Technical Comments (if applicable)} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 48
 \cline{18-18} \cline{21-21}
-\fixedheight   &(k) &\multicolumn{13}{l}{Technical Comments (if applicable)} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 48
-\cline{18-18} \cline{21-21}
-\fixedheight   &(l) &\multicolumn{13}{l}{Information for Laboratory} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 49
+\fixedheight   &(k) &\multicolumn{13}{l}{Information for Laboratory} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 49
 \cline{18-18} \cline{21-21}
 \fixedheight & & & & & & & & & & & & & & & & & & & & & \\ % Row 50
 \hline
