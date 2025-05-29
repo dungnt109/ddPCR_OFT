@@ -73,22 +73,22 @@ read_template_file <- function(file_path){
     
     	 	plate_data[row_name, col_name] = ""
 
-    	 } else if(grepl("Dx_Mk", plate_data[row_name, col_name], fixed=TRUE)){
+    	 } else if(grepl("Dx_OFT", plate_data[row_name, col_name], fixed=TRUE)){
     	 	plate_data[row_name, col_name] = "\\textcolor{blue}{Dx}"
-    	 } else if(grepl("MNC_Mk", plate_data[row_name, col_name], fixed=TRUE)){
-            plate_data[row_name, col_name] = "\\textcolor{blue}{MNC}"
-         } else if(grepl("FU_Mk", plate_data[row_name, col_name], fixed=TRUE)){
+    	 } else if(grepl("NTC_OFT", plate_data[row_name, col_name], fixed=TRUE)){
+            plate_data[row_name, col_name] = "\\textcolor{blue}{NTC}"
+         } else if(grepl("FU_OFT", plate_data[row_name, col_name], fixed=TRUE)){
             plate_data[row_name, col_name] = "\\textcolor{blue}{FU}"
-         } else if(grepl("H2O_Mk", plate_data[row_name, col_name], fixed=TRUE)){
-            plate_data[row_name, col_name] = "\\textcolor{blue}{H2O}"
-         } else if(grepl("Dx_ALB", plate_data[row_name, col_name], fixed=TRUE)){
+         } else if(grepl("HL60_OFT", plate_data[row_name, col_name], fixed=TRUE)){
+            plate_data[row_name, col_name] = "\\textcolor{blue}{HL60}"
+         } else if(grepl("Dx_GUS", plate_data[row_name, col_name], fixed=TRUE)){
             plate_data[row_name, col_name] = "\\textcolor{darkbrown}{Dx}"
-         } else if(grepl("MNC_ALB", plate_data[row_name, col_name], fixed=TRUE)){
-            plate_data[row_name, col_name] = "\\textcolor{darkbrown}{MNC}"
-         } else if(grepl("FU_ALB", plate_data[row_name, col_name], fixed=TRUE)){
+         } else if(grepl("NTC_GUS", plate_data[row_name, col_name], fixed=TRUE)){
+            plate_data[row_name, col_name] = "\\textcolor{darkbrown}{NTC}"
+         } else if(grepl("FU_GUS", plate_data[row_name, col_name], fixed=TRUE)){
             plate_data[row_name, col_name] = "\\textcolor{darkbrown}{FU}"
-         } else if(grepl("H2O_ALB", plate_data[row_name, col_name], fixed=TRUE)){
-            plate_data[row_name, col_name] = "\\textcolor{darkbrown}{H2O}"
+         } else if(grepl("HL60_GUS", plate_data[row_name, col_name], fixed=TRUE)){
+            plate_data[row_name, col_name] = "\\textcolor{darkbrown}{HL60}"
          }
 
 
