@@ -245,32 +245,32 @@ mdata  <- read_template_file(sample_sheet_file)
 \fixedheight & & \multicolumn{6}{l}{Remarks (if any):} & & & & & & & & & & & & & & \\ % Row 19
 \fixedheight & & & & & & & & & & & & & & & & & & & & & \\ % Row 20
 \cline{18-18} \cline{21-21}
-\fixedheight &(b)& \multicolumn{8}{l}{Annealing Temperature:} & \multicolumn{5}{l}{`r annealing_temperature_checklist`$^\circ$C} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 21
+\fixedheight &(b)& \multicolumn{9}{l}{Annealing Temperature:} & \multicolumn{4}{l}{`r annealing_temperature_checklist`$^\circ$C} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 21
 \cline{18-18} \cline{21-21}
 \fixedheight & & & & & & & & & & & & & & & & & & & & & \\ % Row 22
 \hline
 \fixedheight 2 &\multicolumn{14}{l}{Values Input}& & & & & & & \\  % Row 23
 \cline{18-18} \cline{21-21}
-\fixedheight   &(a)&\multicolumn{8}{l}{OFT/GUSB Ratio at Dx:}& \multicolumn{5}{l}{`r oft_gusb_ratio_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 24
+\fixedheight   &(a)&\multicolumn{9}{l}{OFT/GUSB Ratio at Dx:}& \multicolumn{4}{l}{`r oft_gusb_ratio_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 24
 \cline{18-18} \cline{21-21}
-\fixedheight   &(b)&\multicolumn{8}{l}{HL60 GUSB Dilution Factor:} & \multicolumn{5}{l}{`r hl60_gusb_dilution_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 25
+\fixedheight   &(b)&\multicolumn{9}{l}{HL60 GUSB Dilution Factor:} & \multicolumn{4}{l}{`r hl60_gusb_dilution_checklist`x} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 25
 \cline{18-18} \cline{21-21}
-\fixedheight   &(c)&\multicolumn{8}{l}{FU GUSB Dilution Factor:}& \multicolumn{5}{l}{`r fu_gusb_dilution_checklist`x} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 26
+\fixedheight   &(c)&\multicolumn{9}{l}{FU GUSB Dilution Factor:}& \multicolumn{4}{l}{`r fu_gusb_dilution_checklist`x} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 26
 \cline{18-18} \cline{21-21}
 \fixedheight   & & & & & & & & & & & & & & & & & & & & & \\ % Row 28
 \hline
 \fixedheight 3 &\multicolumn{14}{l}{Quality Control Summary} & & & & & & & \\ % Row 29
 \cline{18-18} \cline{21-21}
-\fixedheight   &(a)& \multicolumn{8}{l}{Overall QC Status:} & \multicolumn{5}{l}{`r overall_qc_checklist`}  & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 30
+\fixedheight   &(a)& \multicolumn{9}{l}{Overall QC Status:} & \multicolumn{4}{l}{`r overall_qc_checklist`}  & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 30
 \cline{18-18} \cline{21-21}
 \fixedheight   & & \multicolumn{5}{l}{Remarks (if any):} & & & & & & & & & & & & & & & \\ % Row 31
 \fixedheight   & & & & & & & & & & & & & & & & & & & & & \\ % Row 32
 \hline
 \fixedheight 4 &\multicolumn{14}{l}{Inter-assay Performance Monitorinng} & & & & & & & \\ % Row 33
 \cline{18-18} \cline{21-21}
-\fixedheight   &(a) & \multicolumn{8}{l}{OFT Assay - In-plate OFT/GUSB Ratio at Dx:}   & \multicolumn{5}{l}{`r oft_assay_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 34
+\fixedheight   &(a) & \multicolumn{9}{l}{OFT Assay - In-plate OFT/GUSB Ratio at Dx:}   & \multicolumn{4}{l}{`r oft_assay_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 34
 \cline{18-18} \cline{21-21}
-\fixedheight   &(b) & \multicolumn{8}{l}{GUSB Assay - HL60 (E-2) Concentration:}   & \multicolumn{5}{l}{`r gusb_assay_checklist`} & & &  \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\  % Row 35
+\fixedheight   &(b) & \multicolumn{9}{l}{GUSB Assay - HL60 (E-2) Concentration:}   & \multicolumn{4}{l}{`r gusb_assay_checklist`} & & &  \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\  % Row 35
 \cline{18-18} \cline{21-21}
 \fixedheight & & & & & & & & & & & & & & & & & & & & & \\ % Row 36
 \hline
@@ -278,19 +278,19 @@ mdata  <- read_template_file(sample_sheet_file)
 \cline{18-18} \cline{21-21}
 \fixedheight &(a) &\multicolumn{13}{l}{Demographic and Identifying Information} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 38
 \cline{18-18} \cline{21-21}
-\fixedheight   &(b) &\multicolumn{8}{l}{OFT:} & \multicolumn{5}{l}{`r params$mid`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 39
+\fixedheight   &(b) &\multicolumn{9}{l}{OFT:} & \multicolumn{4}{l}{`r params$mid`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 39
 \cline{18-18} \cline{21-21}
-\fixedheight   &(c) &\multicolumn{8}{l}{OFT Quantitation} & \multicolumn{5}{l}{`r runType`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 40
+\fixedheight   &(c) &\multicolumn{9}{l}{OFT Quantitation} & \multicolumn{4}{l}{`r toupper(runType)`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 40
 \cline{18-18} \cline{21-21}
-\fixedheight   &(d) &\multicolumn{8}{l}{OFT Results to report:} & \multicolumn{5}{l}{`r oft_result_checklist`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 40
+\fixedheight   &(d) &\multicolumn{9}{l}{OFT Results to report:} & \multicolumn{4}{l}{`r oft_result_checklist`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 40
 \cline{18-18} \cline{21-21}
-\fixedheight   &(e) &\multicolumn{8}{l}{Positive Threshold:} & \multicolumn{5}{l}{`r positive_threshold_checklist`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 41
+\fixedheight   &(e) &\multicolumn{9}{l}{Positive Threshold:} & \multicolumn{4}{l}{`r positive_threshold_checklist`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 41
 \cline{18-18} \cline{21-21}
-\fixedheight   &(f) &\multicolumn{8}{l}{Negative Threshold} & \multicolumn{5}{l}{`r negative_threshold_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 42
+\fixedheight   &(f) &\multicolumn{9}{l}{Negative Threshold} & \multicolumn{4}{l}{`r negative_threshold_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 42
 \cline{18-18} \cline{21-21}
-\fixedheight   &(g) &\multicolumn{8}{l}{Result Interpretation:} & \multicolumn{5}{l}{`r callForReporting`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 43
+\fixedheight   &(g) &\multicolumn{9}{l}{Result Interpretation:} & \multicolumn{4}{l}{`r callForReporting`}& & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 43
 \cline{18-18} \cline{21-21}
-\fixedheight   &(h) &\multicolumn{8}{l}{Quality of RNA:} & \multicolumn{5}{l}{`r quality_rna_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 44
+\fixedheight   &(h) &\multicolumn{9}{l}{Quality of RNA:} & \multicolumn{4}{l}{`r quality_rna_checklist`} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 44
 \cline{18-18} \cline{21-21}
 \fixedheight   &(i) &\multicolumn{13}{l}{Condensed Patient Identifiers in Header} & & & \multicolumn{1}{|c|}{} & & & \multicolumn{1}{|c|}{} & \\ % Row 46
 \cline{18-18} \cline{21-21}

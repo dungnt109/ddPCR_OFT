@@ -52,7 +52,7 @@ header-includes:
 \fancypagestyle{lastpage}{%
   \renewcommand{\headrulewidth}{0pt}%
   \fancyhf{}%
-  \fancyfoot[C]{\footnotesize `r params$sid` `r params$mid` Generated at `r generated_date` by ddPCR MRD Pipeline `r pipeline_version`}
+  \fancyfoot[C]{\footnotesize `r params$sid` `r params$mid` Generated at `r generated_date` by ddPCR OFT Pipeline `r pipeline_version`}
   \setlength\footskip{0pt}
 }
 
