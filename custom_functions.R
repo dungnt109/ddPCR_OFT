@@ -67,6 +67,8 @@ get_annealing_temperature <- function(string, separator){
 
 
 read_csv <- function(string){
+        print("reading...")
+	print(string) 
 
 	data <- read.csv(string, header=TRUE, skip=4)
 	header = colnames(data)
