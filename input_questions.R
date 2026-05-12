@@ -42,26 +42,26 @@ verifier_question <- function(){
 run_by_question <- function(){
 
 
-	cat("\nRun by?
-	1. Amanda Lee
-	2. Huan Pei Tee
-	3. Nurhilya
-	4. Others
-	5. Blank\n")
-	answer <- readLines("stdin",n=1)
+	names <- c("Amanda Lee", "Huan Pei Tee", "Nurhilya",  "Felix Utama", "Florence")
 
-	if (answer == "4"){
-		cat("Please specify:")
-		run_by <- readLines("stdin",n=1)
+	# Print menu
+	cat("\nRun by?\n")
+	for (i in seq_along(names)) {
+	  cat("\t", i, ". ", names[i], "\n", sep = "")
+	}
+	cat("\t", length(names) + 1, ". Others\n", sep = "")
+	cat("\t", length(names) + 2, ". Blank\n", sep = "")
+
+	# Read answer
+	answer <- readLines("stdin", n = 1)
+
+	if (answer == as.character(length(names) + 1)) {
+	  cat("Please specify: ")
+	  run_by <- readLines("stdin", n = 1)
+	} else if (answer == as.character(length(names) + 2)) {
+	  run_by <- ""
 	} else {
-		run_by <- switch(
-		answer, 
-		"1" = "Amanda Lee", 
-		"2" = "Huan Pei Tee", 
-		"3" = "Nurhilya",
-		"5" = "", 
-		answer 
-		)
+	  run_by <- names[as.integer(answer)]
 	}
 
 	return(run_by)
